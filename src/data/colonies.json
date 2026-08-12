@@ -1,0 +1,65 @@
+{
+  "_source": "2300AD Core Book 2 (The Worlds of 2300AD), Colonies table, printed pp23-24 (pdf 24-25; printed = pdf - 1).",
+  "_why_here": "The chargen extract (Core Book 1) sends you to 'The Worlds of 2300AD, page 23' for nationality and homeworld. That table is NOT in the chargen extract -- it lives in Core Book 2. Without it there is no homeworld list, no gravity, no Survival DM and no Path.",
+
+  "_key_finding": "PATH IS NOT A FREE CHOICE. Hard/Soft Path is a property of the COLONY, not something the player picks. Choosing a nationality and then a homeworld determines Path, Gravity and Survival DM together. The chargen text reads as though Philosophy were chosen; this table is what actually assigns it.",
+
+  "_columns": {
+    "gravity": "Light | Low | Normal | High | Extreme -- adjusts characteristics",
+    "path": "Hard | Soft -- Soft gives DM+1 Survival on homeworld and DM-1 on Benefit rolls; Hard gives DM+1 on Benefit rolls",
+    "survival_dm": "applies to Survival checks WHILE STILL ON the homeworld; stops applying once the Leaving Home check is passed"
+  },
+
+  "colonies": [
+    { "nationality": "America",           "system": "King",             "colony": "New Columbia",     "gravity": "Extreme", "path": "Soft", "survival_dm": 4 },
+    { "nationality": "America",           "system": "Ellis",            "colony": "Ellis",            "gravity": "Normal",  "path": "Soft", "survival_dm": -1 },
+    { "nationality": "America",           "system": "Mu Herculis",      "colony": "Hermes",           "gravity": "Low",     "path": "Soft", "survival_dm": -2 },
+    { "nationality": "Arabia",            "system": "Beta Hydri",       "colony": "Al-Marjiti",       "gravity": "Low",     "path": "Hard", "survival_dm": -2 },
+    { "nationality": "Argentina",         "system": "Omicron2 Eridani", "colony": "Montana",          "gravity": "Normal",  "path": "Soft", "survival_dm": -1 },
+    { "nationality": "Australia",         "system": "King",             "colony": "Huntsland",        "gravity": "Extreme", "path": "Soft", "survival_dm": 4 },
+    { "nationality": "Australia",         "system": "Botany Bay",       "colony": "Botany Bay",       "gravity": "Normal",  "path": "Soft", "survival_dm": -1 },
+    { "nationality": "Australia",         "system": "Zeta Herculis",    "colony": "Kingsland",        "gravity": "Normal",  "path": "Soft", "survival_dm": -1 },
+    { "nationality": "Azania",            "system": "61 Ursae Majoris", "colony": "Lubumbashi",       "gravity": "Normal",  "path": "Soft", "survival_dm": -1 },
+    { "nationality": "Azania",            "system": "Kimanjano",        "colony": "Okavango",         "gravity": "Normal",  "path": "Soft", "survival_dm": -1 },
+    { "nationality": "Brazil",            "system": "Procyon",          "colony": "Paulo",            "gravity": "Normal",  "path": "Hard", "survival_dm": -2 },
+    { "nationality": "Britain",           "system": "61 Ursae Majoris", "colony": "New Cornwall",     "gravity": "Normal",  "path": "Soft", "survival_dm": -1 },
+    { "nationality": "Britain",           "system": "Beta Canum",       "colony": "New Africa",       "gravity": "Normal",  "path": "Hard", "survival_dm": -1 },
+    { "nationality": "Britain",           "system": "Henry's Star",     "colony": "Crater",           "gravity": "Low",     "path": "Soft", "survival_dm": -2 },
+    { "nationality": "Britain",           "system": "Queen Alice's Star","colony": "Alicia",          "gravity": "Normal",  "path": "Hard", "survival_dm": -2 },
+    { "nationality": "Canada",            "system": "DM+20 5046",       "colony": "Kanata",           "gravity": "Normal",  "path": "Soft", "survival_dm": -1 },
+    { "nationality": "Canton",            "system": "Zeta Tucanae",     "colony": "Lihngtou",         "gravity": "Normal",  "path": "Hard", "survival_dm": -1 },
+    { "nationality": "France",            "system": "Beta Canum",       "colony": "French Continent", "gravity": "Normal",  "path": "Hard", "survival_dm": -1 },
+    { "nationality": "France",            "system": "Beta Comae",       "colony": "Nous Voila",       "gravity": "Normal",  "path": "Hard", "survival_dm": 0 },
+    { "nationality": "France",            "system": "Eta Bootis",       "colony": "Aurore",           "gravity": "Low",     "path": "Hard", "survival_dm": -2 },
+    { "nationality": "France",            "system": "Kimanjano",        "colony": "Fromme",           "gravity": "Normal",  "path": "Hard", "survival_dm": -1 },
+    { "nationality": "France",            "system": "Queen Alice's Star","colony": "Europe Neuve",    "gravity": "Normal",  "path": "Soft", "survival_dm": -2 },
+    { "nationality": "France",            "system": "Vogelheim",        "colony": "Saint Benoit",     "gravity": "Normal",  "path": "Soft", "survival_dm": 0 },
+    { "nationality": "Germany",           "system": "61 Ursae Majoris", "colony": "Halbinsel",        "gravity": "Normal",  "path": "Soft", "survival_dm": -1 },
+    { "nationality": "Germany",           "system": "Beta Canum",       "colony": "German Continent", "gravity": "Normal",  "path": "Hard", "survival_dm": -1 },
+    { "nationality": "Germany",           "system": "DM+36 2393",       "colony": "Dunkelheim",       "gravity": "Low",     "path": "Soft", "survival_dm": -2 },
+    { "nationality": "Germany",           "system": "Hochbaden",        "colony": "Hochbaden",        "gravity": "Low",     "path": "Hard", "survival_dm": 0 },
+    { "nationality": "Germany",           "system": "Neubayern",        "colony": "Nibelungen",       "gravity": "Low",     "path": "Soft", "survival_dm": -1 },
+    { "nationality": "Germany",           "system": "Vogelheim",        "colony": "New Mark",         "gravity": "Normal",  "path": "Soft", "survival_dm": 0 },
+    { "nationality": "Germany (Bavaria)", "system": "Rho Eridani",      "colony": "Heidelsheimat",    "gravity": "Low",     "path": "Soft", "survival_dm": -1 },
+    { "nationality": "Inca",              "system": "DM-3 1123",        "colony": "Sechura",          "gravity": "High",    "path": "Hard", "survival_dm": -2 },
+    { "nationality": "Inca",              "system": "Rho Eridani",      "colony": "Pachamama",        "gravity": "Low",     "path": "Hard", "survival_dm": -2 },
+    { "nationality": "Japan",             "system": "61 Ursae Majoris", "colony": "Tosashimizu",      "gravity": "Normal",  "path": "Soft", "survival_dm": -1 },
+    { "nationality": "Japan",             "system": "Beta Hydri",       "colony": "Daikoku",          "gravity": "Low",     "path": "Soft", "survival_dm": -2 },
+    { "nationality": "Manchuria",         "system": "Delta Pavonis",    "colony": "Cold Mountain",    "gravity": "Normal",  "path": "Hard", "survival_dm": -3 },
+    { "nationality": "Manchuria",         "system": "Epsilon Eridani",  "colony": "Dukou",            "gravity": "High",    "path": "Hard", "survival_dm": -2 },
+    { "nationality": "Manchuria",         "system": "Epsilon Indi",     "colony": "Chengdu",          "gravity": "Normal",  "path": "Hard", "survival_dm": -2 },
+    { "nationality": "Manchuria",         "system": "Tau Ceti",         "colony": "Kwantung",         "gravity": "Normal",  "path": "Hard", "survival_dm": 0 },
+    { "nationality": "Manchuria",         "system": "Zeta Tucanae",     "colony": "Chyuantii",        "gravity": "Normal",  "path": "Hard", "survival_dm": -1 },
+    { "nationality": "Mexico",            "system": "Omicron2 Eridani", "colony": "Montana",          "gravity": "Normal",  "path": "Soft", "survival_dm": -1 },
+    { "nationality": "Mexico",            "system": "Tau Ceti",         "colony": "Azteca",           "gravity": "Normal",  "path": "Soft", "survival_dm": 0 },
+    { "nationality": "Texas",             "system": "DM-3 1123",        "colony": "Austin's World",   "gravity": "High",    "path": "Hard", "survival_dm": -1 },
+    { "nationality": "Texas",             "system": "Rho Eridani",      "colony": "Alamo",            "gravity": "Low",     "path": "Hard", "survival_dm": -1 },
+    { "nationality": "Ukraine",           "system": "Eta Bootis",       "colony": "Noviy Kyiv",       "gravity": "Low",     "path": "Hard", "survival_dm": -2 }
+  ],
+
+  "_still_to_transcribe": [
+    "Major Outposts table, Core Book 2 printed p22 (pdf 23) -- the Spacer homeworlds",
+    "Independent Colonial Nations and Worlds, Core Book 2 printed p25 (pdf 26)",
+    "the UPP/UCP columns, omitted here as world-generation data a character generator does not need"
+  ]
+}
