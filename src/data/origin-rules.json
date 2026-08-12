@@ -1,0 +1,91 @@
+{
+  "_source": "2300AD Core Book 1, chargen extract, printed pp9-10 (pdf 3-4). printed = pdf + 6.",
+
+  "_MY_ERROR": "I omitted the UPP and UCP columns when transcribing the Colonies table, calling them 'world-generation data a character generator does not need'. That was WRONG. TECH LEVEL is the last character of the UPP and it drives the Homeworld Pre-Career Admissions DM; TIER drives both the Off-World Admissions DM and the ban on space careers in term one. Neither is derivable from what I kept. colonies.json must be re-transcribed to carry tech_level and tier before the education step can be built.",
+
+  "creation_order": [
+    "roll characteristics (Traveller Core Rulebook p8)",
+    "choose Nationality (sets native languages)",
+    "choose Frontier or Spacer",
+    "choose Homeworld if Frontier",
+    "note the homeworld Survival DM and adjust characteristics for Gravity Type",
+    "note the Leaving Home modifier",
+    "choose background skills",
+    "optionally attempt Pre-Career Education with the homeworld modifier",
+    "enter a career, then proceed as normal -- BUT make a Leaving Home check at the end of every term until it passes"
+  ],
+
+  "frontier": {
+    "dnams": "Travellers from the Frontier may have DNA Modifications and Symbionts to cope with Planetary Adaptation Syndrome, noted in their colony's description. Travellers from outposts and other low- to zero-gravity environments can also select the Zero-Gee DNAM.",
+    "augmentation": {
+      "trigger": "each time a Survival roll is EQUAL TO the minimum required",
+      "effect": "the Traveller may elect to gain a prosthetic -- a limb, or one or both eyes",
+      "quality": "a cosmetic replacement with no special features unless later upgraded",
+      "_note": "This hooks on an EXACT success, not a pass. The engine must compare total == target, not total >= target, and offer a choice at that moment."
+    },
+    "pre_career_education": {
+      "choice": "on the homeworld, or off-world for better opportunities",
+      "homeworld_admissions_by_tech_level": [
+        { "tech_level": "7 or less", "dm": -6 },
+        { "tech_level": "8-9",       "dm": -4 },
+        { "tech_level": "10-11",     "dm": -2 },
+        { "tech_level": "12",        "dm": 0 }
+      ],
+      "offworld_admissions_by_tier": [
+        { "tier": 1, "dm": 2 }, { "tier": 2, "dm": 0 }, { "tier": 3, "dm": -2 },
+        { "tier": 4, "dm": -4 }, { "tier": 5, "dm": -6 }, { "tier": 6, "dm": -8 }
+      ],
+      "offworld_cost": "a Traveller who successfully goes off-world for education suffers DM-1 to Benefit rolls when mustering out, and a roll of 1 then yields NO benefit at all"
+    },
+    "survival": "the colony's Survival modifier applies until the Traveller leaves the homeworld",
+    "careers": "all careers are available, EXCEPT that Travellers from Tier 5 or Tier 6 colonies cannot take a space-based career (Scout, Merchant, Navy) in their first term",
+    "leaving_home_dm": 0
+  },
+
+  "spacer": {
+    "pre_career_education_dm": -2,
+    "_education_note": "Higher education is rare in Spacer societies; most learning is done on the job.",
+    "survival_dm": -1,
+    "_survival_note": "applies until they leave home",
+    "careers": "all careers except Army are available in the first term; Army is available from the second term onwards and suffers DM-1 for entry",
+    "leaving_home_dm": 2,
+    "gun_combat": "gun combat skills are almost unknown in the civilian Spacer population"
+  },
+
+  "path_effects": {
+    "Hard": { "benefit_dm": 1 },
+    "Soft": { "homeworld_survival_dm": 1, "benefit_dm": -1,
+              "extras": "may start with DNA modifications and their associated Traits, symbionts and perhaps a Neo protector" },
+    "_note": "Path comes from the colony, not from player choice -- see colonies.json."
+  },
+
+  "languages": {
+    "primary": "fully fluent, skill level 2",
+    "secondary": "if the nation or colony has one, skill level 1",
+    "zhargon": "Libertines and Belters know Zhargon at skill level 1",
+    "arm_language": "Frontier colonists have a passing knowledge (level 0) of the primary language of their arm: French in the French Arm, English in the American Arm, Mandarin Chinese in the Manchurian Arm",
+    "checks": "no check is normally needed at level 0+; technical discussion or relaying orders under stress may need one, at the referee's discretion"
+  },
+
+  "leaving_home": {
+    "when": "at the end of each term of a career, until it passes",
+    "roll": "2D, 8+ to leave the homeworld",
+    "dms": [
+      { "careers": ["Navy", "Marine", "Merchant"], "dm_per_term_served": 1 },
+      { "careers": ["Scout"], "dm_per_term_served": 2 },
+      { "origin": "Spacer", "dm": 2 },
+      { "origin": "Frontier", "dm": 0 }
+    ],
+    "on_success": "the homeworld Survival modifier stops applying and the check is no longer made; the Traveller does not return during character generation"
+  },
+
+  "_still_to_transcribe": [
+    "re-transcribe colonies.json with tech_level (from UPP) and tier",
+    "gravity type characteristic adjustments -- printed p8 (pdf 2), partially read",
+    "life span and ageing changes -- printed p10 (pdf 4), truncated mid-sentence",
+    "mustering out and skill changes -- printed p11 (pdf 5)",
+    "the 2300AD Drifter career (Barbarian removed, Freelancer added) -- printed p12 (pdf 6)",
+    "events table -- printed p13 (pdf 7)",
+    "skill packages -- printed p14 (pdf 8)"
+  ]
+}
