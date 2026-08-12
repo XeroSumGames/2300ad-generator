@@ -57,9 +57,24 @@
     { "nationality": "Ukraine",           "system": "Eta Bootis",       "colony": "Noviy Kyiv",       "gravity": "Low",     "path": "Hard", "survival_dm": -2 }
   ],
 
+  "independent_colonies": [
+    { "nationality": "Independent",     "system": "Eta Bootis",       "colony": "Tanstaafl", "gravity": "Low",    "path": "Hard", "survival_dm": -2 },
+    { "nationality": "Ex-French",       "system": "61 Ursae Majoris", "colony": "Elysia",    "gravity": "Normal", "path": "Soft", "survival_dm": -1 },
+    { "nationality": "Life Foundation", "system": "DM+3 1123",        "colony": "Cousteau",  "gravity": "High",   "path": "Soft", "survival_dm": -1 },
+    { "nationality": "Trilon Corp",     "system": "Xi Ursae Majoris", "colony": "Kie-Yuma",  "gravity": "Normal", "path": "Hard", "survival_dm": -1 }
+  ],
+  "_independent_note": "Same shape as the national colonies (Path and categorical Gravity), so these fold into the same picker. Source: Core Book 2 printed p25 (pdf 26). Note Kie-Yuma appears BOTH here as a Trilon Corp colony and in the Major Outposts table as a Turkish outpost -- the same world, two entries, different data. Do not dedupe by world name.",
+
+  "alien_homeworlds": [
+    { "species": "Sung",      "system": "DM+4 123",   "world": "Stark",             "gravity": "Normal", "survival_dm": -1 },
+    { "species": "Pentapods", "system": "DM+43 1953", "world": "God|Home",          "gravity": "Low",    "survival_dm": -4 },
+    { "species": "Arbor",     "system": "DM+17 2611", "world": "Lightfall",         "gravity": "Normal", "survival_dm": -2 },
+    { "species": "Xiang",     "system": "DM+4 123",   "world": "Home of the Mother","gravity": "Low",    "survival_dm": -1 },
+    { "species": "Eber",      "system": "82 Eridani", "world": "Kormoran",          "gravity": "High",   "survival_dm": -2 }
+  ],
+  "_alien_note": "Recorded for completeness but PROBABLY OUT OF SCOPE for the base generator: these are species homeworlds with no Path and no nationality, and the chargen extract never routes a player to them. God|Home's -4 is the harshest Survival DM anywhere in the setting. Confirm whether alien PCs are supported before exposing these.",
+
   "_still_to_transcribe": [
-    "Major Outposts table, Core Book 2 printed p22 (pdf 23) -- the Spacer homeworlds",
-    "Independent Colonial Nations and Worlds, Core Book 2 printed p25 (pdf 26)",
-    "the UPP/UCP columns, omitted here as world-generation data a character generator does not need"
+    "the UPP/UCP columns, omitted throughout as world-generation data a character generator does not need"
   ]
 }
