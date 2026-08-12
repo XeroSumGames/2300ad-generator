@@ -1,0 +1,40 @@
+{
+  "_source": "2300AD Core Book 2 (The Worlds of 2300AD), Major Outposts table, printed p22 (pdf 23).",
+
+  "_structural_difference": "Outposts are shaped DIFFERENTLY from colonies and must not share a table. (1) Gravity is a NUMBER here (0.93, 0.25, 0) where colonies use a category (Normal, Low, Extreme). (2) There is NO Path column -- outposts carry no Hard/Soft assignment at all, which fits them being the Spacer side of the Frontier/Spacer split. (3) Some are Independent or Uninhabited rather than belonging to a nation.",
+
+  "_gravity_note": "Zero-gravity outposts (Clarkesstar, Ross 863, Vega, and Van Maanen's Star at 0.08) are where the 0G DNAM applies -- the chargen text says most Spacers carry it to move between station spin gravity and the zero gravity of distant outposts.",
+
+  "outposts": [
+    { "system": "AC+17 534-105",    "outpost": "Eriksson",          "nationality": "Canada",      "gravity": 0.93, "survival_dm": -2 },
+    { "system": "DM-26 12026",      "outpost": "Estacion Escobar",  "nationality": "Argentina",   "gravity": 0.97, "survival_dm": -2 },
+    { "system": "DM-56 328",        "outpost": "Gerollblock",       "nationality": "Germany",     "gravity": 0.25, "survival_dm": -1 },
+    { "system": "DM+21 1377",       "outpost": "Eshari Station",    "nationality": "Brazil",      "gravity": 0.69, "survival_dm": -2 },
+    { "system": "DM+36 2219",       "outpost": "Sans Souci",        "nationality": "France",      "gravity": 0.99, "survival_dm": -2 },
+    { "system": "Augereau",         "outpost": "Augereau Station",  "nationality": "France",      "gravity": 0.47, "survival_dm": -1 },
+    { "system": "Augereau",         "outpost": "Innsruck Station",  "nationality": "Germany",     "gravity": 0.47, "survival_dm": -1 },
+    { "system": "Barnard's Star",   "outpost": "FAR Station 1",     "nationality": "America",     "gravity": 0.71, "survival_dm": -1 },
+    { "system": "Barnard's Star",   "outpost": "Fuyuan Station",    "nationality": "Manchuria",   "gravity": 0.71, "survival_dm": -2 },
+    { "system": "Barnard's Star",   "outpost": "Meetpoint Station", "nationality": "Indonesia",   "gravity": 0.70, "survival_dm": 0 },
+    { "system": "Berthier",         "outpost": "Berthier City",     "nationality": "Independent", "gravity": 0.23, "survival_dm": -2 },
+    { "system": "Bessieres",        "outpost": "Istria Station",    "nationality": "France",      "gravity": 0.80, "survival_dm": 0 },
+    { "system": "Beta Comae",       "outpost": "Teliha",            "nationality": "Ukraine",     "gravity": 0.33, "survival_dm": 0 },
+    { "system": "Broward",          "outpost": "Armstrong Station", "nationality": "America",     "gravity": 0.26, "survival_dm": -1 },
+    { "system": "Clarkesstar",      "outpost": "DeVilbis Station",  "nationality": "Britain",     "gravity": 0,    "survival_dm": -1 },
+    { "system": "Davout",           "outpost": "Shungen",           "nationality": "Japan",       "gravity": 0.76, "survival_dm": -2 },
+    { "system": "Davout",           "outpost": "Ville de Glace",    "nationality": "France",      "gravity": 0.76, "survival_dm": -2 },
+    { "system": "Haifeng",          "outpost": "Heaven's Water",    "nationality": "Manchuria",   "gravity": 0.81, "survival_dm": -3 },
+    { "system": "Nyotekundu",       "outpost": "Inferno",           "nationality": "France",      "gravity": 1.02, "survival_dm": -2 },
+    { "system": "Nyotekundu",       "outpost": "Naragema",          "nationality": "Azania",      "gravity": 1.02, "survival_dm": -2 },
+    { "system": "Ross 863",         "outpost": "Fisher Station",    "nationality": "Australia",   "gravity": 0,    "survival_dm": -1 },
+    { "system": "Serurier",         "outpost": "Serurier",          "nationality": "Manchuria",   "gravity": 0.21, "survival_dm": -1 },
+    { "system": "Serurier",         "outpost": "Serurier Station",  "nationality": "France",      "gravity": 0.21, "survival_dm": -1 },
+    { "system": "Van Maanen's Star","outpost": "Sandberg",          "nationality": "Uninhabited", "gravity": 0.08, "survival_dm": -2 },
+    { "system": "Vega",             "outpost": "FAR Station 5",     "nationality": "America",     "gravity": 0,    "survival_dm": -1 },
+    { "system": "Xiuning",          "outpost": "Xiuning",           "nationality": "Manchuria",   "gravity": 0.70, "survival_dm": -2 },
+    { "system": "Xi Ursae Majoris", "outpost": "Kie-Yuma",          "nationality": "Turkey",      "gravity": 1.21, "survival_dm": -2 }
+  ],
+
+  "_new_nationalities": "Indonesia and Turkey appear ONLY in this table, never in the Colonies table -- so the nationality picker cannot be built from the Colonies table alone.",
+  "_still_to_transcribe": "Independent Colonial Nations and Worlds, Core Book 2 printed p25 (pdf 26)"
+}
