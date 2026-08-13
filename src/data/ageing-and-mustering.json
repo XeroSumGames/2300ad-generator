@@ -1,0 +1,62 @@
+{
+  "_source": "2300AD Core Book 1, chargen extract, printed pp10-11 (pdf 4-5). printed = pdf + 6.",
+
+  "ageing": {
+    "starts_at_age": 50,
+    "_change": "Traveller starts ageing rolls at 34 (end of the fourth term). 2300AD starts them at 50, to reflect a far longer lifespan -- living to 120 is common and most people postpone retirement into their 80s.",
+    "_engine_impact": "In terms, age 50 is the end of the EIGHTH term (18 + 4*8), not the fourth. The Traveller engine's ageingDue() test of terms >= 4 must become terms >= 8 for 2300AD. Everything else about the ageing table is unchanged."
+  },
+
+  "injuries_and_augmentation": {
+    "prosthetic_on_injury": {
+      "when": "a Traveller who suffers an injury during creation may elect a prosthetic replacement, typically an eye or limb",
+      "cost": "consumes a Benefit roll",
+      "effect": "allows them to CONTINUE in the career if they would otherwise be ejected, and to IGNORE all characteristic deductions from the Injury table",
+      "_note": "Strong effect and easy to miss. This is a second, separate prosthetic route from the Frontier one in origin-rules.json, which triggers on a Survival roll exactly equal to its target and grants only a cosmetic replacement. Two different triggers, two different outcomes."
+    },
+    "neural_jack": {
+      "eligibility": "Travellers in Naval or Marine careers from a Tier 3 or higher nation",
+      "cost": "consumes a Benefit roll",
+      "effect": "DM+1 to advancement rolls",
+      "_AMBIGUITY": "'Tier 3 or higher' is ambiguous because LOWER tier numbers are better in 2300AD -- Tier 1 is the French Empire and the Off-World Admissions table gives Tier 1 the best DM. So 'higher' almost certainly means higher STATUS, i.e. Tiers 1-3, not tiers numbered 3+. Reading it the other way would give the privilege to the poorest nations. Implemented as tier <= 3; flagged for a ruling."
+    }
+  },
+
+  "mustering_out": {
+    "path_dm": { "Hard": 1, "Soft": -1, "_applies_to": "all Benefit rolls" },
+    "soft_path_swap": "a Soft Path Traveller who receives EQUIPMENT as a benefit may opt for an appropriate Neo companion instead",
+    "everyone_starts_with": ["hand comp", "Link phone"],
+    "ship_share_value": 500000,
+    "_ship_share_currency": "Lv500000, not MCr1 as in Traveller. Cannot be redeemed for cash.",
+    "ship_ownership": "private starship ownership is uncommon but not unheard of; any vessel is likely jointly owned with a government, corporation or foundation, which is meant as an adventure hook",
+    "ship_equivalents": {
+      "Ship's Boat":     "SLV-50 Spaceplane or DC-30",
+      "Scout":           "Trilon ISV-2",
+      "Free Trader":     "Thorez Courier",
+      "Laboratory Ship": "Trilon Systems SSV-21",
+      "Yacht":           "Martinique Yacht"
+    },
+    "weapon_benefit": "unless mustering out of a MILITARY career, a Traveller is limited to rifles and handguns only; former belters or free traders may opt for a laser weapon instead",
+    "tas_membership": "there is no TAS equivalent in 2300AD -- count it as another Ship Share",
+
+    "_CURRENCY_WARNING": "2300AD uses the LIVRE (Lv), not the Credit (Cr). The chargen extract gives no replacement Benefit tables, so the per-career Cash columns transcribed for Traveller are reused with their numbers read as Livres. Every 'Cr' label in the UI must become 'Lv' for this generator. Confirm the 1:1 numeric reuse is intended before shipping -- the extract implies it but never says so outright."
+  },
+
+  "skill_changes": {
+    "Astrogation": "retained but repurposed: plots stutterwarp routes and gravity captures on entering a system, rather than accurate jumps",
+    "Engineer (j-drive)": { "action": "replace", "with": "Engineer (stutterwarp)" },
+    "Engineer (stutterwarp)": "operating and fine-tuning a ship's stutterwarp drive",
+    "Flyer (grav)": { "action": "replace", "with": "Flyer (vectored thrust)", "why": "2300AD has no gravitic technology or anti-grav vehicles" },
+    "Flyer (vectored thrust)": "pilots aerodynes -- flying bricks kept aloft solely by engine power, very manoeuvrable and tricky to fly",
+    "Languages": "a Traveller may only choose HUMAN languages unless they have spent 2 or more terms as a Scout",
+    "Science": { "action": "remove speciality", "speciality": "psionicology" },
+    "_engine_impact": "These are string substitutions over the Traveller career skill tables. Navy and Scout tables reference Engineer and Flyer specialities directly, so the swap has to happen in the data layer, not only in display."
+  },
+
+  "_still_to_transcribe": [
+    "the 2300AD Drifter career -- printed p12 (pdf 6)",
+    "events -- printed p13 (pdf 7)",
+    "skill packages -- printed p14 (pdf 8)",
+    "DNAM and symbiont lists -- printed pp28-35 (pdf 22-29)"
+  ]
+}
