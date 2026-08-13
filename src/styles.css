@@ -26,7 +26,7 @@ body{margin:0;background:var(--panel);color:var(--ink);font-family:var(--ff-b);f
 .backbar:hover{color:#fff}
 
 .hdr{position:relative;background:var(--surface);border-bottom:3px solid var(--accent);padding:14px 18px;text-align:center}
-.hdr-title{font-family:var(--ff-d);font-size:30px;font-weight:700;letter-spacing:.02em;color:var(--ink);pointer-events:none}
+.hdr-title{margin:0;font-family:var(--ff-d);font-size:30px;font-weight:700;letter-spacing:.02em;color:var(--ink);pointer-events:none}
 .hdr-sub{font-family:var(--ff-m);font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--dust);pointer-events:none;margin-top:2px}
 .theme-toggle{position:absolute;left:18px;top:50%;transform:translateY(-50%);display:inline-flex;border:1px solid var(--line);border-radius:20px;overflow:hidden;z-index:5}
 .tt-btn{background:transparent;border:0;color:var(--dust);font-family:var(--ff-m);font-size:11px;letter-spacing:.1em;padding:5px 12px;cursor:pointer}

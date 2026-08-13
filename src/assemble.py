@@ -49,8 +49,21 @@ HTML = """<!doctype html>
 <html lang="en"><head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>2300AD -- Character Generator</title>
-<meta name="description" content="An unofficial character generator for 2300AD, the Mongoose Traveller science fiction setting.">
+<title>2300AD Character Generator (Mongoose Traveller) | Xero Sum Games</title>
+<link rel="canonical" href="https://thetable.xerosumgames.com/2300ad-generator">
+<meta name="description" content="Free 2300AD character generator for the Mongoose Traveller setting. Pick a nationality and homeworld on the Frontier or among the Spacers, run the career lifepath, and print a character sheet. No signup.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Xero Sum Games">
+<meta property="og:title" content="2300AD Character Generator (Mongoose Traveller)">
+<meta property="og:description" content="Free 2300AD character generator for the Mongoose Traveller setting. Pick a nationality and homeworld on the Frontier or among the Spacers, run the career lifepath, and print a character sheet. No signup.">
+<meta property="og:url" content="https://thetable.xerosumgames.com/2300ad-generator">
+<meta property="og:image" content="https://thetable.xerosumgames.com/gen-2300ad-generator.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="2300AD Character Generator (Mongoose Traveller)">
+<meta name="twitter:description" content="Free 2300AD character generator for the Mongoose Traveller setting. Pick a nationality and homeworld on the Frontier or among the Spacers, run the career lifepath, and print a character sheet. No signup.">
+<meta name="twitter:image" content="https://thetable.xerosumgames.com/gen-2300ad-generator.jpg">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"2300AD Character Generator (Mongoose Traveller)","url":"https://thetable.xerosumgames.com/2300ad-generator","applicationCategory":"GameApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"description":"Free 2300AD character generator for the Mongoose Traveller setting. Pick a nationality and homeworld on the Frontier or among the Spacers, run the career lifepath, and print a character sheet. No signup."}</script>
+
 <style>
 %CSS%
 </style>
@@ -62,7 +75,7 @@ HTML = """<!doctype html>
     <button class="tt-btn" data-tv="light" onclick="setTheme('light')">Light</button>
     <button class="tt-btn" data-tv="dark" onclick="setTheme('dark')">Dark</button>
   </div>
-  <div class="hdr-title">2300AD</div>
+  <h1 class="hdr-title">2300AD</h1>
   <div class="hdr-sub">Character Generator &middot; Mongoose Traveller</div>
   <button class="hdr-rand no-print" type="button" onclick="A.randomise()">&#9860; Randomise</button>
 </div>
@@ -71,6 +84,8 @@ HTML = """<!doctype html>
   <div id="main"></div>
 </div>
 <div class="footer no-print" style="text-align:center;padding:26px 16px;font-size:12px;color:#8d897c;line-height:1.6">
+  <p class="seo-intro">A free, browser-based character generator for 2300AD, the Mongoose Traveller science fiction setting. Choose a nationality and homeworld, which set your gravity, Survival modifier and Hard or Soft Path, then run the full career lifepath with Leaving Home checks each term.</p>
+
   <b>2300AD -- Character Generator.</b> An unofficial fan tool.<br>
   2300AD and Traveller are trade marks of Mongoose Publishing Ltd. Traveller (c)2024 Mongoose Publishing Ltd.
   This is an unofficial, fan-made character generator, not affiliated with or endorsed by the rights holders.
