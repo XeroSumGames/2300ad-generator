@@ -1,0 +1,35 @@
+{
+  "_source": "2300AD Core Book 1, chargen extract, printed p14 (pdf 8).",
+  "_replaces": "The Traveller Core Rulebook's eight skill packages entirely. 2300AD supplies five of its own and none of the Traveller names carry over.",
+  "_rule": "Used after ALL Travellers have been created -- still a group rule, as in Traveller, so the generator should present the package and let the player tick what they claimed rather than granting the lot.",
+
+  "packages": {
+    "Troubleshooter": {
+      "desc": "For a group of experienced professionals who solve problems for a corporation, government agency or other organisation.",
+      "skills": ["Electronics (any) 1", "Gun Combat (any) 1", "Investigate 1", "Medic 1", "Melee (any) 1", "Recon 1", "Stealth 1", "Streetwise 1"]
+    },
+    "Colonist": {
+      "desc": "For a campaign where the Travellers must survive the harsh challenges of a frontier world.",
+      "skills": ["Animals (any) 1", "Drive (any) 1", "Gun Combat (any) 1", "Mechanic 1", "Medic 1", "Navigation 1", "Recon 1", "Survival 1"]
+    },
+    "Urbanite": {
+      "desc": "For Travellers working the streets of a technologically advanced but decadent urban environment.",
+      "skills": ["Carouse 1", "Computers 1", "Deception 1", "Gun Combat (any) 1", "Melee (any)", "Stealth 1", "Streetwise 1"]
+    },
+    "Libertine Trader": {
+      "desc": "Suits a group of free traders, plying the spaceways between colonies and avoiding the Core.",
+      "skills": ["Advocate 1", "Broker 1", "Deception 1", "Diplomat 1", "Engineering 1", "Gun Combat (any) 1", "Persuade 1", "Pilot 1", "Streetwise 1"]
+    },
+    "Corporate": {
+      "desc": "For a group that largely works in a corporate environment, whether in the Core or on the Frontier.",
+      "skills": ["Admin 1", "Advocate 1", "Deception 1", "Investigate 1", "Profession (any) 1", "Science (any) 1", "Streetwise 1"]
+    }
+  },
+
+  "_TRANSCRIPTION_NOTES": [
+    "Urbanite lists 'Melee (any)' with NO level where every other entry in every package carries a 1. Transcribed as printed. Almost certainly means Melee (any) 1 -- but under the Traveller skill rules an entry with no level listed means 'gain at 1 if untrained, else +1', which is a genuinely different and slightly better outcome, so it is left as printed rather than normalised.",
+    "Libertine Trader says 'Engineering 1'. The skill is called ENGINEER everywhere else in Traveller and in 2300AD's own skill-changes list. Recorded as printed; treat as Engineer when resolving.",
+    "Urbanite says 'Computers 1'. Traveller has no such skill -- it is Electronics (computers). Recorded as printed; treat as Electronics (computers) when resolving.",
+    "Package sizes vary: Troubleshooter and Colonist hold 8, Libertine Trader 9, Urbanite and Corporate 7."
+  ]
+}

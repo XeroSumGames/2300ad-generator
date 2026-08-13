@@ -1,0 +1,102 @@
+{
+  "_source": "2300AD Core Book 1, chargen extract, printed p12 (pdf 6).",
+  "_replaces": "The Traveller Core Rulebook Drifter career, wholesale. 2300AD drops the Barbarian assignment and adds Freelancer; Wanderer and Scavenger carry over unchanged.",
+
+  "_CURRENCY_RESOLVED": "This table settles the Livre question. Its Cash column reads None, None, Lv1000, Lv2000, Lv3000, Lv4000, Lv8000 -- the SAME NUMBERS as the Traveller Drifter's Cr column. So 2300AD reuses Traveller's cash values 1:1 and only relabels the unit. The warning in ageing-and-mustering.json can be downgraded: reuse the Traveller Cash columns as-is and print Lv.",
+
+  "key": "drifter",
+  "name": "Drifter",
+  "blurb": "Drifters are wanderers and Travellers, moving across colony worlds and the built-up cities of the Core. They live from job to job, relying on their wits and skills. Many are products of the extreme labour crisis of the Core, with 40%+ unemployment in most developed nations.",
+  "qualification": { "check": "Automatic", "automatic": true, "dms": [] },
+  "military": false,
+  "commission": null,
+  "basic_training_exception": "Use the ASSIGNMENT skill table for basic training, not Service Skills.",
+  "_structure_note": "As in Traveller, the Drifter has NO Advanced Education table -- four skill tables, not five.",
+  "_pension_note": "Drifter remains excluded from pensions.",
+
+  "assignments": [
+    { "key": "freelancer", "name": "Freelancer", "desc": "You are a professional who works contract-to-contract, skilled in technical work but unable or unwilling to obtain steady employment.", "survival": "EDU 7+", "advancement": "INT 7+" },
+    { "key": "wanderer",   "name": "Wanderer",   "desc": "You are a consummate nomad, living hand to mouth in slums and spaceports across human space.", "survival": "END 7+", "advancement": "INT 7+" },
+    { "key": "scavenger",  "name": "Scavenger",  "desc": "You work as a belter (asteroid miner) or on a salvage crew.", "survival": "DEX 7+", "advancement": "END 7+" }
+  ],
+  "_assignment_note": "Freelancer is the new one. Wanderer and Scavenger keep the Traveller targets exactly (END 7+/INT 7+ and DEX 7+/END 7+).",
+
+  "skill_tables": {
+    "personal_development": ["STR +1", "END +1", "DEX +1", "Language", "Profession", "Jack-of-all-Trades"],
+    "service_skills":       ["Athletics", "Melee (unarmed)", "Recon", "Streetwise", "Stealth", "Survival"],
+    "advanced_education":   null,
+    "assignment": {
+      "freelancer": ["Profession", "Electronics", "Streetwise", "Admin", "Deception", "Jack-of-all-Trades"],
+      "wanderer":   ["Drive", "Deception", "Recon", "Stealth", "Streetwise", "Survival"],
+      "scavenger":  ["Pilot (small craft)", "Mechanic", "Astrogation", "Vacc Suit", "Profession", "Gun Combat"]
+    }
+  },
+  "_skill_table_note": "Personal Development, Service Skills, Wanderer and Scavenger are byte-for-byte the Traveller Drifter's. Only the Freelancer column is new.",
+
+  "ranks": {
+    "freelancer": [
+      { "rank": 0, "title": null, "bonus": null },
+      { "rank": 1, "title": null, "bonus": "Profession 1" },
+      { "rank": 2, "title": null, "bonus": "Carouse 1" },
+      { "rank": 3, "title": null, "bonus": null },
+      { "rank": 4, "title": null, "bonus": null },
+      { "rank": 5, "title": null, "bonus": "Admin 1" },
+      { "rank": 6, "title": null, "bonus": null }
+    ],
+    "wanderer": [
+      { "rank": 0, "title": null, "bonus": null },
+      { "rank": 1, "title": null, "bonus": "Streetwise 1" },
+      { "rank": 2, "title": null, "bonus": null },
+      { "rank": 3, "title": null, "bonus": "Deception 1" },
+      { "rank": 4, "title": null, "bonus": null },
+      { "rank": 5, "title": null, "bonus": null },
+      { "rank": 6, "title": null, "bonus": null }
+    ],
+    "scavenger": [
+      { "rank": 0, "title": null, "bonus": null },
+      { "rank": 1, "title": null, "bonus": "Vacc Suit 1" },
+      { "rank": 2, "title": null, "bonus": null },
+      { "rank": 3, "title": null, "bonus": "Profession (belter) 1 or Mechanic 1" },
+      { "rank": 4, "title": null, "bonus": null },
+      { "rank": 5, "title": null, "bonus": null },
+      { "rank": 6, "title": null, "bonus": null }
+    ]
+  },
+  "_rank_note": "Wanderer and Scavenger rank tracks are identical to Traveller's. Freelancer is new and is the only Drifter track with three bonuses.",
+
+  "mustering_out": [
+    { "roll": 1, "cash": 0,    "benefit": "Contact" },
+    { "roll": 2, "cash": 0,    "benefit": "Weapon" },
+    { "roll": 3, "cash": 1000, "benefit": "Ally" },
+    { "roll": 4, "cash": 2000, "benefit": "Weapon" },
+    { "roll": 5, "cash": 3000, "benefit": "EDU +1" },
+    { "roll": 6, "cash": 4000, "benefit": "Ship Share" },
+    { "roll": 7, "cash": 8000, "benefit": "Two Ship Shares" }
+  ],
+  "_cash_note": "Rolls 1 and 2 pay nothing ('None'), as in Traveller. Values are Livres.",
+
+  "mishaps": [
+    { "roll": 1, "text": "Severely injured (as a result of 2 on the Injury table). Alternatively, roll twice on the Injury table and take the lower result." },
+    { "roll": 2, "text": "Injured. Roll on the Injury table." },
+    { "roll": 3, "text": "You run afoul of a criminal gang, corrupt bureaucrat or other foe. Gain an Enemy." },
+    { "roll": 4, "text": "You suffer from a life-threatening illness. Reduce your END by 1." },
+    { "roll": 5, "text": "Betrayed by a friend. One of your Contacts or Allies betrays you, ending your career; that Contact or Ally becomes a Rival or Enemy. If you have none, you are betrayed by someone you never saw coming and still gain a Rival or Enemy. In addition, roll 2D; on a 2 you must take the Prisoner career next term." },
+    { "roll": 6, "text": "You do not know what happened to you. There is a gap in your memory." }
+  ],
+
+  "events": [
+    { "roll": 2,  "text": "Disaster! Roll on the Mishap table, but you are not ejected from this career." },
+    { "roll": 3,  "text": "A patron offers you a chance at a job. If you accept, gain DM+4 to your next qualification roll but you owe that patron a favour." },
+    { "roll": 4,  "text": "You pick up a few useful skills here and there. Gain one level of Jack-of-all-Trades, Survival, Streetwise or Melee." },
+    { "roll": 5,  "text": "You manage to scavenge something of use. Gain DM+1 to any one Benefit roll." },
+    { "roll": 6,  "text": "You encounter something unusual. Go to the Life Events table and have an Unusual Event." },
+    { "roll": 7,  "text": "Life Event. Roll on the Life Events table." },
+    { "roll": 8,  "text": "You are attacked by enemies. Gain an Enemy if you do not have one already, and roll either Melee 8+, Gun Combat 8+ or Stealth 8+ to avoid a roll on the Injury table." },
+    { "roll": 9,  "text": "You are offered a chance at a risky but rewarding adventure. If you accept, roll 1D: on 1-2 you are injured or arrested (roll on the Injury table or take the Prisoner career next term); on 3-4 you survive but gain nothing; on 5-6 you succeed and gain DM+4 to any one Benefit roll." },
+    { "roll": 10, "text": "Life on the edge hones your abilities. Increase any skill you already have by one level." },
+    { "roll": 11, "text": "You are forcibly drafted. Roll for the Draft next term." },
+    { "roll": 12, "text": "You thrive on adversity. You are automatically promoted." }
+  ],
+
+  "_QUESTION_ANSWERED": "The tables on printed p13 are THIS career's mishaps and events, reprinted because the whole Drifter career is reprinted -- NOT a global replacement for every career's tables. Compared line by line against the Traveller Drifter and they are identical, bar one cosmetic difference: event 4 says 'Melee' where Traveller says 'Melee (any)'. Every other 2300AD career therefore keeps its Traveller mishap and event tables untouched."
+}
