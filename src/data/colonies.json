@@ -14,11 +14,12 @@
    "colony": "New Columbia",
    "gravity": "Extreme",
    "path": "Soft",
-   "survival_dm": 4,
+   "survival_dm": -4,
    "upp": "CD97675-B",
    "ucp": "C247545-B",
    "tech_level": 11,
-   "ucp_tier": 2
+   "ucp_tier": 2,
+   "_survival_correction": "Colonies table prints '4'; the King world description in Book 2 reads 'Survival: DM-4'. Corrected to -4 -- King is a 3.08 G hell-world and a survival BONUS there is not credible."
   },
   {
    "nationality": "America",
@@ -74,11 +75,12 @@
    "colony": "Huntsland",
    "gravity": "Extreme",
    "path": "Soft",
-   "survival_dm": 4,
+   "survival_dm": -4,
    "upp": "CD97675-B",
    "ucp": "D347544-B",
    "tech_level": 11,
-   "ucp_tier": 3
+   "ucp_tier": 3,
+   "_survival_correction": "Colonies table prints '4'; the King world description in Book 2 reads 'Survival: DM-4'. Corrected to -4 -- King is a 3.08 G hell-world and a survival BONUS there is not credible."
   },
   {
    "nationality": "Australia",
@@ -666,5 +668,9 @@
     ]
    ]
   }
+ ],
+ "_king_correction": [
+  "New Columbia",
+  "Huntsland"
  ]
 }

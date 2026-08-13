@@ -1,0 +1,311 @@
+{
+ "_source": "2300AD Core Book 2, world descriptions. Swept programmatically from the PDF text layer.",
+ "_why": "The Colonies table carries Path, Gravity and a Survival DM but NOT which DNAMs and symbionts a world's colonists carry. Each world block has an 'Environmental Hazards and Requirements' line that does.",
+ "_cross_check": "Every world block that states a Survival DM agrees with the Colonies table -- except KING. The Colonies table prints '4' for New Columbia and Huntsland; the King world block reads 'Survival: DM-4'. King is the setting's hell-world (3.08 G, poison-tainted atmosphere, the book calls it a hell-world), so a +4 BONUS is nonsense and -4 is right. colonies.json has been corrected and the original reading recorded.",
+ "worlds": [
+  {
+   "world": "King",
+   "page": 29,
+   "survival_dm": -4,
+   "gravity_g": 3.08,
+   "gravity_band": "extreme",
+   "requirements": null,
+   "colonies": []
+  },
+  {
+   "world": "Hermes",
+   "page": 29,
+   "survival_dm": -2,
+   "gravity_g": 0.73,
+   "gravity_band": "low",
+   "requirements": "Cold climate, exotic salts in water, incompatible biosphere. FADS/ANGPTL6 (Cold Weather) DNAM, AFS Symbionts.",
+   "colonies": []
+  },
+  {
+   "world": "Ellis",
+   "page": 29,
+   "survival_dm": -1,
+   "gravity_g": 0.92,
+   "gravity_band": "normal",
+   "requirements": "Extremely-dry, prone to mote (fine dust) storms. Ariel",
+   "colonies": []
+  },
+  {
+   "world": "Botany Bay",
+   "page": 31,
+   "survival_dm": -1,
+   "gravity_g": 0.87,
+   "gravity_band": "normal",
+   "requirements": "Water world, seasonal fungal spores. Botany Bay- specific PEA DNAM. Triton DNAM. Darwin",
+   "colonies": [
+    {
+     "colony": "Darwin Island",
+     "ucp": "D557664-9",
+     "nationality": "Australian KINGSLAND"
+    },
+    {
+     "colony": "Kingsland",
+     "ucp": "D326645-8",
+     "nationality": "Australian EXPLORATO"
+    }
+   ]
+  },
+  {
+   "world": "Kingsland",
+   "page": 31,
+   "survival_dm": -1,
+   "gravity_g": 1.07,
+   "gravity_band": "normal",
+   "requirements": "Climate is cool to cold, active allergens, vitamin deficiencies.",
+   "colonies": [
+    {
+     "colony": "Kingsland",
+     "ucp": "D326645-8",
+     "nationality": "Australian EXPLORATO"
+    }
+   ]
+  },
+  {
+   "world": "Nibelungen",
+   "page": 35,
+   "survival_dm": -1,
+   "gravity_g": 0.63,
+   "gravity_band": "low",
+   "requirements": null,
+   "colonies": []
+  },
+  {
+   "world": "Beowulf",
+   "page": 35,
+   "survival_dm": -2,
+   "gravity_g": 1.05,
+   "gravity_band": "normal",
+   "requirements": "Allergens, exceptionally long hot days and cold, dark nights (40+ days each), carnivorous life forms. Tailored PEA DNAM, DES Symbiont.",
+   "colonies": [
+    {
+     "colony": "British Europe Neuve",
+     "ucp": "C136746-B",
+     "nationality": "French"
+    }
+   ]
+  },
+  {
+   "world": "Kimanjano",
+   "page": 39,
+   "survival_dm": -1,
+   "gravity_g": 0.94,
+   "gravity_band": "normal",
+   "requirements": null,
+   "colonies": []
+  },
+  {
+   "world": "Yuma",
+   "page": 39,
+   "survival_dm": -1,
+   "gravity_g": 1.21,
+   "gravity_band": "high",
+   "requirements": null,
+   "colonies": []
+  },
+  {
+   "world": "Beta Canum",
+   "page": 41,
+   "survival_dm": -1,
+   "gravity_g": 0.94,
+   "gravity_band": "normal",
+   "requirements": null,
+   "colonies": []
+  },
+  {
+   "world": "Crater",
+   "page": 45,
+   "survival_dm": -2,
+   "gravity_g": 0.61,
+   "gravity_band": null,
+   "requirements": null,
+   "colonies": [
+    {
+     "colony": "Crater",
+     "ucp": "D227664-9",
+     "nationality": "British The colony o"
+    }
+   ]
+  },
+  {
+   "world": "Adlerhorst",
+   "page": 45,
+   "survival_dm": 0,
+   "gravity_g": 1.16,
+   "gravity_band": "normal",
+   "requirements": null,
+   "colonies": [
+    {
+     "colony": "Neu Mark",
+     "ucp": "D246645-9",
+     "nationality": "German The Bavarians"
+    }
+   ]
+  },
+  {
+   "world": "Dunkelheim",
+   "page": 47,
+   "survival_dm": -2,
+   "gravity_g": 0.6,
+   "gravity_band": "low",
+   "requirements": null,
+   "colonies": []
+  },
+  {
+   "world": "Hochbaden",
+   "page": 51,
+   "survival_dm": 0,
+   "gravity_g": 0.29,
+   "gravity_band": "low",
+   "requirements": "Vacuum World. Pressure suits required for surface. PAX/ DLX Transcribe \u2018Free Fall\u2019",
+   "colonies": []
+  },
+  {
+   "world": "Aurore",
+   "page": 51,
+   "survival_dm": -2,
+   "gravity_g": 0.73,
+   "gravity_band": "low",
+   "requirements": null,
+   "colonies": [
+    {
+     "colony": "Noviy Kyiv",
+     "ucp": "X324600-8",
+     "nationality": "Ukrainian The Ukrain"
+    }
+   ]
+  },
+  {
+   "world": "Cold Mountain",
+   "page": 55,
+   "survival_dm": -3,
+   "gravity_g": 0.83,
+   "gravity_band": "normal",
+   "requirements": null,
+   "colonies": []
+  },
+  {
+   "world": "Daikoku",
+   "page": 57,
+   "survival_dm": -2,
+   "gravity_g": 0.66,
+   "gravity_band": "low",
+   "requirements": null,
+   "colonies": []
+  },
+  {
+   "world": "Syuhlahm",
+   "page": 57,
+   "survival_dm": -1,
+   "gravity_g": 1.02,
+   "gravity_band": "normal",
+   "requirements": "Parasites, allergens. Tailored PEA, AFS Symbiont",
+   "colonies": [
+    {
+     "colony": "AFS Symbiont Chyuantii",
+     "ucp": "D265667-A",
+     "nationality": "Manchurian Lihngtou"
+    }
+   ]
+  },
+  {
+   "world": "Heidelsheimat",
+   "page": 57,
+   "survival_dm": -1,
+   "gravity_g": 0.64,
+   "gravity_band": "low",
+   "requirements": "Lower than normal partial-pressure of oxygen, airborne contaminants in spring and fall, largely incompatible biosphere. 57 t h e m a n c h u r i a n a r m",
+   "colonies": []
+  },
+  {
+   "world": "Chengdu",
+   "page": 63,
+   "survival_dm": -2,
+   "gravity_g": 1.12,
+   "gravity_band": "normal",
+   "requirements": null,
+   "colonies": []
+  },
+  {
+   "world": "Kanata",
+   "page": 63,
+   "survival_dm": -1,
+   "gravity_g": 0.87,
+   "gravity_band": "normal",
+   "requirements": "Surface subject to occasional solar flares. Magnetic field is weak. Some allergens in coastal biome and crater gardens. No",
+   "colonies": [
+    {
+     "colony": "Kanata",
+     "ucp": "D344345-8",
+     "nationality": "Canadian KWANTUNG Pr"
+    },
+    {
+     "colony": "Kwantung",
+     "ucp": "D255745-B",
+     "nationality": "Manchurian Azteca UC"
+    }
+   ]
+  },
+  {
+   "world": "Kwantung",
+   "page": 63,
+   "survival_dm": 0,
+   "gravity_g": 0.93,
+   "gravity_band": "normal",
+   "requirements": "Vitamin deficiencies, irritants/allergens. Tailored PEA DNAM, VSS and AFS Symbionts.",
+   "colonies": [
+    {
+     "colony": "Kwantung",
+     "ucp": "D255745-B",
+     "nationality": "Manchurian Azteca UC"
+    }
+   ]
+  },
+  {
+   "world": "Dukou",
+   "page": 67,
+   "survival_dm": -2,
+   "gravity_g": 1.57,
+   "gravity_band": "high",
+   "requirements": "High Gravity.",
+   "colonies": []
+  },
+  {
+   "world": "Montana",
+   "page": 67,
+   "survival_dm": -1,
+   "gravity_g": 0.98,
+   "gravity_band": "normal",
+   "requirements": "Hostile life forms, difficulty living off the land. No",
+   "colonies": []
+  },
+  {
+   "world": "S World",
+   "page": 67,
+   "survival_dm": -1,
+   "gravity_g": 1.25,
+   "gravity_band": "high",
+   "requirements": null,
+   "colonies": []
+  },
+  {
+   "world": "Paulo",
+   "page": 69,
+   "survival_dm": -2,
+   "gravity_g": 0.99,
+   "gravity_band": "normal",
+   "requirements": "Incompatible biology, hostile wildlife.",
+   "colonies": [
+    {
+     "colony": "Paulo",
+     "ucp": "D864645-8",
+     "nationality": "Brazil EXPLORATORY W"
+    }
+   ]
+  }
+ ]
+}
