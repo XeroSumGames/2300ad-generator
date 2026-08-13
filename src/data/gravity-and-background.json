@@ -1,0 +1,48 @@
+{
+  "_source": "2300AD Core Book 1, chargen extract, printed p8 (pdf 2). printed = pdf + 6.",
+
+  "homeworld_gravity": {
+    "_effect": "A Traveller's homeworld gravity type modifies their characteristics at creation. The same table is reused in play to compare homeworld gravity against the gravity of a world being visited.",
+    "_flavour": "Travellers from low-gravity worlds tend to be taller and more slender; those from high-gravity worlds shorter and stockier.",
+    "table": [
+      { "type": "Zero Gravity",     "min": 0.0,  "max": 0.10, "STR": -2, "DEX": 2,  "END": -2 },
+      { "type": "Low Gravity",      "min": 0.10, "max": 0.75, "STR": -1, "DEX": 1,  "END": -1 },
+      { "type": "Standard Gravity", "min": 0.80, "max": 1.20, "STR": 0,  "DEX": 0,  "END": 0 },
+      { "type": "High Gravity",     "min": 1.21, "max": 2.10, "STR": 1,  "DEX": -1, "END": 1 },
+      { "type": "Extreme Gravity",  "min": 2.11, "max": null, "STR": 2,  "DEX": -2, "END": 2 }
+    ],
+
+    "_naming": "The Colonies table says 'Normal' where this table says 'Standard'. Same band. The prose also mentions 'Light gravity worlds', but there is no Light row -- treat it as flavour for Low.",
+
+    "_RANGE_GAP": "The published bands do not tile. Low ends at 0.75 and Standard starts at 0.80, leaving 0.75-0.80 undefined, and Zero (0.0-0.10) overlaps Low (0.10-0.75) at exactly 0.10. This is not academic: outpost gravity is given as a NUMBER, and three outposts fall in the hole -- Davout's Shungen and Ville de Glace at 0.76 have no defined band. Bessieres' Istria Station at 0.80 lands exactly on the Standard boundary and is fine. NEEDS A RULING: the sane reading is to widen Low to 0.79, but the book does not say so and I have not applied it."
+  },
+
+  "survival": {
+    "world_dm": "the colony's Survival DM applies to all Survival rolls until the Traveller leaves their homeworld",
+    "soft_path": "Travellers on the Soft Path have DM+1 to Survival checks until they Leave Home",
+    "dnams": "the roll may also be modified by DNA Modifications and Symbionts",
+    "_PER_COLONY_EXTRAS": "Some colonies carry a FURTHER Survival modifier stated only in their prose description, not in the Colonies table. The book's own example: the Incan colony on Heidelsheimat inflicts DM-1 for its primitive nature and lack of support, while the Texan and Bavarian colonies there do not. These per-colony modifiers are scattered through Book 2's world write-ups and are NOT captured yet -- a colony's total Survival DM cannot be computed from the table alone."
+  },
+
+  "background_skills": {
+    "count": "3 + EDU DM",
+    "_count_note": "Same count as the Traveller Core Rulebook, but a DIFFERENT and shorter list -- 13 entries against Traveller's 17. Do not reuse the Traveller list.",
+    "level": 0,
+    "list": ["Admin", "Animals", "Art", "Athletics", "Carouse", "Drive", "Gun Combat",
+             "Mechanics", "Medic", "Seafarer", "Steward", "Survival", "Vacc Suit"],
+    "restriction": {
+      "nationalities": ["Manchuria", "Inca", "Argentina"],
+      "rule": "Travellers from Manchurian, Incan and Argentinean colonies must be SOC 9+ to choose Gun Combat"
+    },
+    "_vs_traveller": "Dropped from the Traveller list: Electronics, Flyer, Language, Profession, Science, Streetwise. Added: Gun Combat, Steward. 'Mechanic' is spelled 'Mechanics' here."
+  },
+
+  "_still_to_transcribe": [
+    "life span and ageing changes -- printed p10 (pdf 4)",
+    "mustering out and skill changes -- printed p11 (pdf 5)",
+    "the 2300AD Drifter career -- printed p12 (pdf 6)",
+    "events -- printed p13 (pdf 7)",
+    "skill packages -- printed p14 (pdf 8)",
+    "per-colony Survival modifiers from Book 2's world descriptions"
+  ]
+}
