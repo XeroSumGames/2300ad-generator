@@ -1,0 +1,152 @@
+{
+  "_source": "Mongoose Traveller 2nd Edition, Core Rulebook Update 2022 -- 'Char Gen & Skills' extract. PDF page = printed page - 7.",
+  "_scope": "Rules mechanics only (target numbers, tables, procedure). Transcribed for a character generator; no rulebook prose is reproduced beyond the short table entries needed to run the roll.",
+  "_transcribed": "2026-08-11",
+
+  "characteristics": {
+    "roll": "2D each, assign in any order (or in order as rolled), starting with STR",
+    "order": ["STR", "DEX", "END", "INT", "EDU", "SOC"],
+    "names": {
+      "STR": "Strength", "DEX": "Dexterity", "END": "Endurance",
+      "INT": "Intellect", "EDU": "Education", "SOC": "Social Standing", "PSI": "Psi"
+    },
+    "psi": "not rolled during normal creation (see the Psion career, printed p236)",
+    "max_unaugmented": 15,
+    "dm_table": [
+      { "min": 0,  "max": 0,   "dm": -3 },
+      { "min": 1,  "max": 2,   "dm": -2 },
+      { "min": 3,  "max": 5,   "dm": -1 },
+      { "min": 6,  "max": 8,   "dm": 0  },
+      { "min": 9,  "max": 11,  "dm": 1  },
+      { "min": 12, "max": 14,  "dm": 2  },
+      { "min": 15, "max": 999, "dm": 3  }
+    ]
+  },
+
+  "background_skills": {
+    "count": "EDU DM + 3 (range 0-6)",
+    "_warning": "The official Character Generation Flowchart says '(EDU + 3)'. The rulebook text (printed p9) says EDU DM + 3. The BOOK is authoritative -- do not follow the flowchart here.",
+    "level": 0,
+    "list": ["Admin", "Animals", "Art", "Athletics", "Carouse", "Drive", "Electronics",
+             "Flyer", "Language", "Mechanic", "Medic", "Profession", "Science",
+             "Seafarer", "Streetwise", "Survival", "Vacc Suit"]
+  },
+
+  "starting_age": 18,
+  "term_length_years": 4,
+  "_term_note": "A term is always 4 years, even if survival is failed or the Traveller is forced out.",
+
+  "roll_convention": "2D + characteristic DM vs target. 'INT 8+' = roll 2D, add INT DM, succeed on 8+. Skill checks add skill level instead. No other modifiers apply during creation.",
+
+  "skill_limits": {
+    "max_level_during_creation": 4,
+    "_max_note": "Further increases above 4 are lost during creation.",
+    "total_cap": "3 x (INT DM + EDU DM)",
+    "_total_cap_source": "flowchart wording is '3 x (INT + EDU)'; VERIFY against printed p16-18 before implementing"
+  },
+
+  "pre_career_education": {
+    "when": "usually term 1 in place of a career; may be delayed to term 2 or 3; NOT available from term 4 onward",
+    "attempts": "one attempt at one pre-career option per term",
+    "on_entry_failure": "must immediately attempt entry to a career; failing that, be drafted as normal",
+    "on_success": "gain the listed skills and roll on the Pre-Career Events table",
+    "no_mustering_out": true,
+    "on_graduation_failure": "no benefits, but skills earned during the time are kept",
+
+    "university": {
+      "entry": "EDU 6+",
+      "entry_dms": [
+        { "when": "attempted in term two", "dm": -1 },
+        { "when": "attempted in term three", "dm": -2 },
+        { "when": "SOC 9 or higher", "dm": 1 }
+      ],
+      "skills": "choose one skill at level 0 and one at level 1 from the list below",
+      "skill_list": ["Admin", "Advocate", "Animals (Training or Veterinary)", "Art (any)",
+                     "Astrogation", "Electronics (any)", "Engineer (any)", "Language (any)",
+                     "Medic", "Navigation", "Profession (any)", "Science (any)"],
+      "edu_bonus_on_entry": 1,
+      "_edu_total_note": "EDU rises by +2 in total: +1 on entry, +1 more on graduation. Xero's 'MGT2 Character Creation Tips' article says '+1 EDU if you get in, a total of +3 if you graduate'. That is WRONG -- printed p16 reads 'Increase EDU by +1' on entry and 'Increase EDU by an additional +1' under Graduation Benefits, and there is no third increase anywhere on the page. Verified against the page image, not just my own transcription. The book wins.",
+      "graduation": "INT 6+",
+      "honours": "10+",
+      "graduation_benefits": [
+        "both chosen skills increase by one level",
+        "EDU increases by a further +1",
+        "DM+1 (DM+2 with honours) to qualify for: Agent, Army, Citizen (Corporate), Entertainer (Journalist), Marines, Navy, Scholar, Scouts",
+        "may take a commission roll before the first term of a military career at DM+2, so long as that is the first career chosen after university; success enters at officer rank 1; graduating with honours passes this roll automatically"
+      ]
+    },
+
+    "military_academy": {
+      "choose": ["Army", "Marines", "Navy"],
+      "entry": { "Army": "END 7+", "Marines": "END 8+", "Navy": "INT 8+" },
+      "entry_dms": [
+        { "when": "attempted in term two", "dm": -2 },
+        { "when": "attempted in term three", "dm": -4 }
+      ],
+      "skills": "all Service Skills of the tied career at level 0, as with basic training",
+      "graduation": "INT 7+",
+      "honours": "11+",
+      "graduation_dms": [
+        { "when": "END 8 or higher", "dm": 1 },
+        { "when": "SOC 8 or higher", "dm": 1 }
+      ],
+      "graduation_benefits": [
+        "if entering the tied military career, select any three Service Skills and increase them to level 1",
+        "EDU +1",
+        "with honours, SOC +1 as well",
+        "automatic entry into the tied military career, so long as it is the first career attempted after graduation"
+      ],
+      "on_graduation_failure": "may still automatically enter the tied military career unless the graduation roll was 2 or less; if entering this way, no commission roll may be made in the first term"
+    },
+
+    "events_note": "Roll on the Pre-Career Events table for any term spent in pre-career education. If drafted through an event, enter the new career next term but do not graduate; a Traveller can be drafted more than once.",
+
+    "pre_career_events": [
+      { "roll": 2,  "text": "Approached by an underground (and highly illegal) psionic group who sense potential in you. You may test your PSI and attempt to enter the Psion career in any subsequent term." },
+      { "roll": 3,  "text": "Your time in education is not a happy one and you suffer a deep tragedy. You crash and fail to graduate." },
+      { "roll": 4,  "text": "A supposedly harmless prank goes wrong and someone gets hurt. Roll SOC 8+. Success: gain a Rival. Failure: gain an Enemy. On a roll of 2, you fail to graduate and must take the Prisoner career in your next term." },
+      { "roll": 5,  "text": "Taking advantage of youth, you party as much as you study. Gain Carouse 1." },
+      { "roll": 6,  "text": "You become involved in a tightly knit clique and make a pact to remain friends forever. Gain D3 Allies." },
+      { "roll": 7,  "text": "Life Event. Roll on the Life Events table." },
+      { "roll": 8,  "text": "You join a political movement. Roll SOC 8+. If successful you become a leading figure: gain one Ally within the movement but one Enemy in wider society." },
+      { "roll": 9,  "text": "You develop a healthy interest in a hobby or other area of study. Gain any skill of your choice except Jack-of-all-Trades at level 0." },
+      { "roll": 10, "text": "A newly arrived tutor rubs you up the wrong way. Roll 9+ on any skill learned during this term. Success: gain a level in that skill and the tutor as a Rival." },
+      { "roll": 11, "text": "War comes and a wide-ranging draft is instigated. Either flee and join the Drifter career next term, or be drafted (roll 1D: 1-3 Army, 4-5 Marine, 6 Navy). Either way you do not graduate this term. However, on SOC 9+ you avoid the draft and may attempt graduation normally." },
+      { "roll": 12, "text": "You gain wide-ranging recognition of your initiative and innovative approach to study. Increase SOC by +1." }
+    ]
+  },
+
+  "draft_table": [
+    { "roll": 1, "career": "Navy",     "assignment": "any" },
+    { "roll": 2, "career": "Army",     "assignment": "any" },
+    { "roll": 3, "career": "Marine",   "assignment": "any" },
+    { "roll": 4, "career": "Merchant", "assignment": "Merchant Marine" },
+    { "roll": 5, "career": "Scout",    "assignment": "any" },
+    { "roll": 6, "career": "Agent",    "assignment": "Law Enforcement" }
+  ],
+
+  "careers_summary": {
+    "_source": "Career Summary Table, printed p21 (pdf 14)",
+    "_shape": "qualification is the career-level entry roll; survival and advancement are per-assignment",
+    "Agent":       { "qualification": "INT 6+", "page": 22, "assignments": { "Law Enforcement": { "survival": "END 6+", "advancement": "INT 6+" }, "Intelligence": { "survival": "INT 7+", "advancement": "INT 5+" }, "Corporate": { "survival": "INT 5+", "advancement": "INT 7+" } } },
+    "Army":        { "qualification": "END 5+", "page": 24, "assignments": { "Support": { "survival": "END 5+", "advancement": "EDU 7+" }, "Infantry": { "survival": "STR 6+", "advancement": "EDU 6+" }, "Cavalry": { "survival": "DEX 7+", "advancement": "INT 5+" } } },
+    "Citizen":     { "qualification": "EDU 5+", "page": 26, "assignments": { "Corporate": { "survival": "SOC 6+", "advancement": "INT 6+" }, "Worker": { "survival": "END 4+", "advancement": "EDU 8+" }, "Colonist": { "survival": "INT 7+", "advancement": "END 5+" } } },
+    "Drifter":     { "qualification": "Automatic", "page": 28, "assignments": { "Barbarian": { "survival": "END 7+", "advancement": "STR 7+" }, "Wanderer": { "survival": "END 7+", "advancement": "INT 7+" }, "Scavenger": { "survival": "DEX 7+", "advancement": "END 7+" } } },
+    "Entertainer": { "qualification": "DEX or INT 5+", "page": 30, "assignments": { "Artist": { "survival": "SOC 6+", "advancement": "INT 6+" }, "Journalist": { "survival": "EDU 7+", "advancement": "INT 5+" }, "Performer": { "survival": "INT 5+", "advancement": "DEX 7+" } } },
+    "Marine":      { "qualification": "END 6+", "page": 32, "assignments": { "Support": { "survival": "END 5+", "advancement": "EDU 7+" }, "Star Marine": { "survival": "END 6+", "advancement": "EDU 6+" }, "Ground Assault": { "survival": "END 7+", "advancement": "EDU 5+" } } },
+    "Merchant":    { "qualification": "INT 4+", "page": 34, "assignments": { "Merchant Marine": { "survival": "EDU 5+", "advancement": "INT 7+" }, "Free Trader": { "survival": "DEX 6+", "advancement": "INT 6+" }, "Broker": { "survival": "EDU 5+", "advancement": "INT 7+" } } },
+    "Navy":        { "qualification": "INT 6+", "page": 36, "assignments": { "Line/Crew": { "survival": "INT 5+", "advancement": "EDU 7+" }, "Engineer/Gunner": { "survival": "INT 6+", "advancement": "EDU 6+" }, "Flight": { "survival": "DEX 7+", "advancement": "EDU 5+" } } },
+    "Noble":       { "qualification": "SOC 10+", "page": 38, "assignments": { "Administrator": { "survival": "INT 4+", "advancement": "EDU 6+" }, "Diplomat": { "survival": "INT 5+", "advancement": "SOC 7+" }, "Dilettante": { "survival": "SOC 5+", "advancement": "INT 7+" } } },
+    "Rogue":       { "qualification": "DEX 6+", "page": 40, "assignments": { "Thief": { "survival": "INT 6+", "advancement": "DEX 6+" }, "Enforcer": { "survival": "END 6+", "advancement": "STR 6+" }, "Pirate": { "survival": "DEX 6+", "advancement": "INT 6+" } } },
+    "Scholar":     { "qualification": "INT 6+", "page": 42, "assignments": { "Field Researcher": { "survival": "END 6+", "advancement": "INT 6+" }, "Scientist": { "survival": "EDU 4+", "advancement": "INT 8+" }, "Physician": { "survival": "EDU 4+", "advancement": "EDU 8+" } } },
+    "Scout":       { "qualification": "INT 5+", "page": 44, "assignments": { "Courier": { "survival": "END 5+", "advancement": "EDU 9+" }, "Surveyor": { "survival": "END 6+", "advancement": "INT 8+" }, "Explorer": { "survival": "END 7+", "advancement": "EDU 7+" } } }
+  },
+
+  "_todo": [
+    "printed p18-20 (pdf 11-13): qualification DMs, basic training, skill tables, survival/mishap, events, commission, advancement, ageing",
+    "printed p22-45 (pdf 15-38): per-career skill tables, ranks, mishaps, events",
+    "printed p44-47: mustering out benefits, cash table, pension and debts",
+    "printed p48+: skill packages",
+    "confirm the total skill-level cap wording against the book"
+  ]
+}

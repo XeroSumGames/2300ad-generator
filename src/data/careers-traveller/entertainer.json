@@ -1,0 +1,97 @@
+{
+  "_source": "Mongoose Traveller 2e Core Rulebook Update 2022, printed pp30-31 (pdf 23-24)",
+  "key": "entertainer",
+  "name": "Entertainer",
+  "blurb": "Individuals who are involved with the media, whether as reporters, artists or celebrities.",
+  "qualification": {
+    "check": "DEX or INT 5+",
+    "choice_of": ["DEX", "INT"],
+    "target": 5,
+    "dms": [{ "when": "for every previous career", "dm": -1 }]
+  },
+  "_qualification_note": "The only career so far whose qualification lets the player choose which characteristic to test.",
+  "military": false,
+  "commission": null,
+
+  "assignments": [
+    { "key": "artist",     "name": "Artist",     "desc": "You are a writer, holographer or other creative.", "survival": "SOC 6+", "advancement": "INT 6+" },
+    { "key": "journalist", "name": "Journalist", "desc": "You report on local or galactic events for a news feed, the TAS or other organisation.", "survival": "EDU 7+", "advancement": "INT 5+" },
+    { "key": "performer",  "name": "Performer",  "desc": "You are an actor, dancer, acrobat, professional athlete or other public performer.", "survival": "INT 5+", "advancement": "DEX 7+" }
+  ],
+
+  "skill_tables": {
+    "personal_development": ["DEX +1", "INT +1", "SOC +1", "Language", "Carouse", "Jack-of-all-Trades"],
+    "service_skills":       ["Art", "Carouse", "Deception", "Drive", "Persuade", "Steward"],
+    "advanced_education":   { "min_edu": 10, "skills": ["Advocate", "Broker", "Deception", "Science", "Streetwise", "Diplomat"] },
+    "_advanced_education_note": "Requires EDU 10+, as with Citizen -- not the usual 8+.",
+    "assignment": {
+      "artist":     ["Art", "Carouse", "Electronics (computers)", "Gambler", "Persuade", "Profession"],
+      "journalist": ["Art (holography or write)", "Electronics", "Drive", "Investigate", "Recon", "Streetwise"],
+      "performer":  ["Art (performer or instrument)", "Athletics", "Carouse", "Deception", "Stealth", "Streetwise"]
+    }
+  },
+
+  "ranks": {
+    "artist": [
+      { "rank": 0, "title": null,           "bonus": null },
+      { "rank": 1, "title": null,           "bonus": "Art 1" },
+      { "rank": 2, "title": null,           "bonus": null },
+      { "rank": 3, "title": null,           "bonus": "Investigate 1" },
+      { "rank": 4, "title": null,           "bonus": null },
+      { "rank": 5, "title": "Famous Artist","bonus": "SOC +1" },
+      { "rank": 6, "title": null,           "bonus": null }
+    ],
+    "journalist": [
+      { "rank": 0, "title": null,                 "bonus": null },
+      { "rank": 1, "title": "Freelancer",         "bonus": "Electronics (comms) 1" },
+      { "rank": 2, "title": "Staff Writer",       "bonus": "Investigate 1" },
+      { "rank": 3, "title": null,                 "bonus": null },
+      { "rank": 4, "title": "Correspondent",      "bonus": "Persuade 1" },
+      { "rank": 5, "title": null,                 "bonus": null },
+      { "rank": 6, "title": "Senior Correspondent","bonus": "SOC +1" }
+    ],
+    "performer": [
+      { "rank": 0, "title": null,              "bonus": null },
+      { "rank": 1, "title": null,              "bonus": "DEX +1" },
+      { "rank": 2, "title": null,              "bonus": null },
+      { "rank": 3, "title": null,              "bonus": "STR +1" },
+      { "rank": 4, "title": null,              "bonus": null },
+      { "rank": 5, "title": "Famous Performer","bonus": "SOC +1" },
+      { "rank": 6, "title": null,              "bonus": null }
+    ]
+  },
+
+  "mustering_out": [
+    { "roll": 1, "cash": 0,     "benefit": "Contact" },
+    { "roll": 2, "cash": 0,     "benefit": "SOC +1" },
+    { "roll": 3, "cash": 10000, "benefit": "Contact" },
+    { "roll": 4, "cash": 10000, "benefit": "SOC +1" },
+    { "roll": 5, "cash": 40000, "benefit": "INT +1" },
+    { "roll": 6, "cash": 40000, "benefit": "Two Ship Shares" },
+    { "roll": 7, "cash": 80000, "benefit": "SOC +1 and EDU +1" }
+  ],
+  "_cash_note": "Rolls 1 and 2 on the Cash column read 'None' in the book, as with Drifter.",
+
+  "mishaps": [
+    { "roll": 1, "text": "Severely injured (as a result of 2 on the Injury table). Alternatively, roll twice on the Injury table and take the lower result." },
+    { "roll": 2, "text": "You expose or are involved in a scandal of some sort." },
+    { "roll": 3, "text": "Public opinion turns on you. Reduce your SOC by 1." },
+    { "roll": 4, "text": "You are betrayed by a peer. One of your Contacts or Allies betrays you, ending your career; that Contact or Ally becomes a Rival or Enemy. If you have none, you are betrayed by someone you never saw coming and still gain a Rival or Enemy." },
+    { "roll": 5, "text": "An investigation, tour, project or expedition goes wrong, stranding you far from home. Gain one of Survival 1, Pilot 1, Persuade 1 or Streetwise 1." },
+    { "roll": 6, "text": "You are forced out because of censorship or controversy. What truth did you get too close to? You gain DM+2 to the qualification roll for your next career." }
+  ],
+
+  "events": [
+    { "roll": 2,  "text": "Disaster! Roll on the Mishap table, but you are not ejected from this career." },
+    { "roll": 3,  "text": "You are invited to take part in a controversial event or exhibition. Roll Art or Investigate 8+. On success gain one SOC; on failure lose one SOC." },
+    { "roll": 4,  "text": "You are part of your homeworld's celebrity circles. Gain one of Carouse 1, Persuade 1, Steward 1 or a Contact." },
+    { "roll": 5,  "text": "One of your works is especially well received and popular, making you a minor celebrity. Gain DM+1 to any one Benefit roll." },
+    { "roll": 6,  "text": "You gain a patron in the arts. Gain DM+2 to your next advancement roll and an Ally." },
+    { "roll": 7,  "text": "Life Event. Roll on the Life Events table." },
+    { "roll": 8,  "text": "You have the opportunity to criticise or bring down a questionable political leader on your homeworld. If you refuse and support the leader, you gain nothing. If you accept, gain an Enemy and roll Art or Persuade 8+; on success gain one level in any skill you already have, on failure increase a skill anyway and roll on the Mishap table." },
+    { "roll": 9,  "text": "You go on a tour of the sector, visiting several worlds. Gain D3 Contacts." },
+    { "roll": 10, "text": "One of your pieces of art is stolen and the investigation brings you into the criminal underworld. Gain one of Streetwise 1, Investigate 1, Recon 1 or Stealth 1." },
+    { "roll": 11, "text": "As an artist, you lead a strange and charmed life. Go to the Life Events table and have an Unusual Event." },
+    { "roll": 12, "text": "You win a prestigious prize. You are automatically promoted." }
+  ]
+}

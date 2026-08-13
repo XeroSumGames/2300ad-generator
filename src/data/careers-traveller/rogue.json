@@ -1,0 +1,93 @@
+{
+  "_source": "Mongoose Traveller 2e Core Rulebook Update 2022, printed pp40-41 (pdf 33-34)",
+  "key": "rogue",
+  "name": "Rogue",
+  "blurb": "Criminal elements familiar with the rougher or more illegal methods of attaining goals.",
+  "qualification": { "check": "DEX 6+", "dms": [{ "when": "for every previous career", "dm": -1 }] },
+  "military": false,
+  "commission": null,
+  "_pension_note": "Rogue is one of the careers excluded from pensions (with Scout, Prisoner and Drifter).",
+
+  "assignments": [
+    { "key": "thief",    "name": "Thief",    "desc": "You steal from the rich and give to... well, yourself, actually.", "survival": "INT 6+", "advancement": "DEX 6+" },
+    { "key": "enforcer", "name": "Enforcer", "desc": "You are a leg breaker, thug or assassin for a criminal group.",     "survival": "END 6+", "advancement": "STR 6+" },
+    { "key": "pirate",   "name": "Pirate",   "desc": "You are a space-going corsair.",                                    "survival": "DEX 6+", "advancement": "INT 6+" }
+  ],
+
+  "skill_tables": {
+    "personal_development": ["Carouse", "DEX +1", "END +1", "Gambler", "Melee", "Gun Combat"],
+    "service_skills":       ["Deception", "Recon", "Athletics", "Gun Combat", "Stealth", "Streetwise"],
+    "advanced_education":   { "min_edu": 10, "skills": ["Electronics", "Navigation", "Medic", "Investigate", "Broker", "Advocate"] },
+    "_advanced_education_note": "Requires EDU 10+, as with Citizen and Entertainer -- not the usual 8+.",
+    "assignment": {
+      "thief":    ["Stealth", "Electronics", "Recon", "Streetwise", "Deception", "Athletics"],
+      "enforcer": ["Gun Combat", "Melee", "Streetwise", "Persuade", "Athletics", "Drive"],
+      "pirate":   ["Pilot", "Astrogation", "Gunner", "Engineer", "Vacc Suit", "Melee"]
+    }
+  },
+
+  "ranks": {
+    "thief": [
+      { "rank": 0, "title": null, "bonus": null },
+      { "rank": 1, "title": null, "bonus": "Stealth 1" },
+      { "rank": 2, "title": null, "bonus": null },
+      { "rank": 3, "title": null, "bonus": "Streetwise 1" },
+      { "rank": 4, "title": null, "bonus": null },
+      { "rank": 5, "title": null, "bonus": "Recon 1" },
+      { "rank": 6, "title": null, "bonus": null }
+    ],
+    "enforcer": [
+      { "rank": 0, "title": null, "bonus": null },
+      { "rank": 1, "title": null, "bonus": "Persuade 1" },
+      { "rank": 2, "title": null, "bonus": null },
+      { "rank": 3, "title": null, "bonus": "Gun Combat 1 or Melee 1" },
+      { "rank": 4, "title": null, "bonus": null },
+      { "rank": 5, "title": null, "bonus": "Streetwise 1" },
+      { "rank": 6, "title": null, "bonus": null }
+    ],
+    "pirate": [
+      { "rank": 0, "title": "Lackey",    "bonus": null },
+      { "rank": 1, "title": "Henchman",  "bonus": "Pilot 1 or Gunner 1" },
+      { "rank": 2, "title": "Corporal",  "bonus": null },
+      { "rank": 3, "title": "Sergeant",  "bonus": "Gun Combat 1 or Melee 1" },
+      { "rank": 4, "title": "Lieutenant","bonus": null },
+      { "rank": 5, "title": "Leader",    "bonus": "Leadership 1" },
+      { "rank": 6, "title": "Captain",   "bonus": null }
+    ]
+  },
+
+  "mustering_out": [
+    { "roll": 1, "cash": 0,      "benefit": "Ship Share" },
+    { "roll": 2, "cash": 0,      "benefit": "Weapon" },
+    { "roll": 3, "cash": 10000,  "benefit": "INT +1" },
+    { "roll": 4, "cash": 10000,  "benefit": "1D Ship Shares" },
+    { "roll": 5, "cash": 50000,  "benefit": "Armour" },
+    { "roll": 6, "cash": 100000, "benefit": "DEX +1" },
+    { "roll": 7, "cash": 100000, "benefit": "2D Ship Shares" }
+  ],
+  "_cash_note": "Rolls 1 and 2 on the Cash column read 'None' in the book, as with Drifter and Entertainer.",
+  "_benefit_note": "Rogue is the only career whose benefits grant a VARIABLE number of Ship Shares (1D on a 4, 2D on a 7).",
+
+  "mishaps": [
+    { "roll": 1, "text": "Severely injured (as a result of 2 on the Injury table). Alternatively, roll twice on the Injury table and take the lower result." },
+    { "roll": 2, "text": "Arrested. You must take the Prisoner career in your next term." },
+    { "roll": 3, "text": "Betrayed by a friend. One of your Contacts or Allies betrays you, ending your career; that Contact or Ally becomes a Rival or Enemy. If you have none, you are betrayed by someone you never saw coming and still gain a Rival or Enemy. In addition, roll 2D; on a 2 you must take the Prisoner career next term." },
+    { "roll": 4, "text": "A job goes wrong, forcing you to flee off-planet. Gain one of Deception 1, Pilot (small craft or spacecraft) 1, Athletics (dexterity) 1 or Gunner 1." },
+    { "roll": 5, "text": "A police detective or rival criminal forces you to flee and vows to hunt you down. Gain an Enemy." },
+    { "roll": 6, "text": "Injured. Roll on the Injury table." }
+  ],
+
+  "events": [
+    { "roll": 2,  "text": "Disaster! Roll on the Mishap table, but you are not ejected from this career." },
+    { "roll": 3,  "text": "You are arrested and charged. Defend yourself or hire a lawyer. If you defend yourself, roll Advocate 8+: on success the charges are dropped; on failure gain an Enemy and take the Prisoner career next term. If you hired a lawyer, gain the lawyer as a Contact and lose a Benefit roll." },
+    { "roll": 4,  "text": "You are involved in the planning of an impressive heist. Gain Electronics 1 or Mechanic 1." },
+    { "roll": 5,  "text": "One of your crimes pays off. Gain DM+2 to any one Benefit roll and gain your victim as an Enemy." },
+    { "roll": 6,  "text": "You have the opportunity to backstab a fellow rogue for personal gain. If you do so, gain DM+4 to your next advancement roll. If you refuse, gain them as an Ally." },
+    { "roll": 7,  "text": "Life Event. Roll on the Life Events table." },
+    { "roll": 8,  "text": "You spend months in the dangerous criminal underworld. Gain one of Streetwise 1, Stealth 1, Melee 1 or Gun Combat 1." },
+    { "roll": 9,  "text": "You become involved in a feud with a rival criminal organisation. Roll Stealth or Gun Combat 8+; on failure roll on the Injury table, on success gain an extra Benefit roll." },
+    { "roll": 10, "text": "You are involved in a gambling ring. Gain Gambler 1. You may wager any number of Benefit rolls and roll Gambler 8+; on failure lose all the wagered Benefit rolls, on success gain half as many Benefit rolls as you wagered, rounding up." },
+    { "roll": 11, "text": "A crime lord considers you his protege. Either gain Tactics (military) 1 or DM+4 to your next advancement roll thanks to their aid." },
+    { "roll": 12, "text": "You commit a legendary crime. You are automatically promoted." }
+  ]
+}

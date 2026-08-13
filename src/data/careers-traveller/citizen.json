@@ -1,0 +1,91 @@
+{
+  "_source": "Mongoose Traveller 2e Core Rulebook Update 2022, printed pp26-27 (pdf 19-20)",
+  "key": "citizen",
+  "name": "Citizen",
+  "blurb": "Individuals serving in a corporation, bureaucracy or industry, or who are making a new life on an untamed planet.",
+  "qualification": { "check": "EDU 5+", "dms": [{ "when": "for every previous career", "dm": -1 }] },
+  "military": false,
+  "commission": null,
+  "basic_training_exception": "Use the ASSIGNMENT skill table for basic training, not Service Skills.",
+
+  "assignments": [
+    { "key": "corporate", "name": "Corporate", "desc": "You are an executive or manager in a large corporation.", "survival": "SOC 6+", "advancement": "INT 6+" },
+    { "key": "worker",    "name": "Worker",    "desc": "You are a blue collar worker on an industrial world.",     "survival": "END 4+", "advancement": "EDU 8+" },
+    { "key": "colonist",  "name": "Colonist",  "desc": "You are building a new life on a recently settled world that still needs taming.", "survival": "INT 7+", "advancement": "END 5+" }
+  ],
+
+  "skill_tables": {
+    "personal_development": ["EDU +1", "INT +1", "Carouse", "Gambler", "Drive", "Jack-of-all-Trades"],
+    "service_skills":       ["Drive", "Flyer", "Streetwise", "Melee", "Steward", "Profession"],
+    "advanced_education":   { "min_edu": 10, "skills": ["Art", "Advocate", "Diplomat", "Language", "Electronics (computers)", "Medic"] },
+    "_advanced_education_note": "Citizen's Advanced Education table requires EDU 10+, NOT the usual 8+.",
+    "assignment": {
+      "corporate": ["Advocate", "Admin", "Broker", "Electronics (computers)", "Diplomat", "Leadership"],
+      "worker":    ["Drive", "Mechanic", "Electronics", "Engineer", "Profession", "Science"],
+      "colonist":  ["Animals", "Athletics", "Jack-of-all-Trades", "Drive", "Survival", "Recon"]
+    }
+  },
+
+  "ranks": {
+    "corporate": [
+      { "rank": 0, "title": null,             "bonus": null },
+      { "rank": 1, "title": null,             "bonus": null },
+      { "rank": 2, "title": "Manager",        "bonus": "Admin 1" },
+      { "rank": 3, "title": null,             "bonus": null },
+      { "rank": 4, "title": "Senior Manager", "bonus": "Advocate 1" },
+      { "rank": 5, "title": null,             "bonus": null },
+      { "rank": 6, "title": "Director",       "bonus": "SOC +1" }
+    ],
+    "worker": [
+      { "rank": 0, "title": null,               "bonus": null },
+      { "rank": 1, "title": null,               "bonus": null },
+      { "rank": 2, "title": "Technician",       "bonus": "Profession 1" },
+      { "rank": 3, "title": null,               "bonus": null },
+      { "rank": 4, "title": "Craftsman",        "bonus": "Mechanic 1" },
+      { "rank": 5, "title": null,               "bonus": null },
+      { "rank": 6, "title": "Master Technician","bonus": "Engineer 1" }
+    ],
+    "colonist": [
+      { "rank": 0, "title": null,       "bonus": null },
+      { "rank": 1, "title": null,       "bonus": null },
+      { "rank": 2, "title": "Settler",  "bonus": "Survival 1" },
+      { "rank": 3, "title": null,       "bonus": null },
+      { "rank": 4, "title": "Explorer", "bonus": "Navigation 1" },
+      { "rank": 5, "title": null,       "bonus": null },
+      { "rank": 6, "title": null,       "bonus": "Gun Combat 1" }
+    ]
+  },
+
+  "mustering_out": [
+    { "roll": 1, "cash": 2000,   "benefit": "Ship Share" },
+    { "roll": 2, "cash": 5000,   "benefit": "Ally" },
+    { "roll": 3, "cash": 10000,  "benefit": "INT +1" },
+    { "roll": 4, "cash": 10000,  "benefit": "Gun" },
+    { "roll": 5, "cash": 10000,  "benefit": "EDU +1" },
+    { "roll": 6, "cash": 50000,  "benefit": "Two Ship Shares" },
+    { "roll": 7, "cash": 100000, "benefit": "TAS Membership" }
+  ],
+
+  "mishaps": [
+    { "roll": 1, "text": "Severely injured (as a result of 2 on the Injury table). Alternatively, roll twice on the Injury table and take the lower result." },
+    { "roll": 2, "text": "You are harassed and your life ruined by a criminal gang. Gain the gang as an Enemy." },
+    { "roll": 3, "text": "Hard times caused by a lack of interstellar trade cost you your job. Lose one SOC." },
+    { "roll": 4, "text": "Your business is investigated by the planetary authorities (or your colony suffers offworld interference). Co-operate and the business or colony is shut down but you gain DM+2 to the qualification roll for your next career. Refuse and gain an Ally." },
+    { "roll": 5, "text": "A revolution, attack or other unusual event throws your life into chaos, forcing you to leave the planet. Roll Streetwise 8+; on success increase any skill you have by one level." },
+    { "roll": 6, "text": "Injured. Roll on the Injury table." }
+  ],
+
+  "events": [
+    { "roll": 2,  "text": "Disaster! Roll on the Mishap table, but you are not ejected from this career." },
+    { "roll": 3,  "text": "Political upheaval strikes your homeworld and you are caught up in the revolution. Gain either Advocate 1, Persuade 1, Explosives 1 or Streetwise 1, then roll whichever skill you chose 8+. On success you come out on the winning side and gain DM+2 to your next advancement roll. On failure you suffer DM-2 to your next Survival roll." },
+    { "roll": 4,  "text": "You spend time maintaining and using heavy vehicles, as part of your job or as a hobby. Increase Mechanic, Drive, Electronics, Flyer or Engineer by one level." },
+    { "roll": 5,  "text": "Your business expands, your corporation grows or the colony thrives. Gain DM+1 to any one Benefit roll." },
+    { "roll": 6,  "text": "You are given advanced training in a specialist field. Roll EDU 10+ to gain any one skill of your choice at level 1." },
+    { "roll": 7,  "text": "Life Event. Roll on the Life Events table." },
+    { "roll": 8,  "text": "You learn something you should not have -- a corporate secret or political scandal -- which you can profit from illegally. If you do, gain DM+1 to a Benefit roll from this career and gain Streetwise 1, Deception 1 or a criminal Contact. If you refuse, you gain nothing." },
+    { "roll": 9,  "text": "You are rewarded for your diligence or cunning. Gain DM+2 to your next advancement roll." },
+    { "roll": 10, "text": "You gain experience in a technical field as a computer operator or surveyor. Increase Electronics or Engineer by one level." },
+    { "roll": 11, "text": "You befriend a superior in the corporation or the colony. Gain an Ally. Either gain Diplomat 1 or DM+4 to your next advancement roll thanks to their aid." },
+    { "roll": 12, "text": "You rise to a position of power in your colony or corporation. You are automatically promoted." }
+  ]
+}

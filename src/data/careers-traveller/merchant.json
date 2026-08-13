@@ -1,0 +1,89 @@
+{
+  "_source": "Mongoose Traveller 2e Core Rulebook Update 2022, printed pp34-35 (pdf 27-28)",
+  "key": "merchant",
+  "name": "Merchant",
+  "blurb": "Members of a commercial enterprise. Merchants may crew the ships of the huge trading corporations, or work for independent free traders carrying chance cargoes and passengers between worlds.",
+  "qualification": { "check": "INT 4+", "dms": [{ "when": "for every previous career", "dm": -1 }] },
+  "military": false,
+  "commission": null,
+
+  "assignments": [
+    { "key": "merchant_marine", "name": "Merchant Marine", "desc": "You work on one of the massive cargo haulers run by the Imperium or a megacorporation.", "survival": "EDU 5+", "advancement": "INT 7+" },
+    { "key": "free_trader",     "name": "Free Trader",     "desc": "You are part of the crew of a tramp trader.", "survival": "DEX 6+", "advancement": "INT 6+" },
+    { "key": "broker",          "name": "Broker",          "desc": "You work in a planetside brokerage or starport.", "survival": "EDU 5+", "advancement": "INT 7+" }
+  ],
+
+  "skill_tables": {
+    "personal_development": ["STR +1", "DEX +1", "END +1", "INT +1", "Language", "Streetwise"],
+    "service_skills":       ["Drive", "Vacc Suit", "Broker", "Steward", "Electronics", "Persuade"],
+    "advanced_education":   { "min_edu": 8, "skills": ["Engineer", "Astrogation", "Electronics", "Pilot", "Admin", "Advocate"] },
+    "assignment": {
+      "merchant_marine": ["Pilot", "Vacc Suit", "Athletics", "Mechanic", "Engineer", "Electronics"],
+      "free_trader":     ["Pilot (spacecraft)", "Vacc Suit", "Deception", "Mechanic", "Streetwise", "Gunner"],
+      "broker":          ["Admin", "Advocate", "Broker", "Streetwise", "Deception", "Persuade"]
+    }
+  },
+
+  "ranks": {
+    "merchant_marine": [
+      { "rank": 0, "title": "Crewman",        "bonus": null },
+      { "rank": 1, "title": "Senior Crewman", "bonus": "Mechanic 1" },
+      { "rank": 2, "title": "4th Officer",    "bonus": null },
+      { "rank": 3, "title": "3rd Officer",    "bonus": null },
+      { "rank": 4, "title": "2nd Officer",    "bonus": "Pilot 1" },
+      { "rank": 5, "title": "1st Officer",    "bonus": "SOC +1" },
+      { "rank": 6, "title": "Captain",        "bonus": null }
+    ],
+    "free_trader": [
+      { "rank": 0, "title": null,                "bonus": null },
+      { "rank": 1, "title": null,                "bonus": "Persuade 1" },
+      { "rank": 2, "title": null,                "bonus": null },
+      { "rank": 3, "title": "Experienced Trader","bonus": "Jack-of-all-Trades 1" },
+      { "rank": 4, "title": null,                "bonus": null },
+      { "rank": 5, "title": null,                "bonus": null },
+      { "rank": 6, "title": null,                "bonus": null }
+    ],
+    "broker": [
+      { "rank": 0, "title": null,                "bonus": null },
+      { "rank": 1, "title": null,                "bonus": "Broker 1" },
+      { "rank": 2, "title": null,                "bonus": null },
+      { "rank": 3, "title": "Experienced Broker","bonus": "Streetwise 1" },
+      { "rank": 4, "title": null,                "bonus": null },
+      { "rank": 5, "title": null,                "bonus": null },
+      { "rank": 6, "title": null,                "bonus": null }
+    ]
+  },
+
+  "mustering_out": [
+    { "roll": 1, "cash": 1000,  "benefit": "Blade" },
+    { "roll": 2, "cash": 5000,  "benefit": "INT +1" },
+    { "roll": 3, "cash": 10000, "benefit": "EDU +1" },
+    { "roll": 4, "cash": 20000, "benefit": "Gun" },
+    { "roll": 5, "cash": 20000, "benefit": "Ship Share" },
+    { "roll": 6, "cash": 40000, "benefit": "Free Trader" },
+    { "roll": 7, "cash": 40000, "benefit": "Free Trader" }
+  ],
+
+  "mishaps": [
+    { "roll": 1, "text": "Severely injured (as a result of 2 on the Injury table). Alternatively, roll twice on the Injury table and take the lower result." },
+    { "roll": 2, "text": "You are bankrupted by a rival. You lose all Benefits from this career and gain the other trader as a Rival." },
+    { "roll": 3, "text": "A sudden war destroys your trade routes and contacts, forcing you to flee that region of space. Gain Gun Combat 1 or Pilot 1." },
+    { "roll": 4, "text": "Your ship or starport is destroyed by criminals. Gain them as an Enemy." },
+    { "roll": 5, "text": "Imperial trade restrictions force you out of business. You may take the Rogue career next term without needing to roll for qualification." },
+    { "roll": 6, "text": "A series of bad deals and decisions force you into bankruptcy. You salvage what you can: you may take a Benefit roll for this term as well as any others you are entitled to." }
+  ],
+
+  "events": [
+    { "roll": 2,  "text": "Disaster! Roll on the Mishap table, but you are not ejected from this career." },
+    { "roll": 3,  "text": "You are offered the opportunity to smuggle illegal items onto a planet. If you accept, roll Deception 8+ or Persuade 8+ to gain Streetwise 1 and an extra Benefit roll. If you refuse, you gain an Enemy in the criminal sphere." },
+    { "roll": 4,  "text": "Gain any one of these skills, reflecting time spent dealing with suppliers and spacers: Profession 1, Electronics 1, Engineer 1, Animals 1 or Science 1." },
+    { "roll": 5,  "text": "You have a chance to risk your fortune on a possibly lucrative deal. Gamble a number of Benefit rolls and roll Gambler 8+ or Broker 8+. On success gain half as many Benefit rolls as you risked, rounding up; on failure lose all the rolls risked. Either way gain one level in whichever skill you used." },
+    { "roll": 6,  "text": "You make an unexpected connection outside your normal circles. Gain a Contact." },
+    { "roll": 7,  "text": "Life Event. Roll on the Life Events table." },
+    { "roll": 8,  "text": "You are embroiled in legal trouble. Gain one of Advocate 1, Admin 1, Diplomat 1 or Investigate 1, then roll 2D; on a 2 you must take the Prisoner career next term." },
+    { "roll": 9,  "text": "You are given advanced training in a specialist field. Roll EDU 8+ to increase any one skill you already have by one level." },
+    { "roll": 10, "text": "A good deal ensures you are living the high life for a few years. Gain DM+1 to any one Benefit roll." },
+    { "roll": 11, "text": "You befriend a useful ally in one sphere. Gain an Ally and either gain a level in Carouse or DM+4 to your next advancement roll thanks to their aid." },
+    { "roll": 12, "text": "Your business or ship thrives. You are automatically promoted." }
+  ]
+}

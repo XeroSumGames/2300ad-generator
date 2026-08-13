@@ -1,0 +1,130 @@
+{
+  "_source": "Mongoose Traveller 2e Core Rulebook Update 2022, printed pp14-15 (the book's own 'Creating a Traveller' flowchart) and pp18-20. PDF page = printed page - 7.",
+  "_authority": "Where the standalone 'MGT2 Character Generation Flowchart' Game Aid disagrees with the book, THE BOOK WINS. Two confirmed disagreements: (1) the Game Aid says background skills = 'EDU + 3'; the book says EDU DM + 3, twice. (2) the Game Aid puts the skill roll after qualification/basic-training as a separate node and survival before the event; the book's own flowchart folds the skill roll into 'Start New Term'.",
+
+  "loop_order": [
+    "characteristics",
+    "background (EDU DM+3 skills, choose homeworld)",
+    "pre-career education (optional; terms 1-3 only)",
+    "START NEW TERM: choose career, roll qualification; on failure take the draft or Drifter. First term in a career -> basic training; otherwise choose one skill table and roll 1D.",
+    "SURVIVAL: roll; on failure roll a Mishap and leave the career unless the mishap says otherwise, in which case return to Start New Term.",
+    "EVENT: roll on the career Events table. Optionally connect to another Traveller.",
+    "ADVANCEMENT: if a commission is possible and wanted (Army/Navy/Marines, first term or SOC 9+), roll it; then roll advancement.",
+    "CONTINUE?: age +4 years. Continue creation? Same career -> back to Start New Term. Different career -> muster out first. Roll for ageing if required.",
+    "MUSTERING OUT: benefits and cash. On the FINAL muster out, resolve pension and medical debt.",
+    "SKILL PACKAGE",
+    "done"
+  ],
+
+  "qualification": {
+    "on_failure": "cannot enter the chosen career this term; must either submit to the draft or take the Drifter career for this term",
+    "leaving_lockout": "if you leave a career you cannot return to it the next term",
+    "exceptions": [
+      "the draft can put you back into a career you were previously ejected from",
+      "the Drifter career is always open",
+      "see Changing Assignments"
+    ]
+  },
+
+  "basic_training": {
+    "first_career": "gain ALL skills on the Service Skills table at level 0",
+    "later_careers": "pick any ONE skill from the Service Skills table at level 0",
+    "exception": "Citizen and Drifter use their appropriate Assignment Skills table for basic training instead"
+  },
+
+  "skill_tables": {
+    "tables": ["Personal Development", "Service Skills", "Assignment Skills (one sub-table per assignment)", "Officer", "Advanced Education"],
+    "each_term": "pick one table and roll 1D",
+    "restricted": "Advanced Education and Officer/Commissioned tables may only be rolled on if the listed requirement is met (usually EDU 8+, or a given rank)",
+    "resolution": {
+      "no_level_listed": "gain the skill at level 1 if untrained, otherwise increase it by +1",
+      "level_listed": "gain the skill at that level only if it is higher than your current level"
+    }
+  },
+
+  "skill_limits": {
+    "max_level_during_creation": 4,
+    "overflow": "increases beyond level 4 are lost",
+    "total_cap": "total skill levels may never exceed three times combined INT and EDU",
+    "_cap_note": "The book's wording is 'three times their combined INT and EDU' -- the raw characteristic scores, not the DMs. Read literally this is rarely binding (INT 7 + EDU 7 = cap 42). Implemented literally; surfaced in the UI only if it ever actually binds."
+  },
+
+  "survival": {
+    "on_failure": "immediately roll on the career's Mishap table; the mishap forces you to leave the career unless it states otherwise; you also lose the Benefit roll for the current term",
+    "natural_2": "always a failure"
+  },
+
+  "commission": {
+    "careers": ["Army", "Navy", "Marine"],
+    "optional": true,
+    "when": "first term only, unless SOC 9+, in which case any term",
+    "dm": "DM-1 for every term after the first",
+    "event_dms_apply": "bonus DMs from events that apply to advancement also apply to commission rolls",
+    "on_success": "become a rank 1 officer and progress on the officer rank table from then on",
+    "same_term_advancement": "if you gain a commission you may NOT roll advancement in the same term; if you FAIL the commission roll you may still roll advancement"
+  },
+
+  "advancement": {
+    "start_rank": 0,
+    "once_per_term": true,
+    "on_success": "move to the next rank, gain an EXTRA roll on any of the career's skill tables, and gain any bonuses listed for the new rank",
+    "forced_out": "if the advancement roll is equal to or LESS THAN the number of terms already spent in this career, you cannot continue in this career after this term",
+    "natural_12": "you must continue in this career -- you are too valuable to lose"
+  },
+
+  "ranks": {
+    "start": 0,
+    "bonuses": "some ranks grant bonuses such as extra skills; these are acquired immediately on attaining the rank"
+  },
+
+  "draft": {
+    "once_per_lifetime": "a Traveller may only enter the draft once in their lifetime unless otherwise stated",
+    "table": [
+      { "roll": 1, "career": "Navy",     "assignment": "any" },
+      { "roll": 2, "career": "Army",     "assignment": "any" },
+      { "roll": 3, "career": "Marine",   "assignment": "any" },
+      { "roll": 4, "career": "Merchant", "assignment": "Merchant Marine" },
+      { "roll": 5, "career": "Scout",    "assignment": "any" },
+      { "roll": 6, "career": "Agent",    "assignment": "Law Enforcement" }
+    ]
+  },
+
+  "changing_careers": {
+    "how": "make the new career's qualification roll at the start of a new term",
+    "on_failure": "submit to the draft (if not already drafted in this lifetime) or become a Drifter"
+  },
+
+  "changing_assignments": {
+    "simple": {
+      "careers": ["Army", "Marine", "Navy", "Noble", "Rogue", "Scholar", "Scout"],
+      "how": "a qualification roll only",
+      "on_failure": "continue in the career with the same assignment, no penalty",
+      "on_success": "adopt the new assignment and continue in the career, RETAINING RANK"
+    },
+    "treated_as_new_career": {
+      "careers": ["Agent", "Citizen", "Entertainer", "Merchant"],
+      "requires": "must have left the career voluntarily -- a Traveller ejected from a career cannot change assignment",
+      "how": "Benefit rolls are made as normal, then a qualification roll to enter the new assignment",
+      "on_failure": "must enter the draft or become a Drifter",
+      "on_success": "the career begins afresh with the new assignment at RANK 0"
+    }
+  },
+
+  "connections_rule": {
+    "_note": "A group rule. In a single-character generator this is an optional extra step, not part of the main flow.",
+    "max_free_skills": 2,
+    "constraint": "each connection must be with a different Traveller; any skill may be chosen, but it cannot be raised above level 3 this way, and Jack-of-all-Trades may not be taken"
+  },
+
+  "associates": {
+    "categories": ["Contact", "Ally", "Rival", "Enemy"],
+    "_note": "Gained from events; tracked on the sheet. Other Travellers may be Contacts, Allies or Rivals, which qualifies for the connections rule."
+  },
+
+  "_still_to_transcribe": [
+    "ageing rules (printed p48)",
+    "mustering out: benefits tables per career, cash table, pension and medical debt (printed p46-48)",
+    "skill packages (printed p50)",
+    "per-career data: skill tables, ranks, mishaps, events (printed p22-45 = pdf 15-38)"
+  ]
+}

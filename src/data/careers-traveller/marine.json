@@ -1,0 +1,87 @@
+{
+  "_source": "Mongoose Traveller 2e Core Rulebook Update 2022, printed pp32-33 (pdf 25-26)",
+  "key": "marine",
+  "name": "Marine",
+  "blurb": "Members of the armed fighting forces carried aboard starships. Marines deal with piracy and boarding actions in space, defend navy starports and bases, and supplement ground forces such as the army.",
+  "qualification": {
+    "check": "END 6+",
+    "dms": [
+      { "when": "for every previous career", "dm": -1 },
+      { "when": "aged 30 or more", "dm": -2 }
+    ]
+  },
+  "military": true,
+  "commission": { "check": "SOC 8+" },
+
+  "assignments": [
+    { "key": "support",        "name": "Support",        "desc": "You are a quartermaster, engineer or battlefield medic in the marines.", "survival": "END 5+", "advancement": "EDU 7+" },
+    { "key": "star_marine",    "name": "Star Marine",    "desc": "You are trained to fight boarding actions and capture enemy vessels.",   "survival": "END 6+", "advancement": "EDU 6+" },
+    { "key": "ground_assault", "name": "Ground Assault", "desc": "You are kicked out of a spacecraft in high orbit and told to 'capture that planet'.", "survival": "END 7+", "advancement": "EDU 5+" }
+  ],
+
+  "skill_tables": {
+    "personal_development": ["STR +1", "DEX +1", "END +1", "Gambler", "Melee (unarmed)", "Melee (blade)"],
+    "service_skills":       ["Athletics", "Vacc Suit", "Tactics", "Heavy Weapons", "Gun Combat", "Stealth"],
+    "advanced_education":   { "min_edu": 8, "skills": ["Medic", "Survival", "Explosives", "Engineer", "Pilot", "Navigation"] },
+    "officer":              { "commissioned_only": true, "skills": ["Electronics", "Tactics", "Admin", "Advocate", "Diplomat", "Leadership"] },
+    "assignment": {
+      "support":        ["Electronics", "Mechanic", "Drive or Flyer", "Medic", "Heavy Weapons", "Gun Combat"],
+      "star_marine":    ["Vacc Suit", "Athletics", "Gunner", "Melee (blade)", "Electronics", "Gun Combat"],
+      "ground_assault": ["Vacc Suit", "Heavy Weapons", "Recon", "Melee (blade)", "Tactics (military)", "Gun Combat"]
+    }
+  },
+
+  "ranks": {
+    "enlisted": [
+      { "rank": 0, "title": "Marine",           "bonus": "Gun Combat (any) 1 or Melee (blade) 1" },
+      { "rank": 1, "title": "Lance Corporal",   "bonus": "Gun Combat (any) 1" },
+      { "rank": 2, "title": "Corporal",         "bonus": null },
+      { "rank": 3, "title": "Lance Sergeant",   "bonus": "Leadership 1" },
+      { "rank": 4, "title": "Sergeant",         "bonus": null },
+      { "rank": 5, "title": "Gunnery Sergeant", "bonus": "END +1" },
+      { "rank": 6, "title": "Sergeant Major",   "bonus": null }
+    ],
+    "officer": [
+      { "rank": 1, "title": "Lieutenant",         "bonus": "Leadership 1" },
+      { "rank": 2, "title": "Captain",            "bonus": null },
+      { "rank": 3, "title": "Force Commander",    "bonus": "Tactics 1" },
+      { "rank": 4, "title": "Lieutenant Colonel", "bonus": null },
+      { "rank": 5, "title": "Colonel",            "bonus": "SOC 10 or SOC +1, whichever is higher" },
+      { "rank": 6, "title": "Brigadier",          "bonus": null }
+    ]
+  },
+  "_rank_note": "Marine's SOC bonus lands at officer rank 5 (Colonel); Army's lands at rank 6 (General). Do not share one officer table between them.",
+
+  "mustering_out": [
+    { "roll": 1, "cash": 2000,  "benefit": "Armour" },
+    { "roll": 2, "cash": 5000,  "benefit": "INT +1" },
+    { "roll": 3, "cash": 5000,  "benefit": "EDU +1" },
+    { "roll": 4, "cash": 10000, "benefit": "Weapon" },
+    { "roll": 5, "cash": 20000, "benefit": "TAS Membership" },
+    { "roll": 6, "cash": 30000, "benefit": "Armour or END +1" },
+    { "roll": 7, "cash": 40000, "benefit": "SOC +2" }
+  ],
+
+  "mishaps": [
+    { "roll": 1, "text": "Severely injured in action (as a result of 2 on the Injury table). Alternatively, roll twice on the Injury table and take the lower result." },
+    { "roll": 2, "text": "A mission goes wrong; you and several others are captured and mistreated by the enemy. Due to your injuries you are discharged early. Gain your jailer as an Enemy and reduce your STR and DEX by one." },
+    { "roll": 3, "text": "A mission goes wrong and you are stranded behind enemy lines. Increase Stealth or Survival by one level but, due to the mission's failure, you are ejected from the service." },
+    { "roll": 4, "text": "You are ordered to take part in a black ops mission that goes against your conscience. If you refuse you are ejected from the service. If you accept you may stay with the marines but gain the lone survivor as an Enemy." },
+    { "roll": 5, "text": "You are tormented by or quarrel with an officer or fellow marine. Gain that character as a Rival as they drive you out of the service." },
+    { "roll": 6, "text": "Injured. Roll on the Injury table." }
+  ],
+
+  "events": [
+    { "roll": 2,  "text": "Disaster! Roll on the Mishap table, but you are not ejected from this career." },
+    { "roll": 3,  "text": "Trapped behind enemy lines, you have to survive on your own. Gain one of Survival 1, Stealth 1, Deception 1 or Streetwise 1." },
+    { "roll": 4,  "text": "You are assigned to the security staff of a space station. Increase Vacc Suit or Athletics (dexterity) by one level." },
+    { "roll": 5,  "text": "You are given advanced training in a specialist field. Roll EDU 8+ to gain any one skill of your choice at level 1." },
+    { "roll": 6,  "text": "You are assigned to an assault on an enemy fortress. Roll Melee or Gun Combat 8+; on success gain Tactics (military) or Leadership. On failure you are injured and lose 1 point from any physical characteristic." },
+    { "roll": 7,  "text": "Life Event. Roll on the Life Events table." },
+    { "roll": 8,  "text": "You are on the front lines of a planetary assault and occupation. Gain one of Recon 1, Gun Combat 1, Leadership 1 or Electronics (comms) 1." },
+    { "roll": 9,  "text": "A mission goes disastrously wrong due to your commander's error or incompetence, but you survive. Report them and gain DM+2 to your next advancement roll plus the officer as an Enemy; say nothing and protect them, and gain them as an Ally." },
+    { "roll": 10, "text": "You are assigned to a black ops mission. Gain DM+2 to your next advancement roll." },
+    { "roll": 11, "text": "Your commanding officer takes an interest in your career. Either gain Tactics 1 or DM+4 to your next advancement roll thanks to their aid." },
+    { "roll": 12, "text": "You display heroism in battle. You may gain a promotion or a commission automatically." }
+  ]
+}

@@ -1,0 +1,82 @@
+{
+  "_source": "Mongoose Traveller 2e Core Rulebook Update 2022, printed pp22-23 (pdf 15-16)",
+  "key": "agent",
+  "name": "Agent",
+  "blurb": "Law enforcement agencies, corporate operatives, spies and others who work in the shadows.",
+  "qualification": { "check": "INT 6+", "dms": [{ "when": "for every previous career", "dm": -1 }] },
+  "military": false,
+  "commission": null,
+
+  "assignments": [
+    { "key": "law_enforcement", "name": "Law Enforcement", "desc": "You are a police officer or detective.", "survival": "END 6+", "advancement": "INT 6+" },
+    { "key": "intelligence",    "name": "Intelligence",    "desc": "You work as a spy or saboteur.",        "survival": "INT 7+", "advancement": "INT 5+" },
+    { "key": "corporate",       "name": "Corporate",       "desc": "You work for a corporation, spying on rival organisations.", "survival": "INT 5+", "advancement": "INT 7+" }
+  ],
+
+  "skill_tables": {
+    "personal_development": ["Gun Combat", "DEX +1", "END +1", "Melee", "INT +1", "Athletics"],
+    "service_skills":       ["Streetwise", "Drive", "Investigate", "Flyer", "Recon", "Gun Combat"],
+    "advanced_education":   { "min_edu": 8, "skills": ["Advocate", "Language", "Explosives", "Medic", "Vacc Suit", "Electronics"] },
+    "assignment": {
+      "law_enforcement": ["Investigate", "Recon", "Streetwise", "Stealth", "Melee", "Advocate"],
+      "intelligence":    ["Investigate", "Recon", "Electronics (comms)", "Stealth", "Persuade", "Deception"],
+      "corporate":       ["Investigate", "Electronics (computers)", "Stealth", "Carouse", "Deception", "Streetwise"]
+    }
+  },
+
+  "ranks": {
+    "law_enforcement": [
+      { "rank": 0, "title": "Rookie",       "bonus": null },
+      { "rank": 1, "title": "Corporal",     "bonus": "Streetwise 1" },
+      { "rank": 2, "title": "Sergeant",     "bonus": null },
+      { "rank": 3, "title": "Detective",    "bonus": null },
+      { "rank": 4, "title": "Lieutenant",   "bonus": "Investigate 1" },
+      { "rank": 5, "title": "Chief",        "bonus": "Admin 1" },
+      { "rank": 6, "title": "Commissioner", "bonus": "SOC +1" }
+    ],
+    "intelligence_corporate": [
+      { "rank": 0, "title": null,               "bonus": null },
+      { "rank": 1, "title": "Agent",            "bonus": "Deception 1" },
+      { "rank": 2, "title": "Field Agent",      "bonus": "Investigate 1" },
+      { "rank": 3, "title": null,               "bonus": null },
+      { "rank": 4, "title": "Special Agent",    "bonus": "Gun Combat 1" },
+      { "rank": 5, "title": "Assistant Director","bonus": null },
+      { "rank": 6, "title": "Director",         "bonus": null }
+    ],
+    "_shared": "Intelligence and Corporate share one rank table."
+  },
+
+  "mustering_out": [
+    { "roll": 1, "cash": 1000,  "benefit": "Scientific Equipment" },
+    { "roll": 2, "cash": 2000,  "benefit": "INT +1" },
+    { "roll": 3, "cash": 5000,  "benefit": "Ship Share" },
+    { "roll": 4, "cash": 7500,  "benefit": "Weapon" },
+    { "roll": 5, "cash": 10000, "benefit": "Cybernetic Implant" },
+    { "roll": 6, "cash": 25000, "benefit": "SOC +1 or Cybernetic Implant" },
+    { "roll": 7, "cash": 50000, "benefit": "TAS Membership" }
+  ],
+  "_mustering_note": "1D roll; a result of 7 is only reachable with a DM (rank 5-6 grants DM+1, Gambler grants DM+1 on Cash).",
+
+  "mishaps": [
+    { "roll": 1, "text": "Severely injured (as a result of 2 on the Injury table). Alternatively, roll twice on the Injury table and take the lower result." },
+    { "roll": 2, "text": "A criminal or other figure under investigation offers you a deal. Accept and you leave this career without further penalty (though you lose the Benefit roll as normal). Refuse and you must roll twice on the Injury table and take the lower result; you gain an Enemy and one level in any skill you choose." },
+    { "roll": 3, "text": "An investigation goes critically wrong or leads to the top, ruining your career. Roll Advocate 8+. On success you may keep the Benefit roll from this term. If you roll 2, you must take the Prisoner career next term." },
+    { "roll": 4, "text": "You learn something you should not know and people want to kill you for it. Gain an Enemy and Deception 1." },
+    { "roll": 5, "text": "Your work comes home with you and someone gets hurt. Choose one of your Contacts, Allies or family members and roll twice on the Injury table for them, taking the lower result." },
+    { "roll": 6, "text": "Injured. Roll on the Injury table." }
+  ],
+
+  "events": [
+    { "roll": 2,  "text": "Disaster! Roll on the Mishap table, but you are not ejected from this career." },
+    { "roll": 3,  "text": "An investigation takes a dangerous turn. Roll Investigate 8+ or Streetwise 8+. On failure roll on the Mishap table. On success increase one of Deception, Jack-of-all-Trades, Persuade or Tactics by one level." },
+    { "roll": 4,  "text": "You complete a mission for your superiors and are suitably rewarded. Gain DM+1 to any one Benefit roll from this career." },
+    { "roll": 5,  "text": "You establish a network of contacts. Gain D3 Contacts." },
+    { "roll": 6,  "text": "You are given advanced training in a specialist field. Roll EDU 8+ to increase any one skill you already have by one level." },
+    { "roll": 7,  "text": "Life Event. Roll on the Life Events table." },
+    { "roll": 8,  "text": "You go undercover to investigate an enemy. Roll Deception 8+. On success, roll immediately on the Rogue or Citizen Events table and make one roll on any Specialist skill table for that career. On failure, roll immediately on the Rogue or Citizen Mishap table." },
+    { "roll": 9,  "text": "You go above and beyond the call of duty. Gain DM+2 to your next advancement roll." },
+    { "roll": 10, "text": "You are given specialist training in vehicles. Gain one of Drive 1, Flyer 1, Pilot 1 or Gunner 1." },
+    { "roll": 11, "text": "You are befriended by a senior agent. Either increase Investigate by one level, or gain DM+4 to an advancement roll thanks to their aid." },
+    { "roll": 12, "text": "Your efforts uncover a major conspiracy against your employers. You are automatically promoted." }
+  ]
+}

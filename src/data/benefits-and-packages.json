@@ -1,0 +1,43 @@
+{
+  "_source": "Mongoose Traveller 2e Core Rulebook Update 2022, printed pp47 and 50 (pdf 40 and 43)",
+
+  "other_benefits": {
+    "_intro": "Granted when you leave a career in good standing. Different careers grant different Benefits. Nearly every entry has a DUPLICATE rule -- what happens if you roll the same Benefit again -- so benefits are NOT idempotent and the engine must track how many times each has been taken.",
+
+    "Armour":                { "grant": "any type of armour, limit Cr10000 and TL12", "duplicate": "select another type within the same limits, or trade the original in for armour with a limit of Cr25000" },
+    "Ally":                  { "grant": "gain an Ally" },
+    "Blade":                 { "grant": "any blade weapon, limit Cr1000 and TL12", "duplicate": "another blade, or one level in Melee (blade)" },
+    "Characteristic Increase": {
+      "grant": "increase the listed characteristic by the amount shown, up to your racial maximum (15 for humans)",
+      "overflow": "increases above 15 are LOST -- EXCEPT SOC: every point of excess SOC becomes a Ship Share",
+      "_note": "The SOC overflow rule is the one characteristic-cap exception in creation. Do not clamp SOC silently."
+    },
+    "Cybernetic Implant":    { "grant": "any augmentation, limit Cr75000 and TL12", "duplicate": "take a different augmentation, or increase one you already possess by one level of Improvement (this may exceed the Credit and TL limit)" },
+    "Contact":               { "grant": "gain a Contact" },
+    "Free Trader":           { "grant": "a free trader with 25% of the mortgage paid off; roll 1D times on the Spacecraft Quirks table", "duplicate": "a further 25% of the mortgage paid off; four times clears it entirely", "alternative": "may select a far trader instead" },
+    "Gun":                   { "grant": "any common or military ranged weapon, limit Cr3000 and TL12", "duplicate": "another weapon, or one level in the appropriate Gun Combat skill for a weapon already received as a Benefit" },
+    "Lab Ship":              { "grant": "a lab ship with 25% of the mortgage paid off; roll 1D times on the Spacecraft Quirks table", "duplicate": "a further 25% of the mortgage paid off; four times clears it entirely" },
+    "Personal Vehicle":      { "grant": "a personal vehicle such as a ground car or air/raft, limit Cr300000 and TL10; may not be armed", "duplicate": "gain a level of Drive or Flyer" },
+    "Scientific Equipment":  { "grant": "any one piece of scientific equipment, limit Cr2000 and TL12", "duplicate": "another piece, or one level in Electronics or Science" },
+    "Scout Ship":            { "grant": "a scout ship; you have full use of it and may modify it, but it still belongs to the Scout Service and can be recalled, so you will be expected to run missions from time to time", "duplicate": "RE-ROLL the result" },
+    "Ship's Boat":           { "grant": "a ship's boat or other small craft, limit MCr10 and TL12", "duplicate": "gain Pilot (small craft)", "alternative": "receive a Ship Share instead" },
+    "Ship Shares":           { "grant": "one or more Ship Shares toward obtaining a ship; each is worth MCr1 and cannot be redeemed for cash" },
+    "Weapon":                { "grant": "any weapon, limit Cr3000 and TL12", "duplicate": "another weapon, or one level in the appropriate Melee or Gun Combat skill for a weapon already received as a Benefit" },
+    "TAS Membership":        { "grant": "membership of the Travellers' Aid Society: hostels and facilities at all Class A and B starports, available at reasonable cost to members and guests", "lifetime": true, "transferable": false, "duplicate": "see mustering-out.json -- rolling it again yields two Ship Shares", "purchasable": "membership may also be bought for MCr1, though an application can be black-balled by an existing member" }
+  },
+
+  "skill_packages": {
+    "_rule": "As a group, all Travellers select ONE package between them. Each Traveller then takes turns selecting an item from the package until all skills have been taken.",
+    "_single_character_note": "This is a group rule. For a one-Traveller generator, present the package and let the user take the skills they would plausibly have claimed, or offer the whole package as a reference. Do not silently grant all of it.",
+
+    "Traveller":    { "desc": "An all-round package, good for a campaign where the Travellers are trading one week and blowing things up the next.", "skills": ["Deception 1", "Electronics 1", "Gun Combat 1", "Gunner 1", "Medic 1", "Persuade 1", "Pilot 1", "Stealth 1"] },
+    "Trader":       { "desc": "For campaigns where trading and commerce are the primary activities.", "skills": ["Advocate 1", "Astrogation 1", "Broker 1", "Diplomat 1", "Electronics 1", "Medic 1", "Pilot 1", "Streetwise 1"] },
+    "Explorer":     { "desc": "For campaigns on the fringe of Charted Space, dealing with new worlds and ancient relics.", "skills": ["Astrogation 1", "Electronics 1", "Gun Combat 1", "Medic 1", "Pilot 1", "Recon 1", "Stealth 1", "Survival 1"] },
+    "Investigator": { "desc": "For campaigns centring on solving crimes and investigating mysteries.", "skills": ["Admin 1", "Advocate 1", "Deception 1", "Electronics 1", "Gun Combat 1", "Investigate 1", "Persuade 1", "Stealth 1", "Streetwise 1"] },
+    "Mercenary":    { "desc": "Focused on ground combat, aimed at combat-heavy games.", "skills": ["Electronics 1", "Medic 1", "Leadership 1", "Heavy Weapons 1", "Gun Combat 1", "Gun Combat 1", "Stealth 1", "Recon 1"] },
+    "Starship":     { "desc": "For campaigns where the Travellers spend almost all their time on spacecraft.", "skills": ["Astrogation 1", "Electronics 1", "Engineer 1", "Gunner 1", "Mechanic 1", "Medic 1", "Pilot 1", "Tactics (naval) 1"] },
+    "Diplomat":     { "desc": "For campaigns where the Travellers are government operatives and ambassadors.", "skills": ["Admin 1", "Advocate 1", "Deception 1", "Diplomat 1", "Electronics 1", "Persuade 1", "Stealth 1", "Streetwise 1"] },
+    "Criminal":     { "desc": "For campaigns involving crime and elaborate heists.", "skills": ["Broker 1", "Deception 1", "Electronics 1", "Medic 1", "Persuade 1", "Pilot 1", "Stealth 1", "Streetwise 1"] }
+  },
+  "_mercenary_note": "The Mercenary package genuinely lists Gun Combat 1 twice, as printed. Most packages hold 8 skills; Investigator holds 9."
+}

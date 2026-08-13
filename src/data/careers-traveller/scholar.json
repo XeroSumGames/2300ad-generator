@@ -1,0 +1,93 @@
+{
+  "_source": "Mongoose Traveller 2e Core Rulebook Update 2022, printed pp42-43 (pdf 35-36)",
+  "key": "scholar",
+  "name": "Scholar",
+  "blurb": "Individuals trained in technological or research sciences who conduct scientific investigations into materials, situations and phenomena, or who practise medicine.",
+  "qualification": { "check": "INT 6+", "dms": [{ "when": "for every previous career", "dm": -1 }] },
+  "military": false,
+  "commission": null,
+
+  "assignments": [
+    { "key": "field_researcher", "name": "Field Researcher", "desc": "You are an explorer or field researcher, equally at home in the laboratory or wilderness.", "survival": "END 6+", "advancement": "INT 6+" },
+    { "key": "scientist",        "name": "Scientist",        "desc": "You are a researcher in some corporation or research institution, or a mad scientist in an orbiting laboratory.", "survival": "EDU 4+", "advancement": "INT 8+" },
+    { "key": "physician",        "name": "Physician",        "desc": "You are a doctor, healer or medical researcher.", "survival": "EDU 4+", "advancement": "EDU 8+" }
+  ],
+
+  "skill_tables": {
+    "personal_development": ["INT +1", "EDU +1", "SOC +1", "DEX +1", "END +1", "Language"],
+    "service_skills":       ["Drive or Flyer", "Electronics", "Diplomat", "Medic", "Investigate", "Science"],
+    "advanced_education":   { "min_edu": 10, "skills": ["Art", "Advocate", "Electronics", "Language", "Engineer", "Science"] },
+    "_advanced_education_note": "Requires EDU 10+. Scholar is the fourth career at this tier, with Citizen, Entertainer and Rogue.",
+    "assignment": {
+      "field_researcher": ["Electronics", "Vacc Suit", "Navigation", "Survival", "Investigate", "Science"],
+      "scientist":        ["Admin", "Engineer", "Science", "Science", "Electronics", "Science"],
+      "physician":        ["Medic", "Electronics", "Investigate", "Medic", "Persuade", "Science"]
+    }
+  },
+  "_assignment_table_note": "The Scientist table lists Science three times (3, 4 and 6) and Physician lists Medic twice (1 and 4). Both are as printed, not transcription errors.",
+
+  "ranks": {
+    "field_researcher": [
+      { "rank": 0, "title": null, "bonus": null },
+      { "rank": 1, "title": null, "bonus": "Science 1" },
+      { "rank": 2, "title": null, "bonus": "Electronics (computers) 1" },
+      { "rank": 3, "title": null, "bonus": "Investigate 1" },
+      { "rank": 4, "title": null, "bonus": null },
+      { "rank": 5, "title": null, "bonus": "Science 2" },
+      { "rank": 6, "title": null, "bonus": null }
+    ],
+    "scientist": [
+      { "rank": 0, "title": null, "bonus": null },
+      { "rank": 1, "title": null, "bonus": "Science 1" },
+      { "rank": 2, "title": null, "bonus": "Electronics (computers) 1" },
+      { "rank": 3, "title": null, "bonus": "Investigate 1" },
+      { "rank": 4, "title": null, "bonus": null },
+      { "rank": 5, "title": null, "bonus": "Science 2" },
+      { "rank": 6, "title": null, "bonus": null }
+    ],
+    "physician": [
+      { "rank": 0, "title": null, "bonus": null },
+      { "rank": 1, "title": null, "bonus": "Medic 1" },
+      { "rank": 2, "title": null, "bonus": null },
+      { "rank": 3, "title": null, "bonus": "Science 1" },
+      { "rank": 4, "title": null, "bonus": null },
+      { "rank": 5, "title": null, "bonus": "Science 2" },
+      { "rank": 6, "title": null, "bonus": null }
+    ]
+  },
+  "_rank_note": "Scholar is the only career whose rank bonuses grant a skill at LEVEL 2 outright (Science 2 at rank 5 on all three tracks). The general skill-table rule -- take the listed level only if higher than current -- applies.",
+
+  "mustering_out": [
+    { "roll": 1, "cash": 5000,   "benefit": "INT +1" },
+    { "roll": 2, "cash": 10000,  "benefit": "EDU +1" },
+    { "roll": 3, "cash": 20000,  "benefit": "Two Ship Shares" },
+    { "roll": 4, "cash": 30000,  "benefit": "SOC +1" },
+    { "roll": 5, "cash": 40000,  "benefit": "Scientific Equipment" },
+    { "roll": 6, "cash": 60000,  "benefit": "Lab Ship" },
+    { "roll": 7, "cash": 100000, "benefit": "Lab Ship" }
+  ],
+
+  "mishaps": [
+    { "roll": 1, "text": "Severely injured (as a result of 2 on the Injury table). Alternatively, roll twice on the Injury table and take the lower result." },
+    { "roll": 2, "text": "A disaster leaves several injured and others blame you, forcing you to leave your career. Roll on the Injury table twice, taking the HIGHER result, and gain a Rival." },
+    { "roll": 3, "text": "The planetary government interferes with your research for political or religious reasons. Continue openly: increase Science by one level and gain an Enemy. Continue secretly: increase Science by one level and reduce your SOC by 2. This mishap does NOT cause you to leave this career." },
+    { "roll": 4, "text": "An expedition or voyage goes wrong, leaving you stranded in the wilderness. Gain Survival 1 or Athletics (dexterity or endurance) 1. By the time you find your way home, your job is gone." },
+    { "roll": 5, "text": "Your work is sabotaged by unknown parties. You may salvage what you can and give up (leave the career but retain this term's Benefit roll), or start again from scratch (lose all Benefit rolls from this career but you do not have to leave)." },
+    { "roll": 6, "text": "A rival researcher blackens your name or steals your research. Gain a Rival, but you do NOT have to leave this career." }
+  ],
+  "_mishap_note": "Scholar has THREE non-ejecting mishaps (3, 5 and 6) -- more than any other career -- and mishap 2 is the only one in the book that takes the HIGHER of two Injury rolls rather than the lower.",
+
+  "events": [
+    { "roll": 2,  "text": "Disaster! Roll on the Mishap table, but you are not ejected from this career." },
+    { "roll": 3,  "text": "You are called upon to perform research that goes against your conscience. Accept and you gain an extra Benefit roll, a level in each of any two Science specialities, and D3 Enemies." },
+    { "roll": 4,  "text": "You are assigned to work on a secret project for a patron or organisation. Gain one of Medic 1, Science 1, Engineer 1, Electronics 1 or Investigate 1." },
+    { "roll": 5,  "text": "You win a prestigious prize for your work, garnering both the praise and envy of your peers. Gain DM+1 to any one Benefit roll." },
+    { "roll": 6,  "text": "You are given advanced training in a specialist field. Roll EDU 8+ to gain any one skill of your choice at level 1." },
+    { "roll": 7,  "text": "Life Event. Roll on the Life Events table." },
+    { "roll": 8,  "text": "You have the opportunity to cheat in some fashion -- stealing another's work, using an alien device, taking a shortcut. If you refuse you gain nothing. If you accept, roll Deception 8+ or Admin 8+: on success gain DM+2 to any one Benefit roll and may increase any skill by one level, but also gain an Enemy; on failure gain an Enemy and lose one Benefit roll from this career." },
+    { "roll": 9,  "text": "You make a breakthrough in your field. Gain DM+2 to your next advancement roll." },
+    { "roll": 10, "text": "You become entangled in a bureaucratic or legal morass that distracts you from your work. Gain one of Admin 1, Advocate 1, Persuade 1 or Diplomat 1." },
+    { "roll": 11, "text": "You work for an eccentric but brilliant mentor, who becomes an Ally. Either increase Science by one level or gain DM+4 to your next advancement roll thanks to their aid." },
+    { "roll": 12, "text": "Your work leads to a considerable breakthrough. You are automatically promoted." }
+  ]
+}

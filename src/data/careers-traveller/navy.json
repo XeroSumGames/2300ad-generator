@@ -1,0 +1,90 @@
+{
+  "_source": "Mongoose Traveller 2e Core Rulebook Update 2022, printed pp36-37 (pdf 29-30)",
+  "key": "navy",
+  "name": "Navy",
+  "blurb": "Members of the interstellar navy that patrols space between the stars, responsible for protecting society from foreign powers and lawless elements in the interstellar trade channels.",
+  "qualification": {
+    "check": "INT 6+",
+    "dms": [
+      { "when": "for every previous career", "dm": -1 },
+      { "when": "aged 34 or more", "dm": -2 }
+    ]
+  },
+  "_age_penalty_warning": "Navy's age threshold is 34, NOT 30. Army and Marine both use 30. Do not factor these into a shared 'military age penalty' constant.",
+  "military": true,
+  "commission": { "check": "SOC 8+" },
+
+  "assignments": [
+    { "key": "line_crew",       "name": "Line/Crew",       "desc": "You serve as a general crewman or officer on a ship of the line.", "survival": "INT 5+", "advancement": "EDU 7+" },
+    { "key": "engineer_gunner", "name": "Engineer/Gunner", "desc": "You serve as a specialist technician on a starship.",             "survival": "INT 6+", "advancement": "EDU 6+" },
+    { "key": "flight",          "name": "Flight",          "desc": "You are a pilot of a shuttle, fighter or other light craft.",     "survival": "DEX 7+", "advancement": "EDU 5+" }
+  ],
+
+  "skill_tables": {
+    "personal_development": ["STR +1", "DEX +1", "END +1", "INT +1", "EDU +1", "SOC +1"],
+    "service_skills":       ["Pilot", "Vacc Suit", "Athletics", "Gunner", "Mechanic", "Gun Combat"],
+    "advanced_education":   { "min_edu": 8, "skills": ["Electronics", "Astrogation", "Engineer", "Flyer", "Medic", "Admin"] },
+    "officer":              { "commissioned_only": true, "skills": ["Leadership", "Electronics", "Pilot", "Melee (blade)", "Admin", "Tactics (naval)"] },
+    "assignment": {
+      "line_crew":       ["Electronics", "Mechanic", "Gun Combat", "Flyer", "Melee", "Vacc Suit"],
+      "engineer_gunner": ["Engineer", "Mechanic", "Electronics", "Engineer", "Gunner", "Flyer"],
+      "flight":          ["Pilot", "Flyer", "Gunner", "Pilot (small craft)", "Astrogation", "Electronics"]
+    }
+  },
+  "_engineer_gunner_note": "The Engineer/Gunner assignment table genuinely lists Engineer twice (results 1 and 4) in the book. Not a transcription error.",
+
+  "ranks": {
+    "enlisted": [
+      { "rank": 0, "title": "Crewman",                "bonus": null },
+      { "rank": 1, "title": "Able Spacehand",         "bonus": "Mechanic 1" },
+      { "rank": 2, "title": "Petty Officer, 3rd class","bonus": "Vacc Suit 1" },
+      { "rank": 3, "title": "Petty Officer, 2nd class","bonus": null },
+      { "rank": 4, "title": "Petty Officer, 1st class","bonus": "END +1" },
+      { "rank": 5, "title": "Chief Petty Officer",    "bonus": null },
+      { "rank": 6, "title": "Master Chief",           "bonus": null }
+    ],
+    "officer": [
+      { "rank": 1, "title": "Ensign",       "bonus": "Melee (blade) 1" },
+      { "rank": 2, "title": "Sublieutenant","bonus": "Leadership 1" },
+      { "rank": 3, "title": "Lieutenant",   "bonus": null },
+      { "rank": 4, "title": "Commander",    "bonus": "Tactics (naval) 1" },
+      { "rank": 5, "title": "Captain",      "bonus": "SOC 10 or SOC +1, whichever is higher" },
+      { "rank": 6, "title": "Admiral",      "bonus": "SOC 12 or SOC +1, whichever is higher" }
+    ]
+  },
+  "_rank_note": "Navy is the only career granting the SOC floor bonus TWICE -- SOC 10 at Captain and SOC 12 at Admiral.",
+
+  "mustering_out": [
+    { "roll": 1, "cash": 1000,  "benefit": "Personal Vehicle or Ship Share" },
+    { "roll": 2, "cash": 5000,  "benefit": "INT +1" },
+    { "roll": 3, "cash": 5000,  "benefit": "EDU +1 or two Ship Shares" },
+    { "roll": 4, "cash": 10000, "benefit": "Weapon" },
+    { "roll": 5, "cash": 20000, "benefit": "TAS Membership" },
+    { "roll": 6, "cash": 50000, "benefit": "Ship's Boat or two Ship Shares" },
+    { "roll": 7, "cash": 50000, "benefit": "SOC +2" }
+  ],
+
+  "mishaps": [
+    { "roll": 1, "text": "Severely injured in action (as a result of 2 on the Injury table). Alternatively, roll twice on the Injury table and take the lower result." },
+    { "roll": 2, "text": "Placed in the frozen watch (cryogenically stored on board ship) and revived improperly. Reduce STR, DEX or END by 1 due to muscle wastage. You are NOT ejected from this career." },
+    { "roll": 3, "text": "During a battle, defeat or victory depends on your actions. Make an 8+ roll using a skill that depends on your branch: Electronics (sensors) or Gunner if crew, Mechanic or Vacc Suit if engineer/gunner, Pilot (small craft or spacecraft) or Tactics (naval) if flight. On failure the ship suffers severe damage, you are blamed, court-martialled and discharged. On success you are honourably discharged -- you still leave the career but may keep your Benefit roll from this term." },
+    { "roll": 4, "text": "You are blamed for an accident that causes the death of several crew members. If you were responsible, gain one free roll on the Skills and Training tables before you are ejected, as guilt drives you to excel. If you were not, gain the officer who blamed you as an Enemy but keep your Benefit roll from this term." },
+    { "roll": 5, "text": "You are tormented by or quarrel with an officer or fellow crewman. Gain that character as a Rival as they force you out of the Navy." },
+    { "roll": 6, "text": "Injured. Roll on the Injury table." }
+  ],
+  "_mishap_note": "Navy mishap 2 explicitly does NOT eject the Traveller -- the 'unless otherwise stated' exception from the general survival rules.",
+
+  "events": [
+    { "roll": 2,  "text": "Disaster! Roll on the Mishap table, but you are not ejected from this career." },
+    { "roll": 3,  "text": "You join a gambling circle on board. Gain Gambler 1 or Deception 1. If you wish, throw Gambler 8+: on success gain an extra Benefit roll from this career, on failure lose one Benefit roll from this career." },
+    { "roll": 4,  "text": "You are given a special assignment or duty on board ship. Gain DM+1 to any one Benefit roll." },
+    { "roll": 5,  "text": "You are given advanced training in a specialist field. Roll EDU 8+ to gain one level in any skill you already have." },
+    { "roll": 6,  "text": "Your vessel participates in a notable military engagement. Gain one of Electronics 1, Engineer 1, Gunner 1 or Pilot 1." },
+    { "roll": 7,  "text": "Life Event. Roll on the Life Events table." },
+    { "roll": 8,  "text": "Your vessel participates in a diplomatic mission. Gain one of Recon 1, Diplomat 1, Steward 1 or a Contact." },
+    { "roll": 9,  "text": "You foil an attempted crime on board, such as mutiny, sabotage, smuggling or conspiracy. Gain an Enemy but also DM+2 to your next advancement roll in the Navy." },
+    { "roll": 10, "text": "You have the opportunity to abuse your position for profit. If you do so, gain an extra Benefit roll from this term. Refuse and you get DM+2 to your next advancement roll." },
+    { "roll": 11, "text": "Your commanding officer takes an interest in your career. Either gain Tactics (naval) 1 or DM+4 to your next advancement roll thanks to their aid." },
+    { "roll": 12, "text": "You display heroism in battle, saving the whole ship. You automatically pass your next promotion or commission roll." }
+  ]
+}

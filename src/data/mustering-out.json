@@ -1,0 +1,138 @@
+{
+  "_source": "Mongoose Traveller 2e Core Rulebook Update 2022, printed pp46, 48, 49. PDF page = printed page - 7.",
+
+  "benefits": {
+    "when": "gained when a Traveller leaves a career, for any reason",
+    "rolls": "one Benefit roll per FULL term served in that career, plus extra rolls for high rank",
+    "lost_roll": "a failed Survival roll costs the Benefit roll for that term",
+    "columns": ["Cash", "Other Benefits"],
+    "cash_column_limit": 3,
+    "_cash_limit_note": "maximum three Cash-column rolls across ALL careers, for the whole Traveller",
+    "gambler_dm": "a Traveller with the Gambler skill gains DM+1 to all Cash column rolls",
+
+    "benefits_of_rank": [
+      { "highest_rank": "1-2", "bonus_rolls": 1 },
+      { "highest_rank": "3-4", "bonus_rolls": 2 },
+      { "highest_rank": "5-6", "bonus_rolls": 3, "extra": "DM+1 to all Benefit rolls from this career" }
+    ],
+
+    "leftover_cash": "may purchase personal equipment worth up to Cr10000 before play begins; leftover money can be converted to cash, trade goods or simply saved",
+    "_equipment_conflict": "The standalone Character Generation Flowchart game aid says 'spend up to Cr 2,000'. The book (printed p46) says Cr10000. THE BOOK WINS -- this is the third recorded disagreement between that game aid and the rulebook.",
+
+    "ship_shares": {
+      "meaning": "contacts, credit rating, savings and favours worth roughly one millionth of a space vessel each; pooled toward ownership",
+      "not_cash": "Ship Shares cannot be traded or redeemed for cash",
+      "if_unused": "if not used to help purchase a ship, each unused Ship Share instead yields an additional pension of Cr1000 per year"
+    },
+    "tas_membership": {
+      "once_only": "membership may only be received once per Traveller",
+      "duplicate": "rolling this Benefit again yields two Ship Shares instead",
+      "dividend": "one high passage every two months, which may be used, retained or sold"
+    },
+    "yacht": {
+      "first": "a yacht with 25% of the mortgage paid off; roll 1D on the Spacecraft Quirks table",
+      "duplicate": "each further roll pays off another 25%; four times clears the mortgage entirely",
+      "alternative": "a Safari Ship may be selected instead"
+    },
+    "ships_rule": "for simplicity and balance only one Traveller may begin play in possession of a ship; each other Traveller who rolled a ship receives an additional pension of Cr25000 per year instead, representing part ownership"
+  },
+
+  "pensions": {
+    "eligibility": "leaving a career after at least FIVE terms in it counts as retirement and earns a pension",
+    "excluded_careers": ["Scout", "Rogue", "Prisoner", "Drifter"],
+    "payment": "paid at the beginning of each year, effective on leaving the service, collectible at any Class A or B starport",
+    "table": [
+      { "terms": 5, "pay": 10000 },
+      { "terms": 6, "pay": 12000 },
+      { "terms": 7, "pay": 14000 },
+      { "terms": 8, "pay": 16000 }
+    ],
+    "beyond_8": "Cr2000 per term beyond 8, i.e. 16000 + 2000 * (terms - 8)"
+  },
+
+  "ageing": {
+    "begins_at_age": 34,
+    "begins_after_term": 4,
+    "when": "at the end of the fourth term and at the end of every term thereafter",
+    "roll": "2D minus the Traveller's TOTAL number of terms",
+    "player_choice": "the Traveller chooses which characteristics are affected",
+    "table": [
+      { "result": "-6",  "effect": "reduce three physical characteristics by 2, and one mental characteristic by 1" },
+      { "result": "-5",  "effect": "reduce three physical characteristics by 2" },
+      { "result": "-4",  "effect": "reduce two physical characteristics by 2, and one physical characteristic by 1" },
+      { "result": "-3",  "effect": "reduce one physical characteristic by 2, and two physical characteristics by 1" },
+      { "result": "-2",  "effect": "reduce three physical characteristics by 1" },
+      { "result": "-1",  "effect": "reduce two physical characteristics by 1" },
+      { "result": "0",   "effect": "reduce one physical characteristic by 1" },
+      { "result": "1+",  "effect": "no effect" }
+    ],
+    "_physical": ["STR", "DEX", "END"],
+    "_mental": ["INT", "EDU", "SOC"],
+    "ageing_crisis": {
+      "trigger": "any characteristic reduced to 0",
+      "outcome": "the Traveller dies unless they pay 1D x Cr10000 for medical care, which restores any such characteristics to 1",
+      "aftermath": "the Traveller automatically fails all qualification rolls from then on"
+    }
+  },
+
+  "anagathics": {
+    "start": "at the start of any career term, roll SOC 10+ to begin taking anagathics",
+    "fumble": "a roll of exactly 2 sends the Traveller straight to the Prisoner career for that term",
+    "effect": "while using them the Traveller effectively does not age -- add the number of terms since starting anagathics as a POSITIVE DM to Ageing rolls",
+    "stopping": "if the Traveller stops for any reason they must roll immediately on the Ageing table",
+    "drawback_survival": "must make TWO Survival checks each term instead of one; if either or both fail, the Traveller suffers a Mishap",
+    "drawback_cost": "1D x Cr25000 per term, paid out of eventual cash benefits; if unpayable the Traveller goes into debt"
+  },
+
+  "injuries": {
+    "when": "Travellers wounded in combat or accidents during creation roll on the Injury table",
+    "table": [
+      { "roll": 1, "name": "Nearly killed",      "effect": "reduce one physical characteristic by 1D and two other physical characteristics by 2" },
+      { "roll": 2, "name": "Severely injured",   "effect": "reduce one physical characteristic by 1D" },
+      { "roll": 3, "name": "Missing Eye or Limb","effect": "reduce STR or DEX by 2" },
+      { "roll": 4, "name": "Scarred",            "effect": "reduce any physical characteristic by 2" },
+      { "roll": 5, "name": "Injured",            "effect": "reduce any physical characteristic by 1" },
+      { "roll": 6, "name": "Lightly Injured",    "effect": "no permanent effect" }
+    ],
+    "medical_care": {
+      "cost_per_point": 5000,
+      "_note": "Cr5000 to restore each lost characteristic point",
+      "employer_cover": "if injured in the service of an organisation, roll 2D on the Medical Bills table adding your rank as a DM; the result is the percentage of the cost the employer pays",
+      "medical_bills": [
+        { "careers": ["Army", "Navy", "Marine"], "4+": "75%", "8+": "100%", "12+": "100%" },
+        { "careers": ["Agent", "Noble", "Scholar", "Entertainer", "Merchant", "Citizen"], "4+": "50%", "8+": "75%", "12+": "100%" },
+        { "careers": ["Scout", "Rogue", "Drifter"], "4+": "0%", "8+": "50%", "12+": "75%" }
+      ],
+      "unpaid": "any balance the Traveller cannot pay becomes a starting debt"
+    }
+  },
+
+  "life_events": [
+    { "roll": 2,  "name": "Sickness or Injury",       "text": "You are injured or become sick. Roll on the Injury table." },
+    { "roll": 3,  "name": "Birth or Death",           "text": "Someone close to you dies, or someone close to you gives birth. You are involved in some fashion." },
+    { "roll": 4,  "name": "Ending of Relationship",   "text": "A romantic relationship involving you ends badly. Gain a Rival or Enemy." },
+    { "roll": 5,  "name": "Improved Relationship",    "text": "A romantic relationship deepens, possibly leading to marriage or another commitment. Gain an Ally." },
+    { "roll": 6,  "name": "New Relationship",         "text": "You become involved in a romantic relationship. Gain an Ally." },
+    { "roll": 7,  "name": "New Contact",              "text": "You gain a new Contact." },
+    { "roll": 8,  "name": "Betrayal",                 "text": "You are betrayed by a friend. Convert a Contact or Ally into a Rival or Enemy; otherwise gain a Rival or Enemy." },
+    { "roll": 9,  "name": "Travel",                   "text": "You move to another world. Gain DM+2 to your next qualification roll." },
+    { "roll": 10, "name": "Good Fortune",             "text": "Something good happens to you. Gain DM+2 to any one Benefit roll." },
+    { "roll": 11, "name": "Crime",                    "text": "You commit, suffer or are accused of a crime. Lose one Benefit roll or take the Prisoner career next term." },
+    { "roll": 12, "name": "Unusual Event",            "text": "Roll 1D on the Unusual Events sub-table.",
+      "subtable": [
+        { "roll": 1, "name": "Psionics",                "text": "You encounter a Psionic institute. You may immediately test your Psionic Strength and, if you qualify, take the Psion career next term." },
+        { "roll": 2, "name": "Aliens",                  "text": "You spend time among an alien species. Gain Science 1 and a Contact among an alien species." },
+        { "roll": 3, "name": "Alien Artefact",          "text": "You have a strange device from an alien culture, not normally available to humans." },
+        { "roll": 4, "name": "Amnesia",                 "text": "Something happened to you but you do not know what it was." },
+        { "roll": 5, "name": "Contact with Government", "text": "You briefly came into contact with the highest echelons of the Imperium." },
+        { "roll": 6, "name": "Ancient Technology",      "text": "You have something older than the Imperium, or older than humanity." }
+      ]
+    }
+  ],
+
+  "_still_to_transcribe": [
+    "printed p47 (pdf 40): the general Other Benefits descriptions",
+    "printed p50 (pdf 43): skill packages",
+    "printed p22-45 (pdf 15-38): per-career skill tables, ranks, mishaps, events and the two Benefit columns"
+  ]
+}

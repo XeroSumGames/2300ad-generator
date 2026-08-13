@@ -1,0 +1,86 @@
+{
+  "_source": "Mongoose Traveller 2e Core Rulebook Update 2022, printed pp24-25 (pdf 17-18)",
+  "key": "army",
+  "name": "Army",
+  "blurb": "Members of the planetary armed fighting forces. Soldiers deal with planetary surface actions, battles and campaigns, and may also be mercenaries for hire.",
+  "qualification": {
+    "check": "END 5+",
+    "dms": [
+      { "when": "for every previous career", "dm": -1 },
+      { "when": "aged 30 or more", "dm": -2 }
+    ]
+  },
+  "military": true,
+  "commission": { "check": "SOC 8+" },
+
+  "assignments": [
+    { "key": "support",  "name": "Support",  "desc": "You are an engineer, cook or in some other role behind the front lines.", "survival": "END 5+", "advancement": "EDU 7+" },
+    { "key": "infantry", "name": "Infantry", "desc": "You are one of the Poor Bloody Infantry on the ground.",                  "survival": "STR 6+", "advancement": "EDU 6+" },
+    { "key": "cavalry",  "name": "Cavalry",  "desc": "You are one of the crew of a gunship or tank.",                           "survival": "DEX 7+", "advancement": "INT 5+" }
+  ],
+
+  "skill_tables": {
+    "personal_development": ["STR +1", "DEX +1", "END +1", "Gambler", "Medic", "Melee"],
+    "service_skills":       ["Drive or Vacc Suit", "Athletics", "Gun Combat", "Recon", "Melee", "Heavy Weapons"],
+    "advanced_education":   { "min_edu": 8, "skills": ["Tactics (military)", "Electronics", "Navigation", "Explosives", "Engineer", "Survival"] },
+    "officer":              { "commissioned_only": true, "skills": ["Tactics (military)", "Leadership", "Advocate", "Diplomat", "Electronics", "Admin"] },
+    "assignment": {
+      "support":  ["Mechanic", "Drive or Flyer", "Profession", "Explosives", "Electronics (comms)", "Medic"],
+      "infantry": ["Gun Combat", "Melee", "Heavy Weapons", "Stealth", "Athletics", "Recon"],
+      "cavalry":  ["Mechanic", "Drive", "Flyer", "Recon", "Heavy Weapons (vehicle)", "Electronics (sensors)"]
+    }
+  },
+
+  "ranks": {
+    "enlisted": [
+      { "rank": 0, "title": "Private",           "bonus": "Gun Combat 1" },
+      { "rank": 1, "title": "Lance Corporal",    "bonus": "Recon 1" },
+      { "rank": 2, "title": "Corporal",          "bonus": null },
+      { "rank": 3, "title": "Lance Sergeant",    "bonus": "Leadership 1" },
+      { "rank": 4, "title": "Sergeant",          "bonus": null },
+      { "rank": 5, "title": "Gunnery Sergeant",  "bonus": null },
+      { "rank": 6, "title": "Sergeant Major",    "bonus": null }
+    ],
+    "officer": [
+      { "rank": 1, "title": "Lieutenant",         "bonus": "Leadership 1" },
+      { "rank": 2, "title": "Captain",            "bonus": null },
+      { "rank": 3, "title": "Major",              "bonus": "Tactics (military) 1" },
+      { "rank": 4, "title": "Lieutenant Colonel", "bonus": null },
+      { "rank": 5, "title": "Colonel",            "bonus": null },
+      { "rank": 6, "title": "General",            "bonus": "SOC 10 or SOC +1, whichever is higher" }
+    ]
+  },
+
+  "mustering_out": [
+    { "roll": 1, "cash": 2000,  "benefit": "Cybernetic Implant" },
+    { "roll": 2, "cash": 5000,  "benefit": "INT +1" },
+    { "roll": 3, "cash": 10000, "benefit": "EDU +1" },
+    { "roll": 4, "cash": 10000, "benefit": "Weapon" },
+    { "roll": 5, "cash": 10000, "benefit": "Armour" },
+    { "roll": 6, "cash": 20000, "benefit": "END +1 or Cybernetic Implant" },
+    { "roll": 7, "cash": 30000, "benefit": "SOC +1" }
+  ],
+
+  "mishaps": [
+    { "roll": 1, "text": "Severely injured in action (as a result of 2 on the Injury table). Alternatively, roll twice on the Injury table and take the lower result." },
+    { "roll": 2, "text": "Your unit is slaughtered in a disastrous battle, for which you blame your commander. Gain them as an Enemy as they have you removed from the service." },
+    { "roll": 3, "text": "You are sent to a very unpleasant region (jungle, swamp, desert, icecap, urban) to battle guerrilla fighters and rebels. You are discharged because of stress, injury, or because the government wishes to bury the incident. Increase Recon or Survival by one level but gain the rebels as an Enemy." },
+    { "roll": 4, "text": "You discover your commanding officer is engaged in illegal activity such as weapon smuggling. Join their ring and gain them as an Ally before the inevitable investigation gets you discharged, or co-operate with the military police -- the official whitewash gets you discharged anyway but you may keep your Benefit roll from this term." },
+    { "roll": 5, "text": "You are tormented by or quarrel with an officer or fellow soldier. Gain that officer as a Rival as they drive you out of the service." },
+    { "roll": 6, "text": "Injured. Roll on the Injury table." }
+  ],
+
+  "events": [
+    { "roll": 2,  "text": "Disaster! Roll on the Mishap table, but you are not ejected from this career." },
+    { "roll": 3,  "text": "You are assigned to a planet with a hostile or wild environment. Gain one of Vacc Suit 1, Engineer 1, Animals (riding or training) 1 or Recon 1." },
+    { "roll": 4,  "text": "You are assigned to an urbanised planet torn by war. Gain one of Stealth 1, Streetwise 1, Persuade 1 or Recon 1." },
+    { "roll": 5,  "text": "You are given a special assignment or duty in your unit. Gain DM+1 to any one Benefit roll." },
+    { "roll": 6,  "text": "You are thrown into a brutal ground war. Roll EDU 8+ to avoid injury; on success you gain one level in Gun Combat or Leadership." },
+    { "roll": 7,  "text": "Life Event. Roll on the Life Events table." },
+    { "roll": 8,  "text": "You are given advanced training in a specialist field. Roll EDU 8+ to increase any one skill you already have by one level." },
+    { "roll": 9,  "text": "Surrounded and outnumbered by the enemy, you hold out until relief arrives. Gain DM+2 to your next advancement roll." },
+    { "roll": 10, "text": "You are assigned to a peacekeeping role. Gain one of Admin 1, Investigate 1, Deception 1 or Recon 1." },
+    { "roll": 11, "text": "Your commanding officer takes an interest in your career. Either gain Tactics (military) 1 or DM+4 to your next advancement roll thanks to their aid." },
+    { "roll": 12, "text": "You display heroism in battle. You may gain a promotion or a commission automatically." }
+  ]
+}

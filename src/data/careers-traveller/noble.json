@@ -1,0 +1,96 @@
+{
+  "_source": "Mongoose Traveller 2e Core Rulebook Update 2022, printed pp38-39 (pdf 31-32)",
+  "key": "noble",
+  "name": "Noble",
+  "blurb": "Individuals of the upper class who perform little consistent function but often have large amounts of ready money.",
+  "qualification": {
+    "check": "SOC 10+",
+    "dms": [{ "when": "for every previous career", "dm": -1 }],
+    "auto_if": { "characteristic": "SOC", "min": 10 }
+  },
+  "_qualification_note": "Noble is the only career with an AUTOMATIC qualification clause: SOC 10 or higher qualifies without a roll. The SOC 10+ check therefore only ever matters for Travellers with SOC 9 or below, who must roll 2D + SOC DM. Steepest entry bar in the book.",
+  "military": false,
+  "commission": null,
+
+  "assignments": [
+    { "key": "administrator", "name": "Administrator", "desc": "You serve in the planetary government or even rule over a fiefdom or other domain.", "survival": "INT 4+", "advancement": "EDU 6+" },
+    { "key": "diplomat",      "name": "Diplomat",      "desc": "You are a diplomat or other state official.", "survival": "INT 5+", "advancement": "SOC 7+" },
+    { "key": "dilettante",    "name": "Dilettante",    "desc": "You are known for being known and have absolutely no useful function in society.", "survival": "SOC 5+", "advancement": "INT 7+" }
+  ],
+  "_survival_note": "Dilettante is the only assignment in the book whose SURVIVAL roll keys off SOC.",
+
+  "skill_tables": {
+    "personal_development": ["STR +1", "DEX +1", "END +1", "Gambler", "Gun Combat", "Melee"],
+    "service_skills":       ["Admin", "Advocate", "Electronics", "Diplomat", "Investigate", "Persuade"],
+    "advanced_education":   { "min_edu": 8, "skills": ["Science", "Advocate", "Language", "Leadership", "Diplomat", "Art"] },
+    "assignment": {
+      "administrator": ["Admin", "Advocate", "Broker", "Diplomat", "Leadership", "Persuade"],
+      "diplomat":      ["Advocate", "Carouse", "Electronics", "Steward", "Diplomat", "Deception"],
+      "dilettante":    ["Carouse", "Deception", "Flyer", "Streetwise", "Gambler", "Jack-of-all-Trades"]
+    }
+  },
+
+  "ranks": {
+    "administrator": [
+      { "rank": 0, "title": "Assistant",  "bonus": null },
+      { "rank": 1, "title": "Clerk",      "bonus": "Admin 1" },
+      { "rank": 2, "title": "Supervisor", "bonus": null },
+      { "rank": 3, "title": "Manager",    "bonus": "Advocate 1" },
+      { "rank": 4, "title": "Chief",      "bonus": null },
+      { "rank": 5, "title": "Director",   "bonus": "Leadership 1" },
+      { "rank": 6, "title": "Minister",   "bonus": null }
+    ],
+    "diplomat": [
+      { "rank": 0, "title": "Intern",         "bonus": null },
+      { "rank": 1, "title": "3rd Secretary",  "bonus": "Admin 1" },
+      { "rank": 2, "title": "2nd Secretary",  "bonus": null },
+      { "rank": 3, "title": "1st Secretary",  "bonus": "Advocate 1" },
+      { "rank": 4, "title": "Counsellor",     "bonus": null },
+      { "rank": 5, "title": "Minister",       "bonus": "Diplomat 1" },
+      { "rank": 6, "title": "Ambassador",     "bonus": null }
+    ],
+    "dilettante": [
+      { "rank": 0, "title": "Wastrel",     "bonus": null },
+      { "rank": 1, "title": null,          "bonus": null },
+      { "rank": 2, "title": "Ingrate",     "bonus": "Carouse 1" },
+      { "rank": 3, "title": null,          "bonus": null },
+      { "rank": 4, "title": "Black Sheep", "bonus": "Persuade 1" },
+      { "rank": 5, "title": null,          "bonus": null },
+      { "rank": 6, "title": "Scoundrel",   "bonus": "Jack-of-all-Trades 1" }
+    ]
+  },
+
+  "mustering_out": [
+    { "roll": 1, "cash": 10000,  "benefit": "Ship Share" },
+    { "roll": 2, "cash": 10000,  "benefit": "Two Ship Shares" },
+    { "roll": 3, "cash": 50000,  "benefit": "Blade" },
+    { "roll": 4, "cash": 50000,  "benefit": "SOC +1" },
+    { "roll": 5, "cash": 100000, "benefit": "TAS Membership" },
+    { "roll": 6, "cash": 100000, "benefit": "Yacht" },
+    { "roll": 7, "cash": 200000, "benefit": "SOC +1 and Yacht" }
+  ],
+  "_cash_note": "Noble has by far the richest Cash column in the book -- Cr200000 on a 7, against Cr50000 for the Navy.",
+
+  "mishaps": [
+    { "roll": 1, "text": "Severely injured (as a result of 2 on the Injury table). Alternatively, roll twice on the Injury table and take the lower result." },
+    { "roll": 2, "text": "A family scandal forces you out of your position. Lose one SOC." },
+    { "roll": 3, "text": "A disaster or war strikes. Roll Stealth 8+ or Deception 8+ to escape unhurt; on failure roll on the Injury table." },
+    { "roll": 4, "text": "Political manoeuvrings usurp your position. Increase Diplomat or Advocate by one level and gain a Rival." },
+    { "roll": 5, "text": "An assassin attempts to end your life. Roll END 8+; on failure roll on the Injury table." },
+    { "roll": 6, "text": "Injured. Roll on the Injury table." }
+  ],
+
+  "events": [
+    { "roll": 2,  "text": "Disaster! Roll on the Mishap table, but you are not ejected from this career." },
+    { "roll": 3,  "text": "You are challenged to a duel for your honour and standing. If you refuse, reduce your SOC by 1. If you accept, roll Melee (blade) 8+: on success gain one SOC; on failure roll on the Injury table and reduce your SOC by one. Either way gain one level in Melee (blade), Leadership, Tactics (any) or Deception." },
+    { "roll": 4,  "text": "Your time as a ruler or playboy gives you a wide range of experiences. Gain one of Animals (handling) 1, Art 1, Carouse 1 or Streetwise 1." },
+    { "roll": 5,  "text": "You inherit a gift from a rich relative. Gain DM+1 to any one Benefit roll." },
+    { "roll": 6,  "text": "You become deeply involved in politics on your world of residence, becoming a player in the intrigues of government. Gain one level in Advocate, Admin, Diplomat or Persuade but also gain a Rival." },
+    { "roll": 7,  "text": "Life Event. Roll on the Life Events table." },
+    { "roll": 8,  "text": "A conspiracy of nobles attempts to recruit you. If you refuse, gain the conspiracy as an Enemy. If you accept, roll Deception 8+ or Persuade 8+: on failure roll on the Mishap table as the conspiracy collapses; on success gain one level of Deception, Persuade, Tactics or Carouse." },
+    { "roll": 9,  "text": "Your reign is acclaimed by all as fair and wise -- or, as a dilettante, you sponge off your family's wealth a while longer. Gain either a jealous relative or an unhappy subject as an Enemy. Gain DM+2 to your next advancement roll." },
+    { "roll": 10, "text": "You manipulate and charm your way through high society. Gain one level of Carouse, Diplomat, Persuade or Steward, as well as a Rival and an Ally." },
+    { "roll": 11, "text": "You make an alliance with a powerful and charismatic noble, who becomes an Ally. Either gain one level of Leadership or DM+4 to your next advancement roll thanks to their aid." },
+    { "roll": 12, "text": "Your efforts do not go unnoticed by the Imperium. You are automatically promoted." }
+  ]
+}

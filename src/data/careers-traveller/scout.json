@@ -1,0 +1,74 @@
+{
+  "_source": "Mongoose Traveller 2e Core Rulebook Update 2022, printed pp44-45 (pdf 37-38)",
+  "key": "scout",
+  "name": "Scout",
+  "blurb": "Members of the exploratory service. Scouts explore new areas, map and survey known or newly discovered areas, and maintain communication ships carrying information and messages between the worlds of the galaxy.",
+  "qualification": { "check": "INT 5+", "dms": [{ "when": "for every previous career", "dm": -1 }] },
+  "military": false,
+  "commission": null,
+  "_pension_note": "Scout is one of the careers excluded from pensions (with Rogue, Prisoner and Drifter).",
+
+  "assignments": [
+    { "key": "courier",  "name": "Courier",  "desc": "You are responsible for shuttling messages and high value packages around the galaxy.", "survival": "END 5+", "advancement": "EDU 9+" },
+    { "key": "surveyor", "name": "Surveyor", "desc": "You visit border worlds and assess their worth.", "survival": "END 6+", "advancement": "INT 8+" },
+    { "key": "explorer", "name": "Explorer", "desc": "You go wherever the map is blank, exploring unknown worlds and uncharted space.", "survival": "END 7+", "advancement": "EDU 7+" }
+  ],
+  "_advancement_note": "Courier's EDU 9+ is the hardest advancement target in the book.",
+
+  "skill_tables": {
+    "personal_development": ["STR +1", "DEX +1", "END +1", "INT +1", "EDU +1", "Jack-of-all-Trades"],
+    "service_skills":       ["Pilot (small craft or spacecraft)", "Survival", "Mechanic", "Astrogation", "Vacc Suit", "Gun Combat"],
+    "advanced_education":   { "min_edu": 8, "skills": ["Medic", "Language", "Seafarer", "Explosives", "Science", "Jack-of-all-Trades"] },
+    "assignment": {
+      "courier":  ["Electronics", "Flyer", "Pilot (spacecraft)", "Engineer", "Athletics", "Astrogation"],
+      "surveyor": ["Electronics", "Persuade", "Pilot", "Navigation", "Diplomat", "Streetwise"],
+      "explorer": ["Electronics", "Pilot", "Engineer", "Science", "Stealth", "Recon"]
+    }
+  },
+
+  "ranks": {
+    "all": [
+      { "rank": 0, "title": null,           "bonus": null },
+      { "rank": 1, "title": "Scout",        "bonus": "Vacc Suit 1" },
+      { "rank": 2, "title": null,           "bonus": null },
+      { "rank": 3, "title": "Senior Scout", "bonus": "Pilot 1" },
+      { "rank": 4, "title": null,           "bonus": null },
+      { "rank": 5, "title": null,           "bonus": null },
+      { "rank": 6, "title": null,           "bonus": null }
+    ]
+  },
+  "_rank_note": "Scout is the only career with a SINGLE rank table shared by all three assignments -- the book heads it simply 'TITLE' rather than naming an assignment. Contrast Agent, which shares one track between two of its three assignments.",
+
+  "mustering_out": [
+    { "roll": 1, "cash": 20000, "benefit": "Ship Share" },
+    { "roll": 2, "cash": 20000, "benefit": "INT +1" },
+    { "roll": 3, "cash": 30000, "benefit": "EDU +1" },
+    { "roll": 4, "cash": 30000, "benefit": "Weapon" },
+    { "roll": 5, "cash": 50000, "benefit": "Weapon" },
+    { "roll": 6, "cash": 50000, "benefit": "Scout Ship" },
+    { "roll": 7, "cash": 50000, "benefit": "Scout Ship" }
+  ],
+
+  "mishaps": [
+    { "roll": 1, "text": "Severely injured (as a result of 2 on the Injury table). Alternatively, roll twice on the Injury table and take the lower result." },
+    { "roll": 2, "text": "Psychologically damaged by your time in the scouts. Reduce your INT or SOC by 1." },
+    { "roll": 3, "text": "Your ship is damaged and you have to hitch-hike your way back across the stars to the nearest scout base. Gain 1D Contacts and D3 Enemies." },
+    { "roll": 4, "text": "You inadvertently cause a conflict between the Imperium and a minor world or species. Gain a Rival and Diplomat 1." },
+    { "roll": 5, "text": "You have no idea what happened to you -- they found your ship drifting on the fringes of friendly space." },
+    { "roll": 6, "text": "Injured. Roll on the Injury table." }
+  ],
+
+  "events": [
+    { "roll": 2,  "text": "Disaster! Roll on the Mishap table, but you are not ejected from this career." },
+    { "roll": 3,  "text": "Your ship is ambushed by enemy vessels. Either run and roll Pilot 8+ to escape, or treat with them and roll Persuade 10+ to bargain. On failure your ship is destroyed and you may not re-enlist in the Scouts at the end of this term. On success you survive and gain Electronics (sensors) 1. Either way, gain an Enemy." },
+    { "roll": 4,  "text": "You survey an alien world. Gain one of Animals (riding or training) 1, Survival 1, Recon 1 or Science 1." },
+    { "roll": 5,  "text": "You perform an exemplary service for the scouts. Gain DM+1 to any one Benefit roll." },
+    { "roll": 6,  "text": "You spend several years jumping from world to world in your scout ship. Gain one of Astrogation 1, Electronics 1, Navigation 1, Pilot (small craft) 1 or Mechanic 1." },
+    { "roll": 7,  "text": "Life Event. Roll on the Life Events table." },
+    { "roll": 8,  "text": "When dealing with an alien species you have an opportunity to gather extra intelligence about them. Roll either Electronics 8+ or Deception 8+. On success gain an Ally in the Imperium and DM+2 to your next advancement roll. On failure roll on the Mishap table, but you are not ejected from this career." },
+    { "roll": 9,  "text": "Your scout ship is one of the first on the scene to rescue the survivors of a disaster. Roll either Medic 8+ or Engineer 8+. On success gain a Contact and DM+2 to your next advancement roll. On failure gain an Enemy." },
+    { "roll": 10, "text": "You spend a great deal of time on the fringes of Charted Space. Roll Survival 8+ or Pilot 8+. On success gain a Contact in an alien species and one level in any skill of your choice. On failure roll on the Mishap table, but you are not ejected from this career." },
+    { "roll": 11, "text": "You serve as the courier for an important message from the Imperium. Either gain one level of Diplomat or DM+4 to your next advancement roll." },
+    { "roll": 12, "text": "You discover a world, item or information of worth to the Imperium. You are automatically promoted." }
+  ]
+}
