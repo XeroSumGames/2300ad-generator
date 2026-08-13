@@ -1,0 +1,84 @@
+{
+  "_source": "2300AD Core Book 1, printed pp28-35 (pdf 22-29).",
+  "_why": "Soft Path Travellers may start with DNA modifications and symbionts, and Frontier colonists typically receive the standard PEA package. Spacers usually carry a Micro-G modification. So these are creation-time content, not just an equipment catalogue.",
+  "_pas": "PAS = Planetary Adaptation Syndrome, the condition most of these exist to counter.",
+
+  "dnams": [
+    { "name": "EPAS/HIF ThinAir Modification", "short": "Thin Air", "tl": 10, "type": "Minor", "cost": 60000,
+      "effect": "Breathe Thin and Very Thin atmospheres without a compressor mask.",
+      "drawback": "Any wound causes an extra one point of damage. Breathing thicker air without a filter mask causes oxygen intoxication, DM-1 to all checks." },
+
+    { "name": "Ariel Dry World Adaptation", "short": "Dry World", "tl": 10, "type": "Minor", "cost": 40000,
+      "effect": "DM+2 on checks to resist hot weather.", "drawback": "DM-2 to resist cold weather." },
+
+    { "name": "FADS/ANGPTL6 Vostok Cold Weather Adaptation", "short": "Cold Weather", "tl": 10, "type": "Minor", "cost": 30000,
+      "effect": "DM+2 on checks to resist cold weather.", "drawback": "DM-2 to resist hot weather." },
+
+    { "name": "SRR-564 Lut Hot Weather Adaptation", "short": "Hot Weather Adaptation", "tl": 10, "type": "Minor", "cost": 30000,
+      "effect": "DM+3 on checks to resist hot weather.", "drawback": "DM-2 to resist cold weather.",
+      "_note": "DM+3, one better than the Ariel Dry World modification, at the same TL, type and cost." },
+
+    { "name": "King Ultra Modification", "short": "King Ultra", "tl": 11, "type": "Major", "cost": 200000,
+      "effect": "STR +1D and END +1D. On worlds of normal gravity and lower, gain the Fast Metabolism (+1) trait. Lungs function in King's much denser atmosphere.",
+      "drawback": "In any atmosphere less than Dense (Atmosphere code below 8) the Traveller must wear a compressor mask, at the same cost as a respirator mask.",
+      "_creation_impact": "The only DNAM that rolls dice for characteristics. STR +1D and END +1D at creation is a swing of 2 to 12 points across two characteristics." },
+
+    { "name": "PAX/DLX Transcribe Micro-G Space Adaptation Modification", "short": "Free Fall", "tl": 10, "type": "Minor", "cost": 15000,
+      "effect": "DM+4 to Zero-G muscle atrophy checks. As a side effect, +1 STR in normal gravity environments and +2 STR in high gravity.",
+      "_note": "This is the modification the chargen text says most Spacers carry." },
+
+    { "name": "Micro-G (More Hands)", "short": "Free Fall (More Hands)", "tl": 10, "type": "Minor", "cost": 25000,
+      "effect": "Feet are restructured as a second pair of hands.",
+      "drawback": "Speed reduced by 1 metre when walking on a solid surface under Low gravity or higher." },
+
+    { "name": "Planetary Environmental Adaptation (PEA)", "short": "PEA", "tl": 10, "type": "Minor", "cost": 10000,
+      "effect": "DM+4 to all PAS checks for the world it was designed for.",
+      "_note": "The standard package Frontier colonists typically receive. Tied to ONE named world -- it does nothing elsewhere." },
+
+    { "name": "Triton Ultra", "short": "Triton Ultra", "tl": 12, "type": "Major", "cost": 200000,
+      "effect": "Grants the Amphibious, Enhanced Senses and Tough traits, plus the same cold resistance as the Cold Weather Adaptation.",
+      "_note": "Adapted for life in deep, cold oceans. The most trait-dense modification in the list." },
+
+    { "name": "Gender Reassignment", "short": "Gender Reassignment", "tl": 12, "type": "Major", "cost": 20000,
+      "effect": "Introduces no transgenic elements, so it is far more easily tolerated than other DNAMs and may be applied multiple times at only DM-1 to the END checks.",
+      "_note": "The only DNAM commonly available in the Core, where DNAMs are largely banned." },
+
+    { "name": "Retrograde", "short": "Retrograde", "tl": 12, "type": "Minor", "cost": 120000,
+      "effect": "Removes all existing DNA modifications.",
+      "drawback": "A further DM-2 on the END check for each additional DNAM after the first.",
+      "_note": "Strictly speaking DNAMs cannot be reversed; the price includes engineering a custom virus unique to the individual." }
+  ],
+
+  "symbiont_infection": {
+    "check": "Easy END (4+), plus the Medic skill of the attendant",
+    "delivery_dm": { "Injected": -1, "Ingested": 1, "Inhaled": 0 },
+    "retry": "a new check within 48 hours of a failed infection attempt is made at DM-2"
+  },
+
+  "symbionts": [
+    { "name": "Arterial Maintenance Symbiont (AMS)", "tl": 12, "delivery": "Injected", "cost": 10000,
+      "effect": "Blood cleaners grant DM+2 to AGEING rolls.",
+      "_creation_impact": "Directly modifies the ageing roll, which 2300AD already delays to age 50. Worth surfacing in the generator rather than treating as equipment." },
+    { "name": "Atmospheric Filter Symbiont (AFS)", "tl": 11, "delivery": "Inhaled", "cost": 2000,
+      "effect": "DM+2 to PAS checks." },
+    { "name": "Blood Clotting Agent (BCA)", "tl": 11, "delivery": "Injected", "cost": 8000,
+      "effect": "Developed for the hyper-charged cardiovascular systems of King Ultra recipients; now in wider use.",
+      "_note": "The extracted text does not state a numeric effect for BCA. Needs a re-read of printed p35 before it is exposed." },
+    { "name": "Calcium Fixing Symbiont (CFS)", "tl": 11, "delivery": "Injected", "cost": 5000,
+      "effect": "DM+2 to the check to avoid long-term negative effects from zero gravity; reduces bone decalcification in low and micro gravity." },
+    { "name": "Targeted Anti-Microbial", "tl": 11, "delivery": "Injected", "cost": 1000,
+      "effect": "unknown",
+      "_note": "Appears ONLY in a cost line on printed p35 with no heading and no description of its own. Either a symbiont whose write-up was cut, or a stray line. Do not expose until confirmed against the page image." },
+    { "name": "Digestive Enhancing Symbiont (DES)", "tl": 9, "delivery": "Ingested", "cost": 10000,
+      "effect": "DM+1 on PAS checks, in addition to any modifiers from DNA modifications or other symbionts. Developed for specific worlds." },
+    { "name": "Vitamin Synthesising Symbiont (VSS)", "tl": 10, "delivery": "Ingested", "cost": 4000,
+      "effect": "DM+1 to PAS checks." }
+  ],
+
+  "_OPEN_QUESTIONS": [
+    "An example reading 'a pistol shot causing 3D damage normally would cause 3D+3 damage' sits in the two-column text flow between the ThinAir and King Ultra entries. +1 per die matches ThinAir's 'any wound causes an extra one point of damage', so it is recorded there -- but the column interleaving means it could belong to King Ultra. Confirm against the page image before relying on it.",
+    "Blood Clotting Agent has no numeric effect in the extracted text.",
+    "Targeted Anti-Microbial has a cost line but no write-up.",
+    "None of this says HOW MANY DNAMs or symbionts a Soft Path Traveller starts with, or who pays. The colony descriptions in Book 2 are supposed to note which ones a given colony's people carry -- the same descriptions that hold the missing per-colony Survival modifiers."
+  ]
+}
