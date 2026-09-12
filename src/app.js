@@ -5,13 +5,25 @@
 (function () {
   'use strict';
   var E = window.TravellerEngine, X = window.AD2300;
-  var main, track, S = null;
+  var main, track, sidebar, S = null;
 
+  // The record is filled in BY the Life Foundation, so the sections are its sections.
+  // Esperanto subtitles because that is the Foundation's official language (Core Book 1
+  // p101); the diacritics are HTML entities to keep the source ASCII for assemble.py.
   var PHASES = [
-    ['origin', 'Origin'], ['chars', 'Characteristics'], ['background', 'Background'],
-    ['education', 'Education'], ['terms', 'Careers'], ['muster', 'Mustering Out'],
-    ['package', 'Skill Package'], ['done', 'Dossier']
+    ['origin', 'I. Registration', 'Registrado'],
+    ['chars', 'II. Biological Assessment', 'Biologia Takso'],
+    ['background', 'III. Formative Skills', 'Fruaj Kapabloj'],
+    ['education', 'IV. Certification', 'Atestado'],
+    ['terms', 'V. Record of Service', 'Servo-Registro'],
+    ['muster', 'VI. Disposition', 'Dispono'],
+    ['package', 'VII. Declaration', 'Deklaracio'],
+    ['done', 'Record', 'Dosiero']
   ];
+
+  // Parts the service record is built on. Readable always; amending one discards
+  // everything the Foundation recorded after it.
+  var GATED = ['origin', 'chars', 'background', 'education'];
 
   function esc(s) {
     return String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;')
@@ -29,16 +41,55 @@
     S.offworldEducated = false; S.gravityBand = null;
     S.bgPicked = []; S.pkg = null; S.pkgTaken = []; S.musterQueue = [];
     S.pendingCareer = null; S.termLog = []; S.crisis = false;
+    S.snaps = {}; S.readOnly = false; S.confirmUnlock = null;
+    S.skillSources = {}; S.charSources = {};
   }
+
+  function reached(phase) {
+    var order = PHASES.map(function (p) { return p[0]; });
+    if (S.phase === 'done') return true;
+    return order.indexOf(phase) <= order.indexOf(S.phase);
+  }
+  function isGated(phase) { return GATED.indexOf(phase) >= 0 && S.terms.length > 0; }
+
+  // Records WHERE a gain came from, by diffing the sheet either side of the grant. The
+  // engine has no notion of provenance and should not -- it owns the rules, and this is
+  // presentation. Same approach as traveller-generator, which shares that engine.
+  function tracked(label, fn) {
+    var sb = {}, cb = {}, k;
+    for (k in S.skills) sb[k] = S.skills[k];
+    for (k in S.chars) cb[k] = S.chars[k];
+    var out = fn();
+    S.skillSources = S.skillSources || {};
+    S.charSources = S.charSources || {};
+    for (k in S.skills) {
+      if (sb[k] === undefined || sb[k] !== S.skills[k]) (S.skillSources[k] = S.skillSources[k] || []).push(label);
+    }
+    for (k in S.chars) {
+      if (cb[k] !== S.chars[k]) {
+        var d = S.chars[k] - cb[k];
+        (S.charSources[k] = S.charSources[k] || []).push(label + ' ' + (d >= 0 ? '+' : '') + d);
+      }
+    }
+    return out;
+  }
+  function termLabel() { return 'term ' + (S.terms.length + 1); }
 
   // ---------------- render ----------------
   function renderTrack() {
     var idx = 0;
     for (var i = 0; i < PHASES.length; i++) if (PHASES[i][0] === S.phase) idx = i;
     track.innerHTML = PHASES.map(function (p, i) {
-      return '<div class="track-item' + (i === idx ? ' active' : (i < idx ? ' done' : '')) + '">' + esc(p[1]) + '</div>';
+      var can = reached(p[0]);
+      var cls = 'track-item' + (i === idx ? ' active' : (i < idx ? ' done' : '')) + (can ? ' nav' : '');
+      return '<div class="' + cls + '"' + (can ? ' onclick="A.nav(\'' + p[0] + '\')"' : '') + '>' +
+        esc(p[1]) + '</div>';
     }).join('');
   }
+
+  // Only jump to the top when the screen actually CHANGES -- ticking a skill or picking
+  // a career re-renders the same view, and yanking the page back loses the reader's place.
+  var lastView = null;
 
   function render() {
     renderTrack();
@@ -51,13 +102,136 @@
     else if (S.phase === 'muster') h = viewMuster();
     else if (S.phase === 'package') h = viewPackage();
     else h = viewDossier();
+    if (S.readOnly) h = lockedBanner(S.phase) + '<div class="ro">' + h + '</div>';
     main.innerHTML = h + (S.phase === 'done' ? printSheet() : '');
-    window.scrollTo(0, 0);
+    if (sidebar) sidebar.innerHTML = viewSidebar();
+    var rno = document.getElementById('recordno');
+    if (rno) rno.textContent = 'LF-' + String(S.seed % 100000).padStart(5, '0');
+    var view = S.phase + '/' + (S.sub || '');
+    if (view !== lastView) { lastView = view; window.scrollTo(0, 0); }
+  }
+
+  // ---- the running summary: where every point went, and what it cost ----
+  function sbRow(k, v, src, hot) {
+    return '<div class="sb-row"><span class="k">' + k + '</span><span class="v' +
+      (hot ? ' hot' : '') + '">' + v + '</span></div>' +
+      (src ? '<div class="sb-src">' + esc(src) + '</div>' : '');
+  }
+  function sbT(en, eo) { return '<div class="sb-t">' + en + '<span class="eo">' + eo + '</span></div>'; }
+
+  function viewSidebar() {
+    var n = Math.max(0, E.dm(S.chars.EDU) + 3);
+    var h = '<button class="sb-toggle" onclick="A.toggleSb()">Summary &mdash; where my points went</button><div class="sb-body">';
+
+    h += '<div class="sb">' + sbT('Colonist', 'Koloniano') +
+      sbRow('Name', esc(S.name || '&mdash;')) +
+      (S.nat ? sbRow('Nationality', esc(S.nat)) : '') +
+      (S.origin ? sbRow('Homeworld', esc(S.origin.name)) : '') +
+      (S.path ? sbRow('Path', esc(S.path)) : (S.isSpacer ? sbRow('Path', 'Spacer') : '')) +
+      sbRow('Age', S.age) + sbRow('Terms', S.terms.length) +
+      '</div>';
+
+    // The gravity adjustment is the Foundation's whole point -- it shaped the body it is
+    // now assessing -- so it is called out rather than buried in the characteristics.
+    if (S.gravityBand) {
+      h += '<div class="sb">' + sbT('Environment', 'Medio') +
+        sbRow('Gravity', esc(S.gravityBand), S.origin ? 'homeworld ' + S.origin.name : '') +
+        sbRow('Survival DM', S.leftHome ? 'expired' : sign(X.survivalDM(S)),
+          S.leftHome ? 'lapsed on leaving home' + (S.leftHomeAt ? ' after term ' + S.leftHomeAt : '')
+                     : 'applies until you leave home', !S.leftHome && X.survivalDM(S) < 0) +
+        '</div>';
+    }
+
+    h += '<div class="sb">' + sbT('Characteristics', 'Trajtoj') +
+      E.CHARS.map(function (k) {
+        var src = (S.charSources && S.charSources[k]) ? S.charSources[k].join(', ') : 'rolled 2D at 18';
+        return sbRow(k, S.chars[k] + ' <span style="color:var(--dust);font-weight:400">DM ' +
+          sign(E.dm(S.chars[k])) + '</span>', src);
+      }).join('') + '</div>';
+
+    var used = E.totalSkillLevels(S), cap = E.skillCap(S);
+    var pct = cap ? Math.min(100, Math.round(used / cap * 100)) : 0;
+    var keys = Object.keys(S.skills).sort();
+    h += '<div class="sb">' + sbT('Skills', 'Kapabloj') +
+      '<div class="sb-row"><span class="k">Levels used</span><span class="v">' + used + ' / ' + cap + '</span></div>' +
+      '<div class="sb-bar"><span style="width:' + pct + '%"></span></div>' +
+      '<div class="sb-src">cap is 3 x (INT ' + S.chars.INT + ' + EDU ' + S.chars.EDU + ')</div>';
+    h += keys.length ? keys.map(function (k) {
+      return sbRow(esc(k), S.skills[k], skillSource(k));
+    }).join('') : '<div class="sb-empty">Nothing recorded yet.</div>';
+    h += '</div>';
+
+    if (S.phase === 'background' && S.bgPicked.length < n) {
+      h = h.replace('<div class="sb-body">', '<div class="sb-body"><div class="sb-budget">' +
+        (n - S.bgPicked.length) + ' formative skill' + ((n - S.bgPicked.length) === 1 ? '' : 's') + ' left to record</div>');
+    }
+
+    if (S.terms.length || S.phase === 'terms') h += ageClockHTML();
+
+    h += '<div class="sb">' + sbT('Disposition', 'Dispono') +
+      sbRow('Cash', lv(S.cash), S.cashRollsUsed + ' of 3 lifetime cash rolls used', S.cashRollsUsed >= 3) +
+      sbRow('Pension', S.pension ? lv(S.pension) + '/yr' : '&mdash;') +
+      sbRow('Ship shares', S.shipShares) +
+      (S.benefits.length ? '<div class="sb-src" style="margin-top:6px">' + esc(S.benefits.join(', ')) + '</div>' : '') +
+      '</div>';
+    return h + '</div>';
+  }
+
+  function skillSource(name) {
+    var bits = [];
+    if (S.bgPicked.indexOf(name) >= 0) bits.push('formative');
+    if (S.skillSources && S.skillSources[name]) bits.push(S.skillSources[name].join('; '));
+    return bits.join('; ');
+  }
+
+  // 2300AD pushes ageing out to term 8, where Traveller starts at 4 -- colonists are
+  // valuable and the Foundation says so. The warning belongs before the decision.
+  function ageClockHTML() {
+    var served = S.terms.length, next = served + 1;
+    var h = '<div class="sb">' + sbT('Longevity', 'Longviveco');
+    if (served >= 8) {
+      h += '<div class="clock-note" style="color:var(--rust)"><b>Ageing is in effect.</b> ' +
+        'Each term now ends on 2D minus ' + served + ' terms; at or under zero the Foundation records a decline.</div>';
+    } else if (next >= 8) {
+      h += '<div class="clock-note" style="color:var(--rust)"><b>An eighth term begins the ageing checks.</b> ' +
+        'From here every term risks a characteristic, and the odds worsen each time.</div>';
+    } else {
+      h += '<div class="clock-note">No ageing until the end of your eighth term &mdash; ' +
+        (8 - next) + ' more term' + ((8 - next) === 1 ? '' : 's') + ' of grace. ' +
+        'The Foundation notes this is four terms longer than Imperial service allows.</div>';
+    }
+    return h + '</div>';
+  }
+
+  // ---- free to review, gated to mutate ----
+  function discardCost(p) {
+    var snap = S.snaps[p];
+    if (!snap) return 'nothing';
+    var bits = [];
+    var lost = S.terms.length - (snap.terms ? snap.terms.length : 0);
+    if (lost > 0) bits.push(lost + ' term' + (lost === 1 ? '' : 's') + ' of service');
+    if (S.education && !snap.education) bits.push('your certification');
+    if (S.cash > (snap.cash || 0)) bits.push('your disposition settlement');
+    if (S.leftHome && !snap.leftHome) bits.push('your passage authorisation');
+    return bits.length ? bits.join(', ') : 'nothing';
+  }
+  function lockedBanner(p) {
+    if (S.confirmUnlock === p) {
+      return '<div class="locked-note"><b>Amending this discards ' + esc(discardCost(p)) + '.</b> ' +
+        'The Foundation built your service record on these entries and cannot carry them across.' +
+        '<div class="btn-row tight" style="margin-top:10px">' +
+        '<button class="btn ghost" onclick="A.cancelUnlock()">Leave the record as filed</button>' +
+        '<button class="btn" onclick="A.unlock(\'' + p + '\')">Discard and amend</button></div></div>';
+    }
+    return '<div class="locked-note">Filed. Your service record was built on this section, so it reads only.' +
+      '<div class="btn-row tight" style="margin-top:8px">' +
+      '<button class="btn ghost" onclick="A.askUnlock(\'' + p + '\')">Amend this section&hellip;</button></div></div>';
   }
 
   // ---- origin ----
   function viewOrigin() {
-    var h = '<div class="step-h">Origin</div>' +
+    var h = '<div class="step-h">Registration and Origin</div>' +
+      '<div class="step-eo">Registrado kaj Deveno</div>' +
       '<div class="step-p">Where you are from decides more in 2300AD than in Traveller. Your homeworld fixes your gravity, your Survival modifier, and whether you walk the Hard or Soft Path &mdash; that last one is not a choice, it belongs to the colony.</div>';
 
     var nats = X.nationalities(DATA);
@@ -136,7 +310,8 @@
       }).join('') + '</div></div>';
   }
   function viewChars() {
-    return '<div class="step-h">Characteristics</div>' +
+    return '<div class="step-h">Biological Assessment</div>' +
+      '<div class="step-eo">Biologia Takso</div>' +
       '<div class="step-p">Rolled 2D each, then adjusted for your homeworld gravity. You are 18.</div>' +
       charsPanel() +
       '<div class="note">' + esc(S.origin.name) + ' is ' + esc(S.gravityBand) + ' &mdash; ' + gravText() + ' already applied.</div>' +
@@ -149,7 +324,8 @@
     var n = Math.max(0, E.dm(S.chars.EDU) + 3);
     var B = DATA.gravity.background_skills;
     var barred = B.restriction.nationalities.indexOf(S.nat) >= 0 && S.chars.SOC < 9;
-    return '<div class="step-h">Background</div>' +
+    return '<div class="step-h">Formative Skills</div>' +
+      '<div class="step-eo">Fruaj Kapabloj</div>' +
       '<div class="step-p">Choose <b>' + n + '</b> background skills &mdash; EDU DM + 3 &mdash; each at level 0. 2300AD uses its own shorter list.</div>' +
       '<div class="panel"><div class="grid2">' +
       '<div><label class="lbl">Name</label><input class="txt name-inp" value="' + esc(S.name) + '" oninput="A.set(\'name\',this.value)" placeholder="Your Traveller">' +
@@ -172,7 +348,8 @@
 
   // ---- education ----
   function viewEducation() {
-    var h = '<div class="step-h">Pre-Career Education</div>' +
+    var h = '<div class="step-h">Certification</div>' +
+      '<div class="step-eo">Atestado</div>' +
       '<div class="step-p">Optional, and takes your first term. Where you study matters: your homeworld\'s tech level or your nation\'s tier sets the entry modifier.</div>';
     if (S.education) {
       h += '<div class="panel"><div class="panel-t">' + esc(S.education.type) + '</div>' +
@@ -221,7 +398,8 @@
   }
 
   function viewTerms() {
-    var h = '<div class="step-h">Term ' + (S.terms.length + 1) + '</div>' +
+    var h = '<div class="step-h">Service Period ' + (S.terms.length + 1) + '</div>' +
+      '<div class="step-eo">Servo-Periodo</div>' +
       '<div class="step-p">Age ' + S.age + '. Four years a term.</div>' + historyHTML();
     if (!S.sub || S.sub === 'pick') {
       h += '<div class="panel"><div class="panel-t">Choose a career</div>';
@@ -268,7 +446,8 @@
   // ---- mustering out ----
   function viewMuster() {
     var q = S.musterQueue[0];
-    var h = '<div class="step-h">Mustering Out</div>';
+    var h = '<div class="step-h">Disposition</div>' +
+      '<div class="step-eo">Dispono</div>';
     if (!q) return h + '<div class="btn-row"><span></span><button class="btn" onclick="A.go(\'package\')">Continue &rarr;</button></div>';
     var dm = X.benefitDM(S);
     h += '<div class="step-p">Leaving <b>' + esc(DATA.careers[q.career].name) + '</b> after ' + q.terms +
@@ -291,7 +470,8 @@
   // ---- skill package ----
   function viewPackage() {
     var P = DATA.packages2300.packages;
-    var h = '<div class="step-h">Skill Package</div>' +
+    var h = '<div class="step-h">Declaration</div>' +
+      '<div class="step-eo">Deklaracio</div>' +
       '<div class="step-p">A group picks <b>one</b> package between them after everyone is created, then takes turns claiming skills from it.</div>' +
       '<div class="note">Written as a group rule with no solo split, so nothing is granted automatically. Pick the package your table agreed on and tick what you claimed.</div>' +
       '<div class="panel"><div class="panel-t">Package</div>';
@@ -374,8 +554,47 @@
   // ---------------- actions ----------------
   var A = {};
   A.set = function (k, v) { S[k] = v; };
-  A.go = function (p) { if (p === 'terms' && !S.sub) S.sub = 'pick'; S.phase = p; render(); };
-  A.restart = function () { fresh(); render(); };
+  // Photograph a gated section the first time it is finished with, whatever route got
+  // there. This must NOT live only in A.go: the randomiser builds a whole character
+  // without ever calling it, and a record built that way would offer "amend this
+  // section" with nothing behind it -- the button would restore nothing and the warning
+  // would claim it discards nothing.
+  function snapGate(phase) {
+    if (GATED.indexOf(phase) >= 0 && !S.snaps[phase]) S.snaps[phase] = E.snapshot(S);
+  }
+
+  A.go = function (p) {
+    // The engine's snapshot carries the RNG position too, so a restored record replays
+    // identically rather than quietly re-rolling what came after.
+    snapGate(S.phase);
+    if (p === 'terms' && !S.sub) S.sub = 'pick';
+    S.phase = p; S.readOnly = false; S.confirmUnlock = null;
+    render();
+  };
+  A.nav = function (p) {
+    if (!reached(p)) return;
+    S.phase = p;
+    S.confirmUnlock = null;
+    S.readOnly = isGated(p);
+    if (p === 'terms' && !S.sub) S.sub = 'pick';
+    render();
+  };
+  A.askUnlock = function (p) { S.confirmUnlock = p; render(); };
+  A.cancelUnlock = function () { S.confirmUnlock = null; render(); };
+  A.unlock = function (p) {
+    var snap = S.snaps[p];
+    if (!snap) return;
+    E.restore(S, snap);
+    S.phase = p; S.readOnly = false; S.confirmUnlock = null; S.sub = null;
+    lastView = null;
+    render();
+  };
+  A.toggleSb = function () {
+    var el = document.getElementById('sidebar');
+    if (el) el.classList.toggle('open');
+  };
+  A.__peek = function () { return S; };
+  A.restart = function () { fresh(); lastView = null; render(); };
 
   A.exportJson = function () {
     var doc = E.exportCharacter(S);
@@ -402,14 +621,18 @@
     var homes = X.homeworldsFor(DATA, S.nat, 'any');
     for (var i = 0; i < homes.length; i++) if (homes[i].name === name) {
       E.rollCharacteristics(S);          // reroll so the gravity adjustment lands on fresh dice
-      X.setOrigin(S, homes[i]);
+      S.charSources = {};                // the reroll invalidates any provenance recorded so far
+      tracked('homeworld gravity', function () { return X.setOrigin(S, homes[i]); });
       break;
     }
     render();
   };
   A.reroll = function () {
     E.rollCharacteristics(S);
-    X.applyGravity(S, X.GRAV.filter(function (b) { return b.type === S.gravityBand; })[0]);
+    S.charSources = {}; S.skillSources = {};   // fresh dice, so the old audit trail is void
+    tracked('homeworld gravity', function () {
+      return X.applyGravity(S, X.GRAV.filter(function (b) { return b.type === S.gravityBand; })[0]);
+    });
     S.bgPicked = []; S.skills = {};
     render();
   };
@@ -425,11 +648,11 @@
     var ok = tot >= 6;
     log.push({ v: tot, t: (where === 'offworld' ? 'Off-world' : 'Homeworld') + ' entry, EDU 6+ with DM ' + sign(mod) + ': ' + (ok ? 'accepted' : 'rejected'), cls: ok ? 'good' : 'bad' });
     if (ok) {
-      E.bumpChar(S, 'EDU', 1, S.log);
+      tracked('certification', function () { return E.bumpChar(S, 'EDU', 1, S.log); });
       if (where === 'offworld') { S.offworldEducated = true; log.push({ v: '!', t: 'Off-world study costs DM-1 on every Benefit roll later.', cls: 'bad' }); }
       var g = S.rng.d2() + E.dm(S.chars.INT), grad = g >= 6;
       log.push({ v: g, t: 'Graduation, INT 6+: ' + (grad ? 'graduated' : 'failed'), cls: grad ? 'good' : 'bad' });
-      if (grad) E.bumpChar(S, 'EDU', 1, S.log);
+      if (grad) tracked('graduation', function () { return E.bumpChar(S, 'EDU', 1, S.log); });
     }
     S.education = { type: where === 'offworld' ? 'Off-world education' : 'Homeworld education', entered: ok, log: log };
     S.age += 4;
@@ -445,12 +668,12 @@
     else S.termLog.push({ v: q.total + entryDM, t: 'Qualification ' + DATA.careers[k].qualification.check +
       (entryDM ? ' (DM' + sign(entryDM) + ')' : '') + ': ' + (q.ok ? 'accepted' : 'rejected'), cls: q.ok ? 'good' : 'bad' });
     if (!q.ok) { k = 'drifter'; a = DATA.careers[k].assignments[0].key; S.termLog.push({ v: '--', t: 'You drift.', cls: 'bad' }); }
-    E.enterCareer(S, k, a);
+    tracked(termLabel() + ' basic training', function () { return E.enterCareer(S, k, a); });
     S.pendingCareer = null; S.sub = 'train';
     render();
   };
   A.train = function (tableKey) {
-    var r = E.rollSkillTable(S, tableKey);
+    var r = tracked(termLabel() + ' training', function () { return E.rollSkillTable(S, tableKey); });
     S.termLog.push({ v: r.roll, t: 'Training: ' + X.swapSkill(r.entry) });
     var sv = E.survival(S), dm = X.survivalDM(S);
     var target = E.parseCheck(E.findAssignment(DATA.careers[S.current.career], S.current.assignment).survival).target;
@@ -467,7 +690,10 @@
     S.termLog.push({ v: ev, t: 'Event: ' + DATA.careers[S.current.career].events[ev - 2].text });
     var ad = E.advancement(S);
     S.termLog.push({ v: ad.total, t: 'Advancement ' + ad.check + ': ' + (ad.ok ? 'promoted' : 'passed over'), cls: ad.ok ? 'good' : '' });
-    if (ad.ok) { S.current.rank = Math.min(6, S.current.rank + 1); E.rankBonus(S); }
+    if (ad.ok) {
+      S.current.rank = Math.min(6, S.current.rank + 1);
+      tracked(termLabel() + ' promotion', function () { return E.rankBonus(S); });
+    }
     S.mustLeave = ad.mustLeave;
     S.sub = 'continue';
     render();
@@ -527,11 +753,17 @@
     var homes = X.homeworldsFor(DATA, S.nat, 'any');
     A.pickHome(homes[Math.floor(S.rng.next() * homes.length)].name);
     S.name = rollName();
+    snapGate('origin');
+    snapGate('chars');
     var n = Math.max(0, E.dm(S.chars.EDU) + 3), pool = DATA.gravity.background_skills.list.slice();
     for (var i = 0; i < n && pool.length; i++) {
       var p = pool.splice(Math.floor(S.rng.next() * pool.length), 1)[0];
       S.bgPicked.push(p); S.skills[p] = 0;
     }
+    // Snapshot the built sections in the same order a player would leave them, so a
+    // randomised record can be amended exactly like a hand-filled one.
+    snapGate('background');
+    snapGate('education');
     var want = 2 + Math.floor(S.rng.next() * 3), guard = 0;
     S.phase = 'terms'; S.sub = 'pick';
     while (S.terms.length < want && guard++ < 40) {
@@ -566,6 +798,7 @@
   }
   window.addEventListener('DOMContentLoaded', function () {
     main = document.getElementById('main'); track = document.getElementById('track');
+    sidebar = document.getElementById('sidebar');
     fresh(); render(); syncTheme();
   });
 })();

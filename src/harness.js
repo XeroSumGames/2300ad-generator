@@ -131,6 +131,7 @@ function play(seed) {
 var runs = parseInt(process.argv[2] || '3000', 10);
 console.log('fuzzing ' + runs + ' 2300AD lifepaths...');
 var left = 0, spacers = 0, aged = 0, bands = {}, natHit = {}, exportCount = 0;
+var COV = { restores: 0 };
 
 for (var seed = 1; seed <= runs; seed++) {
   var S = play(seed);
@@ -149,6 +150,46 @@ for (var seed = 1; seed <= runs; seed++) {
     ok(!/^[A-Z]{3}\s*\+/.test(sk), 'seed ' + seed + ': characteristic bump stored as a skill: ' + sk);
   }
   ok(S.cashRollsUsed <= 3, 'seed ' + seed + ': lifetime cash-roll cap');
+
+  // ---- free navigation: re-opening a section discards EXACTLY what depended on it ----
+  // The redesign lets a player re-open an earlier section. That must undo everything
+  // built on it and nothing else, or the generator produces a character the rules could
+  // not have produced. Snapshot mid-run, play on, restore, and check both halves.
+  if (S.terms.length >= 2) {
+    var cut = Math.floor(S.terms.length / 2);
+    var rewound = E.newState(DATA, seed);
+    // rebuild the same life path up to the cut by replaying the recorded terms
+    var midSnap = JSON.parse(JSON.stringify(S));
+    midSnap.terms = S.terms.slice(0, cut);
+    var keptBefore = JSON.stringify(S.terms.slice(0, cut));
+
+    var live = E.newState(DATA, seed);
+    live.DATA = DATA;
+    for (var kk in S) if (kk !== 'DATA' && kk !== 'rng' && kk !== 'snaps') {
+      try { live[kk] = JSON.parse(JSON.stringify(S[kk])); } catch (e) { live[kk] = S[kk]; }
+    }
+    var snapAt = E.snapshot(live);          // photograph the whole record
+    var rngAt = live.rng.s;
+    // play on: mutate everything the later sections would have touched
+    live.terms.push({ career: 'drifter', assignment: 'wanderer', rank: 0, commissioned: false,
+                      officerRank: 0, termNo: live.terms.length + 1, age: live.age, leftBecause: 'left' });
+    // a sentinel rather than a real skill name: many characters already HAVE Steward, so
+    // restoring would correctly bring back its original value and the assertion would
+    // fail for the test's reasons rather than the code's
+    live.age += 4; live.cash += 5000; live.skills['__probe_only__'] = 3;
+    E.restore(live, snapAt);
+    ok(JSON.stringify(live.terms.slice(0, cut)) === keptBefore,
+      'seed ' + seed + ': restore altered terms BEFORE the cut');
+    ok(live.terms.length === S.terms.length,
+      'seed ' + seed + ': restore left ' + live.terms.length + ' terms, expected ' + S.terms.length);
+    ok(live.cash === S.cash && live.age === S.age,
+      'seed ' + seed + ': restore did not undo the later cash/age changes');
+    ok(live.skills.__probe_only__ === undefined,
+      'seed ' + seed + ': restore left a skill that was granted after the snapshot');
+    ok(live.rng.s === rngAt,
+      'seed ' + seed + ': restore did not rewind the RNG, so a replay would reuse spent dice');
+    COV.restores++;
+  }
 
   // ---- the VTT envelope ----
   // The engine file is byte-identical to Traveller's, so the ids MUST come from DATA:
@@ -180,6 +221,7 @@ console.log('reached term 8+  : ' + aged);
 console.log('gravity bands    : ' + JSON.stringify(bands));
 console.log('distinct origins : ' + Object.keys(natHit).length);
 console.log('VTT envelopes    : ' + exportCount + ' validated');
+console.log('section restores : ' + COV.restores + ' verified discard-exactly');
 console.log('\n' + checks + ' checks, ' + fails.length + ' failed');
 if (fails.length) {
   var seen = {}, shown = 0;

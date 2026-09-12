@@ -70,6 +70,19 @@ HTML = """<!doctype html>
 <script>/* apply saved theme before paint to avoid a flash */(function(){try{if(localStorage.getItem('ad2300_theme')==='dark')document.documentElement.setAttribute('data-theme','dark');}catch(e){}})();</script>
 </head><body>
 <a class="backbar no-print" href="https://thetable.xerosumgames.com/">&larr; The Table</a>
+<!-- The Life Foundation is a colonisation support agency (Core Book 1 p101) whose
+     official language is Esperanto -- hence the subtitles throughout. The emblem is
+     drawn in CSS rather than supplied as art. -->
+<div class="lfbar no-print">
+  <div class="lf-mark" aria-hidden="true"><span class="lf-leaf"></span></div>
+  <div class="lfbar-txt">
+    <!-- &#309; is Esperanto's j-circumflex; written as an entity so the source stays
+         ASCII for assemble.py's guard while the page still renders it properly. -->
+    <div class="lfbar-t">Life Foundation <span class="lf-eo">Vivo-Fonda&#309;o</span></div>
+    <div class="lfbar-s">Colonist Personnel Record &middot; Form LF/KOLONIANO/2 &middot; Retain this record</div>
+  </div>
+  <div class="lfbar-no">Dosiero <span id="recordno">--</span></div>
+</div>
 <div class="hdr">
   <div class="theme-toggle" role="group" aria-label="Colour theme">
     <button class="tt-btn" data-tv="light" onclick="setTheme('light')">Light</button>
@@ -81,7 +94,10 @@ HTML = """<!doctype html>
 </div>
 <div class="main">
   <div class="track" id="track"></div>
-  <div id="main"></div>
+  <div class="layout">
+    <div id="main"></div>
+    <div class="sidebar no-print" id="sidebar"></div>
+  </div>
 </div>
 <div class="footer no-print" style="text-align:center;padding:26px 16px;font-size:14px;color:#8d897c;line-height:1.6">
   <p class="seo-intro">A free, browser-based character generator for 2300AD, the Mongoose Traveller science fiction setting. Choose a nationality and homeworld, which set your gravity, Survival modifier and Hard or Soft Path, then run the full career lifepath with Leaving Home checks each term.</p>
