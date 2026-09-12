@@ -332,6 +332,7 @@
       (S.benefits.length ? '<div class="skills-list" style="margin-top:10px">' +
         S.benefits.map(function (b) { return '<div class="sk"><span>' + esc(b) + '</span></div>'; }).join('') + '</div>' : '') + '</div>';
     return h + '<div class="btn-row"><button class="btn ghost" onclick="A.restart()">Start over</button>' +
+      '<button class="btn ghost" onclick="A.exportJson()">Download character JSON</button>' +
       '<button class="btn" onclick="window.print()">Print sheet</button></div>';
   }
 
@@ -375,6 +376,18 @@
   A.set = function (k, v) { S[k] = v; };
   A.go = function (p) { if (p === 'terms' && !S.sub) S.sub = 'pick'; S.phase = p; render(); };
   A.restart = function () { fresh(); render(); };
+
+  A.exportJson = function () {
+    var doc = E.exportCharacter(S);
+    var blob = new Blob([JSON.stringify(doc, null, 2)], { type: 'application/json' });
+    var safe = (S.name || '2300ad-character').replace(/[^A-Za-z0-9_-]+/g, '-').replace(/^-+|-+$/g, '');
+    var a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = (safe || '2300ad-character') + '.2300ad.json';
+    document.body.appendChild(a);
+    a.click();
+    setTimeout(function () { URL.revokeObjectURL(a.href); a.remove(); }, 0);
+  };
   function rollName() {
     var N = DATA.names, a = N[Math.floor(S.rng.next() * N.length)], b = a;
     for (var i = 0; i < 8 && b === a; i++) b = N[Math.floor(S.rng.next() * N.length)];

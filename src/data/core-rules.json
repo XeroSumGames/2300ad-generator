@@ -3,6 +3,9 @@
   "_scope": "Rules mechanics only (target numbers, tables, procedure). Transcribed for a character generator; no rulebook prose is reproduced beyond the short table entries needed to run the roll.",
   "_transcribed": "2026-08-11",
 
+  "_vtt_note": "Identifies this game to the VTT's character import. The shared engine reads these from DATA rather than hardcoding them, which is what lets one engine serve both Traveller and 2300AD.",
+  "vtt": { "system": "2300ad", "generator": "2300ad-generator" },
+
   "characteristics": {
     "roll": "2D each, assign in any order (or in order as rolled), starting with STR",
     "order": ["STR", "DEX", "END", "INT", "EDU", "SOC"],

@@ -94,6 +94,34 @@
     if (log) log.push('char: ' + k + ' -> ' + next);
   }
 
+
+  // ---------- snapshots, for free navigation ----------
+  // Re-opening an earlier step must UNDO everything built on it. This is a dice-driven
+  // lifepath -- characteristics, skills, rank and cash all accumulate -- so there is no
+  // computing backwards. The state is photographed instead, RNG position included, so a
+  // replayed term does not reuse dice the discarded terms already spent.
+  // `snaps` is detached along with DATA and rng, or each snapshot would contain the last.
+  function snapshot(S) {
+    var data = S.DATA, rng = S.rng, snaps = S.snaps;
+    S.DATA = null; S.rng = null; S.snaps = null;
+    var copy;
+    try { copy = JSON.parse(JSON.stringify(S)); }
+    finally { S.DATA = data; S.rng = rng; S.snaps = snaps; }
+    copy.__rng = rng.s;
+    return copy;
+  }
+  // Mutates S in place so every existing reference to it stays valid.
+  function restore(S, snap) {
+    var data = S.DATA, rng = S.rng, snaps = S.snaps;
+    for (var k in S) if (Object.prototype.hasOwnProperty.call(S, k)) delete S[k];
+    var fresh = JSON.parse(JSON.stringify(snap));
+    for (var j in fresh) if (Object.prototype.hasOwnProperty.call(fresh, j)) S[j] = fresh[j];
+    delete S.__rng;
+    S.DATA = data; S.rng = rng; S.snaps = snaps;
+    rng.s = (snap.__rng >>> 0) || 1;
+    return S;
+  }
+
   function totalSkillLevels(S) {
     var t = 0;
     for (var k in S.skills) t += S.skills[k];
@@ -431,6 +459,95 @@
     return 16000 + (termsServed - 8) * 2000;
   }
 
+
+  // ---------- export for the VTT ----------
+  // Envelope fixed by tasks/mothership-vtt-architecture.md section 7: a shared OUTER
+  // envelope with a per-game payload underneath. The ids come from DATA, not from
+  // code, because this engine serves BOTH Traveller and 2300AD and must stay
+  // byte-identical between the two repos.
+  var SCHEMA_VERSION = 1;
+  function exportCharacter(S) {
+    var meta = (S.DATA.core && S.DATA.core.vtt) || {};
+    var out = {
+      schemaVersion: SCHEMA_VERSION,
+      system: meta.system || 'traveller-family',
+      generator: meta.generator || 'traveller-generator',
+      generatedAt: new Date().toISOString(),
+      character: {
+        name: S.name || '',
+        homeworld: S.homeworld || '',
+        age: S.age,
+        terms: S.terms.length,
+        characteristics: copy(S.chars),
+        characteristicDMs: dmMap(S),
+        skills: skillList(S),
+        careerHistory: S.terms.map(function (t) {
+          var c = S.DATA.careers[t.career];
+          var a = findAssignment(c, t.assignment);
+          return {
+            term: t.termNo || null,
+            career: c ? c.name : t.career,
+            assignment: a ? a.name : t.assignment,
+            // The sheet prints this as a bare number (or "Officer 3"), which would hand a
+            // consumer a field that is sometimes a number and sometimes a string. Give it
+            // the index, the flag and the career's own printed title separately instead.
+            rank: {
+              index: t.commissioned ? t.officerRank : t.rank,
+              commissioned: !!t.commissioned,
+              title: rankTitle(c, t)
+            },
+            commissioned: !!t.commissioned,
+            leftBecause: t.leftBecause || null,
+            age: t.age
+          };
+        }),
+        education: S.education ? { type: S.education.type, entered: !!S.education.entered } : null,
+        finances: {
+          cash: S.cash, pension: S.pension, debt: S.debt,
+          shipShares: S.shipShares, benefits: S.benefits.slice(),
+          cashRollsUsed: S.cashRollsUsed
+        },
+        ageingCrisis: !!S.crisis,
+        seed: S.seed
+      }
+    };
+    // 2300AD carries extra origin state through its overlay; include whatever of it
+    // exists so the one engine serves both without knowing which game it is in.
+    // Keyed state name -> wire name, because the UI holds the nationality as `nat`.
+    var extra = { nat: 'nationality', origin: 'origin', path: 'path',
+                  gravityBand: 'gravityBand', isSpacer: 'isSpacer', leftHome: 'leftHome' };
+    for (var k in extra) {
+      if (!Object.prototype.hasOwnProperty.call(extra, k)) continue;
+      if (S[k] !== undefined && S[k] !== null) out.character[extra[k]] = S[k];
+    }
+    return out;
+  }
+  function copy(o) {
+    var out = {}, k;
+    for (k in o) if (Object.prototype.hasOwnProperty.call(o, k)) out[k] = o[k];
+    return out;
+  }
+  function dmMap(S) {
+    var out = {};
+    for (var i = 0; i < CHARS.length; i++) out[CHARS[i]] = dm(S.chars[CHARS[i]]);
+    return out;
+  }
+  // Officer tracks start at rank 1 and enlisted at 0, so match on the printed rank
+  // number rather than indexing the array.
+  function rankTitle(career, t) {
+    var track = career ? pickRankTrack(career, t) : null;
+    if (!track) return null;
+    var want = t.commissioned ? t.officerRank : t.rank;
+    for (var i = 0; i < track.length; i++) if (track[i].rank === want) return track[i].title;
+    return null;
+  }
+  function skillList(S) {
+    var out = [], k;
+    var keys = Object.keys(S.skills).sort();
+    for (var i = 0; i < keys.length; i++) out.push({ name: keys[i], level: S.skills[keys[i]] });
+    return out;
+  }
+
   root.TravellerEngine = {
     RNG: RNG, CHARS: CHARS, PHYSICAL: PHYSICAL, MENTAL: MENTAL,
     dm: dm, parseCheck: parseCheck, applySkillEntry: applySkillEntry, bumpChar: bumpChar,
@@ -441,7 +558,8 @@
     rollSkillTable: rollSkillTable, survival: survival, advancement: advancement,
     commissionRoll: commissionRoll, commissionAllowed: commissionAllowed,
     rankBonus: rankBonus, pickRankTrack: pickRankTrack,
-    ageingDue: ageingDue, ageingRoll: ageingRoll, applyAgeing: applyAgeing,
+    exportCharacter: exportCharacter, SCHEMA_VERSION: SCHEMA_VERSION,
+    ageingDue: ageingDue, snapshot: snapshot, restore: restore, ageingRoll: ageingRoll, applyAgeing: applyAgeing,
     musterOut: musterOut, takeBenefit: takeBenefit, pensionFor: pensionFor,
     findAssignment: findAssignment
   };

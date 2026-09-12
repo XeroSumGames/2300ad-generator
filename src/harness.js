@@ -130,7 +130,7 @@ function play(seed) {
 
 var runs = parseInt(process.argv[2] || '3000', 10);
 console.log('fuzzing ' + runs + ' 2300AD lifepaths...');
-var left = 0, spacers = 0, aged = 0, bands = {}, natHit = {};
+var left = 0, spacers = 0, aged = 0, bands = {}, natHit = {}, exportCount = 0;
 
 for (var seed = 1; seed <= runs; seed++) {
   var S = play(seed);
@@ -149,6 +149,29 @@ for (var seed = 1; seed <= runs; seed++) {
     ok(!/^[A-Z]{3}\s*\+/.test(sk), 'seed ' + seed + ': characteristic bump stored as a skill: ' + sk);
   }
   ok(S.cashRollsUsed <= 3, 'seed ' + seed + ': lifetime cash-roll cap');
+
+  // ---- the VTT envelope ----
+  // The engine file is byte-identical to Traveller's, so the ids MUST come from DATA:
+  // this asserting '2300ad' is what proves one engine is serving two games.
+  var x = E.exportCharacter(S);
+  ok(x.schemaVersion === 1, 'seed ' + seed + ': schemaVersion ' + x.schemaVersion);
+  ok(x.system === '2300ad', 'seed ' + seed + ': system ' + x.system + ' -- the shared engine must read its id from DATA');
+  ok(x.generator === '2300ad-generator', 'seed ' + seed + ': generator ' + x.generator);
+  ok(!!x.generatedAt && !!x.character, 'seed ' + seed + ': envelope missing generatedAt/character');
+  E.CHARS.forEach(function (c) {
+    ok(x.character.characteristics[c] === S.chars[c], 'seed ' + seed + ': exported ' + c + ' disagrees');
+  });
+  ok(x.character.skills.length === Object.keys(S.skills).length, 'seed ' + seed + ': export dropped skills');
+  ok(x.character.careerHistory.length === S.terms.length, 'seed ' + seed + ': export dropped career history');
+  // the overlay's own state has to survive, or the VTT cannot tell a Spacer from a colonist
+  ok(!!x.character.origin && x.character.origin.name === S.origin.name, 'seed ' + seed + ': export lost the homeworld');
+  ok(x.character.isSpacer === S.isSpacer, 'seed ' + seed + ': export lost the Spacer flag');
+  ok(x.character.gravityBand === S.gravityBand, 'seed ' + seed + ': export lost the gravity band');
+  ok(x.character.leftHome === S.leftHome, 'seed ' + seed + ': export lost the leaving-home state');
+  var round = JSON.parse(JSON.stringify(x));
+  ok(round.character.seed === S.seed && round.character.origin.name === S.origin.name,
+    'seed ' + seed + ': export does not survive a JSON round trip');
+  exportCount++;
 }
 
 console.log('\nleft home        : ' + left + '/' + runs);
@@ -156,6 +179,7 @@ console.log('spacers          : ' + spacers + '/' + runs);
 console.log('reached term 8+  : ' + aged);
 console.log('gravity bands    : ' + JSON.stringify(bands));
 console.log('distinct origins : ' + Object.keys(natHit).length);
+console.log('VTT envelopes    : ' + exportCount + ' validated');
 console.log('\n' + checks + ' checks, ' + fails.length + ' failed');
 if (fails.length) {
   var seen = {}, shown = 0;
