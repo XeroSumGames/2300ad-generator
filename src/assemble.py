@@ -83,7 +83,7 @@ HTML = """<!doctype html>
   <div class="track" id="track"></div>
   <div id="main"></div>
 </div>
-<div class="footer no-print" style="text-align:center;padding:26px 16px;font-size:12px;color:#8d897c;line-height:1.6">
+<div class="footer no-print" style="text-align:center;padding:26px 16px;font-size:14px;color:#8d897c;line-height:1.6">
   <p class="seo-intro">A free, browser-based character generator for 2300AD, the Mongoose Traveller science fiction setting. Choose a nationality and homeworld, which set your gravity, Survival modifier and Hard or Soft Path, then run the full career lifepath with Leaving Home checks each term.</p>
 
   <b>2300AD -- Character Generator.</b> An unofficial fan tool.<br>
